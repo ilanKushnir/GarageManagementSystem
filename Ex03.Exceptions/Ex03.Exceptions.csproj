@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3AF80147-14A5-4CE4-83F1-49E71163727F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Ex03.ConsoleUI</RootNamespace>
-    <AssemblyName>Ex03.ConsoleUI</AssemblyName>
+    <ProjectGuid>{10E7AD90-DE26-48E1-8F72-AD57C3309859}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Ex03.Exceptions</RootNamespace>
+    <AssemblyName>Ex03.Exceptions</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,19 +31,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ex03.Exceptions\Ex03.Exceptions.csproj">
-      <Project>{10e7ad90-de26-48e1-8f72-ad57c3309859}</Project>
-      <Name>Ex03.Exceptions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ex03.GarageLogic\Ex03.GarageLogic.csproj">
-      <Project>{446143af-6c49-40b8-be5b-90e34643429f}</Project>
-      <Name>Ex03.GarageLogic</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Program.cs" />
-    <Compile Include="UI.cs" />
+    <Compile Include="VehicleAllreadyInGarageException.cs" />
+    <Compile Include="WrongFuelException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

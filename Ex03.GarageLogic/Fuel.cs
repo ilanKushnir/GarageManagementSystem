@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ex03.Exceptions;
 
 namespace Ex03.GarageLogic
 {
@@ -27,7 +28,14 @@ namespace Ex03.GarageLogic
 
         public void FuelUp(float i_FuelToAdd, eFuelType i_FuelType)                 ///////////////////////
         {
-
+            if(i_FuelType.Equals(m_FuelType))
+            {
+                m_CurrentFuelCapacity = (m_CurrentFuelCapacity + i_FuelToAdd > m_MaxFuelCapacity ? m_MaxFuelCapacity : m_CurrentFuelCapacity + i_FuelToAdd);
+            }
+            else
+            {
+                throw new WrongFuelException(new Exception, i_FuelType.ToString, m_FuelType.ToString);
+            }
         }
     }
 }

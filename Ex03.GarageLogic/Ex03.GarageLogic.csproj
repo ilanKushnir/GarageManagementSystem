@@ -47,5 +47,11 @@
     <Compile Include="VehicleCreator.cs" />
     <Compile Include="Wheel.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ex03.Exceptions\Ex03.Exceptions.csproj">
+      <Project>{10e7ad90-de26-48e1-8f72-ad57c3309859}</Project>
+      <Name>Ex03.Exceptions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
