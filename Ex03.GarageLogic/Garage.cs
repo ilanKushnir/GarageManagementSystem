@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Ex03;
 
 namespace Ex03.GarageLogic
 {
-    class Garage
+    public class Garage
     {
         private List<VehicleCard> m_Cards;
 
