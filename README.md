@@ -1,31 +1,25 @@
 <div align="center"><img src="design/Logo.png"></div>
-<h1 align="center">Othelo</h1>
+<h1 align="center">Garage Management System</h1>
 <p align="center"><strong>Console Edition - by Ilan & Ofir</strong>
 <br>Students project for C# & .Net Framework course - The Academic College of Tel Aviv - Yaffo</p>
 <br/>
 <div align="center"><img src="design/Demo.png"></img></div>
 <h2>About</h2>
-This is an Othelo game, coded using C# for our CS degree.
-<br/>We built the console edition and will expand its UI in the near future...
-<br/>Have fun and try to beat the PC ;)
+This is a garage management system, coded using C# for our CS degree.
+<br/>In this program you can manage a garage, add new customers and manage it.
 
 <h2>Goal and requirements</h2>
 
-The idea was to practice OOP, C#'s Arrays and other collection classes and using an outer assembly in the project.
+The idea was to practice classes, inheritance and polymorphism.
 
 <h2>Key learnings</h2>
 
-- OOP 
-- Arrays
-- Lists
-- Using outer Dll
-- string
-- C# syntax
-- Microsoft Visual Studio .NET dev tools
-- Access modifiers
-- Constructors
-- Properties
-- Indexers
+- Polymorphism 
+- Collections
+- Using an outer assembly (Dll)
+- Working with multiple projects
+- Exceptions
+- Object inheritance
 
 
 After submission we've improved more the styling and the classes organization.
@@ -34,13 +28,13 @@ After submission we've improved more the styling and the classes organization.
 
 1. Download this project as zip and extract it
 2. Run the .exe file
-3. Play!
+3. Manage the garage!
 
 <h2>Contributing</h2>
 no need for now :)
 
 <h2>Project status</h2>
-Completed
+In progress
 
 <h2>Credits</h2>
 
