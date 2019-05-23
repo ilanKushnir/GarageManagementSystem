@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ex03.Exceptions;
 
 namespace Ex03.GarageLogic
 {
@@ -12,34 +13,32 @@ namespace Ex03.GarageLogic
 
         public void AddCarToGarage(string i_Owner, string i_Phone, ref VehicleInputData i_VehicleData)
         {
-            VehicleCard newCard;
+            VehicleCard newCard, foundCard;
             Vehicle newVehicle;
 
-            newVehicle = VehicleCreator.CreateNewVehicle(i_VehicleData);
-            newCard = new VehicleCard(i_Owner, i_Phone, VehicleCard.eVehicleStatus.InService, newVehicle);
-
-            if(m_Cards.Count == 0)
+            foundCard = FindCardByLicense(i_VehicleData.m_LicenseNumber);
+            if (foundCard != null)
             {
-                m_Cards = new List<VehicleCard>();
+                foundCard.Status = VehicleCard.eVehicleStatus.InService;
+                throw new VehicleAllreadyInGarageException(new Exception() ,foundCard.Vehicle.LicenseNumber);
             }
 
+            newVehicle = VehicleCreator.CreateNewVehicle(ref i_VehicleData);
+            newCard = new VehicleCard(i_Owner, i_Phone, VehicleCard.eVehicleStatus.InService, newVehicle);
+             
             m_Cards.Add(newCard);
         }
 
         public VehicleCard FindCardByLicense(string i_LicenseNumber) 
         {
-            foreach(VehicleCard card in m_Cards)
-            {
-                if(card.Vehicle.LicenseNumber.Equals(i_LicenseNumber))
-                {
-                    return card;
-                }
-            }
+            VehicleCard o_FoundCard;
 
-            return null;
+            o_FoundCard = m_Cards.Find(card => card.Vehicle.LicenseNumber.Equals(i_LicenseNumber));
+
+            return o_FoundCard;
         }
 
-        public List<string> DisplayLicenseNumbersByStatus(VehicleCard.eVehicleStatus i_Status)
+        public List<string> GetLicenseNumbersByStatus(VehicleCard.eVehicleStatus i_Status)
         {
             List<string> o_licenstNumbers = new List<string>();
 
