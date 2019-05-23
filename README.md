@@ -1,29 +1,54 @@
-# Foobar
+<div align="center"><img src="design/Logo.png"></div>
+<h1 align="center">Othelo</h1>
+<p align="center"><strong>Console Edition - by Ilan & Ofir</strong>
+<br>Students project for C# & .Net Framework course - The Academic College of Tel Aviv - Yaffo</p>
+<br/>
+<div align="center"><img src="design/Demo.png"></img></div>
+<h2>About</h2>
+This is an Othelo game, coded using C# for our CS degree.
+<br/>We built the console edition and will expand its UI in the near future...
+<br/>Have fun and try to beat the PC ;)
 
-Foobar is a Python library for dealing with word pluralization.
+<h2>Goal and requirements</h2>
 
-## Installation
+The idea was to practice OOP, C#'s Arrays and other collection classes and using an outer assembly in the project.
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+<h2>Key learnings</h2>
 
-```bash
-pip install foobar
-```
+- OOP 
+- Arrays
+- Lists
+- Using outer Dll
+- string
+- C# syntax
+- Microsoft Visual Studio .NET dev tools
+- Access modifiers
+- Constructors
+- Properties
+- Indexers
 
-## Usage
 
-```python
-import foobar
+After submission we've improved more the styling and the classes organization.
 
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
-```
+<h2>Installation</h2>
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+1. Download this project as zip and extract it
+2. Run the .exe file
+3. Play!
 
-Please make sure to update tests as appropriate.
+<h2>Contributing</h2>
+no need for now :)
 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+<h2>Project status</h2>
+Completed
+
+<h2>Credits</h2>
+
+- Authors: <a href="mailto:ilan.kushnir@gmail.com" target="_blank">Ilan Kushnir</a>, <a href="mailto:ofir5300@gmail.com" target="_blank">Ofir Cohen</a>
+- Logo & Design: <a href="mailto:ilan.kushnir@gmail.com" target="_blank">Ilan Kushnir</a>
+- Lecturer: <a href="https://www.facebook.com/guy.ronen" target="_blank">Guy Ronen</a>
+- <a href="https://www.mta.ac.il/" target="_blank">The Academic College of Tel Aviv - Yaffo</a>
+
+
+<h2>Copyright</h2>
+This project is licensed under the terms of the MIT license 
