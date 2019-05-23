@@ -14,10 +14,7 @@ namespace Ex03.GarageLogic
 
         public string LicenseNumber
         {
-            get
-            {
-                return m_LicenseNumber;
-            }
+            get { return m_LicenseNumber;}
         }
 
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Ex03;
 
 namespace Ex03.GarageLogic
 {
@@ -11,14 +12,38 @@ namespace Ex03.GarageLogic
 
 
         public void AddCarToGarage()
-        { }
+        {
+            string licenstNumber, owner, phone;
+            Vehicle newVehicle;
+            VehicleCard newCard;
 
-        private bool isLicenseExistOnGarage(string i_LicenseNumber)
+            VehicleCard cardFound;
+            List<Wheel> wheels;
+            EnergySource energySource;
+
+            licenstNumber = ConsoleUI.Display.GetLicenstNumberInput();
+            if((cardFound = FindCardByLicense(licenstNumber)) != null)
+            {
+                cardFound.Status = VehicleCard.eVehicleStatus.InService;
+                //////////////////////////////// UI output car allready exist on garage
+                return;
+            }
+
+            newCard = new VehicleCard(owner, phone, newVehicle);
+
+        }
+
+        public VehicleCard FindCardByLicense(string i_LicenseNumber)
         {
             foreach(VehicleCard card in m_Cards)
             {
-                if(strcmp(card.Vehicle.LicenseNumber))
+                if(card.Vehicle.LicenseNumber.Equals(i_LicenseNumber))
+                {
+                    return card;
+                }
             }
+
+            return null;
         }
 
         public void DisplayLicenseNumbersByStatus(VehicleCard.eVehicleStatus i_Status)
