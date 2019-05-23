@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Vehicle
+    public class Vehicle
     {
         protected string m_ModelName;
         protected string m_LicenseNumber;
@@ -28,6 +28,12 @@ namespace Ex03.GarageLogic
         public string LicenseNumber
         {
             get { return m_LicenseNumber; }
+        }
+
+        public List<Wheel> Wheels
+        {
+            get { return m_Wheels; }
+            set { m_Wheels = value; }
         }
 
     }

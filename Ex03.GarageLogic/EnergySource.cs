@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class EnergySource
+    public class EnergySource
     {
         float m_EnergyPercentage;
     }

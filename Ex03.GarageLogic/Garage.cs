@@ -10,29 +10,23 @@ namespace Ex03.GarageLogic
         private List<VehicleCard> m_Cards;
 
 
-        public void AddCarToGarage()
+        public void AddCarToGarage(string i_Owner, string i_Phone, ref VehicleInputData i_VehicleData)
         {
-            string licenstNumber, owner, phone;
-            Vehicle newVehicle;
             VehicleCard newCard;
+            Vehicle newVehicle;
 
-            VehicleCard cardFound;
-            List<Wheel> wheels;
-            EnergySource energySource;
+            newVehicle = VehicleCreator.CreateNewVehicle(i_VehicleData);
+            newCard = new VehicleCard(i_Owner, i_Phone, VehicleCard.eVehicleStatus.InService, newVehicle);
 
-            licenstNumber = ConsoleUI.Display.GetLicenstNumberInput();
-            if((cardFound = FindCardByLicense(licenstNumber)) != null)
+            if(m_Cards.Count == 0)
             {
-                cardFound.Status = VehicleCard.eVehicleStatus.InService;
-                //////////////////////////////// UI output car allready exist on garage
-                return;
+                m_Cards = new List<VehicleCard>();
             }
 
-            newCard = new VehicleCard(owner, phone, newVehicle);
-
+            m_Cards.Add(newCard);
         }
 
-        public VehicleCard FindCardByLicense(string i_LicenseNumber)
+        public VehicleCard FindCardByLicense(string i_LicenseNumber) 
         {
             foreach(VehicleCard card in m_Cards)
             {
@@ -45,12 +39,43 @@ namespace Ex03.GarageLogic
             return null;
         }
 
-        public void DisplayLicenseNumbersByStatus(VehicleCard.eVehicleStatus i_Status)
-        { }
-        public void ChangeVehicleStatus(string i_LicenseNumber, VehicleCard.eVehicleStatus i_NewsStatus)
-        { }
+        public List<string> DisplayLicenseNumbersByStatus(VehicleCard.eVehicleStatus i_Status)
+        {
+            List<string> o_licenstNumbers = new List<string>();
+
+            foreach(VehicleCard card in m_Cards)
+            {
+                if(card.Status.Equals(i_Status))
+                {
+                    o_licenstNumbers.Add(card.Vehicle.LicenseNumber);
+                }
+
+            }
+
+            return o_licenstNumbers;
+        }
+
+        public void ChangeVehicleStatus(string i_LicenseNumber, VehicleCard.eVehicleStatus i_NewsStatus) 
+        {
+            VehicleCard cardToChange;
+
+            cardToChange =  m_Cards.Find(vehicleToChange => vehicleToChange.Vehicle.LicenseNumber.Equals(i_LicenseNumber));
+            cardToChange.Status = i_NewsStatus;         /// exception
+        }
+
         public void InflateVehicleWheelsToMax(string i_LicenseNumber)
-        { }
+        {
+            Vehicle vehicleToInflate;
+            List<Wheel> wheels;
+
+            vehicleToInflate = m_Cards.Find(toInflate => toInflate.Vehicle.LicenseNumber.Equals(i_LicenseNumber)).Vehicle;
+            wheels = vehicleToInflate.Wheels;
+
+            foreach(Wheel wheel in wheels)
+            {
+                wheel.Inflate(wheel.MaxAirPressure - wheel.CurrentAirPressure);
+            }
+        }
 
 
     }

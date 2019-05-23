@@ -48,7 +48,7 @@ namespace Ex03.GarageLogic
         float m_MaxBatteryTime;
     }
 
-    static class VehicleCreator
+    public static class VehicleCreator
     {
         public static Vehicle CreateNewVehicle(VehicleInputData input)
         {
