@@ -18,5 +18,13 @@ namespace Ex03.GarageLogic
         string m_Phone;
         eVehicleStatus m_Status;
         Vehicle m_Vehicle;
+
+        public Vehicle Vehicle
+        {
+            get
+            {
+                return m_Vehicle;
+            }
+        }
     }
 }

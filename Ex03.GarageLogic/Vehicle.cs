@@ -12,6 +12,13 @@ namespace Ex03.GarageLogic
         List<Wheel> m_Wheels;
         EnergySource m_EnergySource;
 
+        public string LicenseNumber
+        {
+            get
+            {
+                return m_LicenseNumber;
+            }
+        }
 
     }
 }
