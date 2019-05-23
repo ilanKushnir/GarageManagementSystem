@@ -9,19 +9,18 @@ namespace Ex03.GarageLogic
     {
         private List<VehicleCard> m_Cards;
 
+        public Garage()
+        {
+            m_Cards = new List<VehicleCard>();
+        }
 
         public void AddCarToGarage(string i_Owner, string i_Phone, ref VehicleInputData i_VehicleData)
         {
             VehicleCard newCard;
             Vehicle newVehicle;
 
-            newVehicle = VehicleCreator.CreateNewVehicle(i_VehicleData);
+            newVehicle = VehicleCreator.CreateNewVehicle(ref i_VehicleData);
             newCard = new VehicleCard(i_Owner, i_Phone, VehicleCard.eVehicleStatus.InService, newVehicle);
-
-            if(m_Cards.Count == 0)
-            {
-                m_Cards = new List<VehicleCard>();
-            }
 
             m_Cards.Add(newCard);
         }
