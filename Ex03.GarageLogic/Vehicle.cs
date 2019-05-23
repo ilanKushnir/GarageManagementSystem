@@ -7,14 +7,27 @@ namespace Ex03.GarageLogic
 {
     class Vehicle
     {
-        string m_ModelName;
-        string m_LicenseNumber;
-        List<Wheel> m_Wheels;
-        EnergySource m_EnergySource;
+        protected string m_ModelName;
+        protected string m_LicenseNumber;
+        protected List<Wheel> m_Wheels;
+        protected EnergySource m_EnergySource;
+
+        public Vehicle(string i_ModelName, string i_LicenseNumber, List<Wheel> i_Wheels, EnergySource i_EnergySource)
+        {
+            m_ModelName = i_ModelName;
+            m_LicenseNumber = i_LicenseNumber;
+            m_Wheels = i_Wheels;
+            m_EnergySource = i_EnergySource;
+        }
+
+        public string ModelName
+        {
+            get { return m_ModelName; }
+        }
 
         public string LicenseNumber
         {
-            get { return m_LicenseNumber;}
+            get { return m_LicenseNumber; }
         }
 
     }
