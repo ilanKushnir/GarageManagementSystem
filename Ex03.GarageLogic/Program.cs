@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Test1
+    class Program
     {
+        Garage newGarage = new Garage;
     }
 }
