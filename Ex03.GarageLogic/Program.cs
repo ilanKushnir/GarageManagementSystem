@@ -8,6 +8,5 @@ namespace Ex03.GarageLogic
     class Program
     {
         Garage newGarage = new Garage;
-        showMenu();
     }
 }
