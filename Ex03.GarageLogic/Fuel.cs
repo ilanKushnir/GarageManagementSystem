@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Fuel : EnergySource
+    public class Fuel : EnergySource
     {
         public enum eFuelType
         {
@@ -19,7 +19,15 @@ namespace Ex03.GarageLogic
         float m_CurrentFuelCapacity;
         float m_MaxFuelCapacity;
 
+        public Fuel(float i_CurrentFuelCapacity, float i_MaxFuelCapacity)
+        {
+            m_CurrentFuelCapacity = i_CurrentFuelCapacity;
+            m_MaxFuelCapacity = i_MaxFuelCapacity;
+        }
+
         public void FuelUp(float i_FuelToAdd, eFuelType i_FuelType)                 ///////////////////////
-        { }
+        {
+
+        }
     }
 }
