@@ -10,6 +10,10 @@ namespace Ex03.GarageLogic
     {
         private List<VehicleCard> m_Cards;
 
+        public Garage()
+        {
+            m_Cards = new List<VehicleCard>();
+        }
 
         public void AddCarToGarage(string i_Owner, string i_Phone, ref VehicleInputData i_VehicleData)
         {
