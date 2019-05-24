@@ -24,7 +24,7 @@ namespace Ex03.ConsoleUI
                 {
                     try
                     {
-                        validInput = GetValidUserIntChoiceInRange(out userChoice, 1, 7);
+                        validInput = GetValidIntFromUserInRange(out userChoice, 1, 7);
                     }
                     catch (FormatException)
                     {
@@ -69,20 +69,7 @@ namespace Ex03.ConsoleUI
             // exit program
         }
 
-        public static bool GetValidUserIntChoiceInRange(out int o_UserChoice, int i_MinValue, int i_MaxValue)
-        {
-            if (!int.TryParse(Console.ReadLine(), out o_UserChoice))
-            {
-                throw new FormatException();
-            }
-
-            if (o_UserChoice < i_MinValue || o_UserChoice > i_MaxValue)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            return true;
-        }
+       
 
 
         public static void PrintWelcomeMessage()
@@ -165,7 +152,12 @@ namespace Ex03.ConsoleUI
         {
             VehicleInputData o_VehicleData = new VehicleInputData();
 
-            o_VehicleData.m_VehicleType = GetVehicleTypeFromUser();
+            GetVehicleTypeFromUser(out o_VehicleData.m_VehicleType);
+            GetWheelsDataFromUser(out o_VehicleData.m_WheelsManufacturer,
+                                  out o_VehicleData.m_CurrentAirPressure,
+                                  out o_VehicleData.m_MaxAirPressure);
+
+            ////// GET... SPECIFIC DATA BY TYPE .....
             /////////////////////////////////////
             
 
@@ -175,11 +167,10 @@ namespace Ex03.ConsoleUI
             return o_VehicleData;
         }
 
-        private static eVehicleType GetVehicleTypeFromUser()
+        private static void GetVehicleTypeFromUser(out eVehicleType o_VehicleType)
         {
             int userChoice = 0;
             bool validInput = false;
-            eVehicleType o_VehicleType;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" ---------------------------------" + Environment.NewLine);
@@ -197,7 +188,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetValidUserIntChoiceInRange(out userChoice, 1, 5);
+                    validInput = GetValidIntFromUserInRange(out userChoice, 1, 5);
                 }
                 catch (FormatException)
                 {
@@ -234,8 +225,146 @@ namespace Ex03.ConsoleUI
                     o_VehicleType = 0;
                     break;
             }
+        }
 
-            return o_VehicleType;
+        private static void GetWheelsDataFromUser(out string o_Manufacturer,
+                                                  out float o_CurrentAirPressure,
+                                                  out float o_MaxAirPressure)
+        {
+            float pressureInput = 0;
+            string stringInput = string.Empty;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" ---------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter wheels manufacturer name:" + Environment.NewLine);
+            userPrompt.Append(" ---------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            do
+            {
+                try
+                {
+                    validInput = GetUnemptyStringFromUser(out stringInput);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Error: The name is too long");
+                }
+                catch (NullReferenceException)
+                {
+                    Console.WriteLine("The name can't be empty");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+            o_Manufacturer = stringInput;
+
+            userPrompt.Clear();
+            userPrompt.Append(" -------------------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter manufacturer maximum pressure allowed" + Environment.NewLine);
+            userPrompt.Append(" -------------------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            validInput = false;
+            do
+            {
+                try
+                {
+                    GetValidFloatFromUserInRange(out pressureInput, 0, float.MaxValue);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a floating point number");
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Error: Please enter a positive number");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+            o_MaxAirPressure = pressureInput;
+
+            userPrompt.Clear();
+            userPrompt.Append(" -----------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter current wheels pressure" + Environment.NewLine);
+            userPrompt.Append(" -----------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            pressureInput = 0;
+            validInput = false;
+            do
+            {
+                try
+                {
+                    GetValidFloatFromUserInRange(out pressureInput, 0, o_MaxAirPressure);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a floating point number");
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Error: The pressure should be positive number" + Environment.NewLine +
+                                      "       and smaller then the maximum pressure (" + o_MaxAirPressure + ")");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+            o_CurrentAirPressure = pressureInput;
+        }
+
+
+        public static bool GetValidIntFromUserInRange(out int o_UserInput, int i_MinValue, int i_MaxValue)
+        {
+            if (!int.TryParse(Console.ReadLine(), out o_UserInput))
+            {
+                throw new FormatException();
+            }
+
+            if (o_UserInput < i_MinValue || o_UserInput > i_MaxValue)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return true;
+        }
+
+        public static bool GetValidFloatFromUserInRange(out float o_UserInput, float i_MinValue, float i_MaxValue)
+        {
+            if (!float.TryParse(Console.ReadLine(), out o_UserInput))
+            {
+                throw new FormatException();
+            }
+
+            if (o_UserInput < i_MinValue || o_UserInput > i_MaxValue)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return true;
+        }
+
+        public static bool GetUnemptyStringFromUser(out string o_UserInput)
+        {
+            o_UserInput = Console.ReadLine();
+
+            if(string.IsNullOrEmpty(o_UserInput))
+            {
+                throw new NullReferenceException();
+            }
+
+            return true;
         }
     }
 }
