@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.Exceptions
 {
-    class WrongFuelException : Exception
+    public class WrongFuelException : Exception
     {
         private string m_WrongFuel;
         private string m_Fuel;

@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
 
     public struct VehicleInputData
     {
-        // Vehicle
+        // Vehiclee
         public string m_ModelName;
         public string m_LicenseNumber;
         public eVehicleType m_VehicleType;

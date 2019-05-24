@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic
             m_MaxFuelCapacity = i_MaxFuelCapacity;
         }
 
-        public void FuelUp(float i_FuelToAdd, eFuelType i_FuelType)                 ///////////////////////
+        public void FuelUp(float i_FuelToAdd, eFuelType i_FuelType)              
         {
             if(i_FuelType.Equals(m_FuelType))
             {
@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new WrongFuelException(new Exception, i_FuelType.ToString, m_FuelType.ToString);
+                //throw new WrongFuelException(new Exception(), i_FuelType.ToString, m_FuelType.ToString);
             }
         }
     }

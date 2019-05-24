@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="VehicleAllreadyInGarageException.cs" />
     <Compile Include="WrongFuelException.cs" />
+    <Compile Include="WrongInputException.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
