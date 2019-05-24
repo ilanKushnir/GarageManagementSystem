@@ -114,39 +114,10 @@ namespace Ex03.ConsoleUI
 
         public static void AddNewVehicleToGarage()
         {
-            int userChoice = 0;
-            bool validInput = false;
-            StringBuilder userPrompt = new StringBuilder();
-            userPrompt.Append(" ---------------------------------" + Environment.NewLine);
-            userPrompt.Append(" Please choose your vehicle type:" +  Environment.NewLine);
-            userPrompt.Append("  1) Car" +                           Environment.NewLine);
-            userPrompt.Append("  2) Electric Car" +                  Environment.NewLine);
-            userPrompt.Append("  3) Motorcycle" +                    Environment.NewLine);
-            userPrompt.Append("  4) Electric Motorcycle" +           Environment.NewLine);
-            userPrompt.Append("  5) Truck" +                         Environment.NewLine);
-            userPrompt.Append(" ---------------------------------" + Environment.NewLine);
+            VehicleInputData vehicleData;
+            GetVehicleTypeFromUser(out vehicleData.m_VehicleType);
 
-            Console.Write(userPrompt + Environment.NewLine);
 
-            while(validInput == false)
-            {
-                try
-                {
-                    validInput = GetValidUserIntChoiceInRange(out userChoice, 1, 5);
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Error: Please enter a number.");
-                }
-                catch (ArgumentOutOfRangeException)
-                {
-                    Console.WriteLine("Error: The number should be between 1 to 5.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
-                }
-            }
         }
 
         public static void ShowLicenseNumbersByStatus()
@@ -180,6 +151,86 @@ namespace Ex03.ConsoleUI
         private void ShowVehicleDataByLicenseNumber()
         {
 
+        }
+
+
+        /////////////////////////////////////////////////////////////
+        
+        private static VehicleInputData GetVehicleDataFromUser()
+        {
+            VehicleInputData o_VehicleData = new VehicleInputData();
+
+            o_VehicleData.m_VehicleType = GetVehicleTypeFromUser();
+            /////////////////////////////////////
+            
+
+
+
+
+            return o_VehicleData;
+        }
+
+        private static eVehicleType GetVehicleTypeFromUser()
+        {
+            int userChoice = 0;
+            bool validInput = false;
+            eVehicleType o_VehicleType;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" ---------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Please choose your vehicle type:" + Environment.NewLine);
+            userPrompt.Append("  1) Car" + Environment.NewLine);
+            userPrompt.Append("  2) Electric Car" + Environment.NewLine);
+            userPrompt.Append("  3) Motorcycle" + Environment.NewLine);
+            userPrompt.Append("  4) Electric Motorcycle" + Environment.NewLine);
+            userPrompt.Append("  5) Truck" + Environment.NewLine);
+            userPrompt.Append(" ---------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            while (validInput == false)
+            {
+                try
+                {
+                    validInput = GetValidUserIntChoiceInRange(out userChoice, 1, 5);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a number.");
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Error: The number should be between 1 to 5.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            }
+
+            switch(userChoice)
+            {
+                case 1:
+                    o_VehicleType = eVehicleType.Car;
+                    break;
+                case 2:
+                    o_VehicleType = eVehicleType.ElectricCar;
+                    break;
+                case 3:
+                    o_VehicleType = eVehicleType.Motorcycle;
+                    break;
+                case 4:
+                    o_VehicleType = eVehicleType.ElectricMotorcycle;
+                    break;
+                case 5:
+                    o_VehicleType = eVehicleType.Truck;
+                    break;
+                default:
+                    o_VehicleType = 0;
+                    break;
+            }
+
+            return o_VehicleType;
         }
     }
 }

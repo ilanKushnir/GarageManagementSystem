@@ -45,6 +45,7 @@
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleCard.cs" />
     <Compile Include="VehicleCreator.cs" />
+    <Compile Include="VehicleInputData.cs" />
     <Compile Include="Wheel.cs" />
   </ItemGroup>
   <ItemGroup>
