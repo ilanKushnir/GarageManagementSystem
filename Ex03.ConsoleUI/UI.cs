@@ -12,20 +12,42 @@ namespace Ex03.ConsoleUI
         {
             string userInput = string.Empty;
             int userChoice = 0;
+            bool valueInRange = false;
             Console.WriteLine("Welcome To Garage Manager By Ilan & Ofir" + Environment.NewLine);
 
             while(userChoice != 7)
             {
-                bool result = false;
                 ShowMenu();
 
-                while(!result)
+                while(valueInRange == false)
                 {
                     userChoice = getUserChoice();
-                    result = validateUserChoice(userChoice);
+                    valueInRange = validateUserChoice(userChoice);
+                }
+
+                switch(userChoice)
+                {
+                    case 1:
+                        AddNewVehicleToGarage();
+                        break;
+                    case 2:
+                        ShowLicenseNumbersByStatus();
+                        break;
+                    case 3:
+                        ChangeVehicleStatus();
+                        break;
+                    case 4:
+                        InflateVehicleToMax();
+                        break;
+                    case 5:
+
+                        break;
+                    case 6:
+                        break;
+                    default:
+                        break;
                 }
             }
-
             // exit program
         }
 
@@ -39,7 +61,6 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine(ex.Message);
                 return 0;
-                //throw new FormatException("bla");
             }
         }
 
@@ -50,17 +71,14 @@ namespace Ex03.ConsoleUI
 
         public static void ShowMenu()
         {
-            StringBuilder menu = new StringBuilder("Hello" + Environment.NewLine + "Please choose which action to make by inserting a chioce number below:" + Environment.NewLine);
-            List<string> options = new List<string>();
-            options.Add("1) Add a new vehicle to garage" + Environment.NewLine);
-            options.Add("2) Show license numbers by status" + Environment.NewLine);
-            options.Add("3) Change car status" + Environment.NewLine);
-            options.Add("4) Inflate car wheels to maximum" + Environment.NewLine);
-            options.Add("5) Fuel/Charge vehicle" + Environment.NewLine);
-            options.Add("6) Show vehicle full data" + Environment.NewLine);
-            options.Add("7) Exit" + Environment.NewLine);
-
-            menu.Append(options);
+            StringBuilder menu = new StringBuilder("Menu" + Environment.NewLine + "Please choose which action to make by inserting a chioce number below:" + Environment.NewLine);
+            menu.Append("1) Add a new vehicle to garage" + Environment.NewLine);
+            menu.Append("2) Show license numbers by status" + Environment.NewLine);
+            menu.Append("3) Change car status" + Environment.NewLine);
+            menu.Append("4) Inflate car wheels to maximum" + Environment.NewLine);
+            menu.Append("5) Fuel/Charge vehicle" + Environment.NewLine);
+            menu.Append("6) Show vehicle full data" + Environment.NewLine);
+            menu.Append("7) Exit" + Environment.NewLine);
             menu.Append("Please choose: " + Environment.NewLine);
             Console.WriteLine(menu);
         }
@@ -69,7 +87,7 @@ namespace Ex03.ConsoleUI
         ////////////////////////////////
         
 
-        private void AddNewVehicleToGarage()
+        public static void AddNewVehicleToGarage()
         {
             int userChoice = 0;
             StringBuilder userPrompt = new StringBuilder("Please choose vehicle type:" + Environment.NewLine);
@@ -84,7 +102,8 @@ namespace Ex03.ConsoleUI
             while(userChoice < 1 && userChoice > 5)
             {
                 userChoice = Int32.Parse(Console.ReadLine());
-                catch(FormatException ex)
+
+                //catch(FormatException ex)
                 {
 
                 }
@@ -96,21 +115,24 @@ namespace Ex03.ConsoleUI
 
         }
 
-        private void ShowLicenseNumbersByStatus()
+        public static void ShowLicenseNumbersByStatus()
         {
 
         }
 
-        private void ChangeVehicleStatus()
+        public static void ChangeVehicleStatus()
         {
 
         }
 
-        private void InflateVehicleToMax()
+        public static void InflateVehicleToMax()
         {
 
         }
         
+        public static void FuelOrChargeVehicle()
+        { }
+
         private void FuelVehicle()
         {
 
