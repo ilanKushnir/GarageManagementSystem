@@ -28,6 +28,28 @@ namespace Ex03.ConsoleUI
 
         private void AddNewVehicleToGarage()
         {
+            int userChoice = 0;
+            StringBuilder userPrompt = new StringBuilder("Please choose vehicle type:" + Environment.NewLine);
+            userPrompt.Append(" 1) Car" + Environment.NewLine);
+            userPrompt.Append(" 2) Electric Car" + Environment.NewLine);
+            userPrompt.Append(" 3) Motorcycle" + Environment.NewLine);
+            userPrompt.Append(" 4) Electric Motorcycle" + Environment.NewLine);
+            userPrompt.Append(" 5) Truck" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            while(userChoice < 1 && userChoice > 5)
+            {
+                userChoice = Int32.Parse(Console.ReadLine());
+                catch(FormatException ex)
+                {
+
+                }
+            }
+
+
+
+
 
         }
 
