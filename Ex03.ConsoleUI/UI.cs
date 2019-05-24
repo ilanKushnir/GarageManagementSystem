@@ -20,7 +20,7 @@ namespace Ex03.ConsoleUI
             {
                 PrintMenu();
 
-                while(validInput == false)
+                while (validInput == false)
                 {
                     try
                     {
@@ -60,8 +60,11 @@ namespace Ex03.ConsoleUI
                     case 6:
                         break;
                     default:
+                        userChoice = 0;
                         break;
                 }
+
+                userChoice = 0;
             }
             // exit program
         }
@@ -114,10 +117,12 @@ namespace Ex03.ConsoleUI
 
         public static void AddNewVehicleToGarage()
         {
-            VehicleInputData vehicleData;
-            GetVehicleTypeFromUser(out vehicleData.m_VehicleType);
+            VehicleInputData vehicleData = GetVehicleDataFromUser();
+            // הוספת רכב למוסך צריכה להיות סטטית כי המוסך הקלאס הנוכחי לא מחזיק אובייקט מוסך?
+            // ויצירת הרכב חייבת לקרות בתוך מתודת ההוספה במוסך
+            ////////////////////////////////////////////
 
-
+            
         }
 
         public static void ShowLicenseNumbersByStatus()

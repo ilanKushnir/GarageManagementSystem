@@ -15,21 +15,20 @@ namespace Ex03.GarageLogic
             m_Cards = new List<VehicleCard>();
         }
 
-        public void AddCarToGarage(string i_Owner, string i_Phone, ref VehicleInputData i_VehicleData)
+        public void AddVehicleToGarage(string i_Owner, string i_Phone, VehicleInputData i_VehicleData)
         {
             VehicleCard newCard, foundCard;
-            Vehicle newVehicle;
+            Vehicle newVehicle; 
 
             foundCard = FindCardByLicense(i_VehicleData.m_LicenseNumber);
             if (foundCard != null)
             {
                 foundCard.Status = VehicleCard.eVehicleStatus.InService;
-                throw new VehicleAllreadyInGarageException(new Exception() ,foundCard.Vehicle.LicenseNumber);
+                throw new VehicleAllreadyInGarageException(new Exception(), foundCard.Vehicle.LicenseNumber);
             }
 
-            newVehicle = VehicleCreator.CreateNewVehicle(ref i_VehicleData);
+            newVehicle = VehicleCreator.CreateNewVehicle(i_VehicleData);
             newCard = new VehicleCard(i_Owner, i_Phone, VehicleCard.eVehicleStatus.InService, newVehicle);
-             
             m_Cards.Add(newCard);
         }
 

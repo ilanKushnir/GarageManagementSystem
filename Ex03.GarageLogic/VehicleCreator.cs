@@ -19,39 +19,39 @@ namespace Ex03.GarageLogic
 
     public static class VehicleCreator
     {
-        public static Vehicle CreateNewVehicle(VehicleInputData input)
+        public static Vehicle CreateNewVehicle(VehicleInputData i_VehicleData)
         {
             Vehicle o_NewVehicle = null;
-            List<Wheel> o_WheelsList = CreateWheelsList(ref input);
-            EnergySource o_EnergySource = CreateEnergySource(ref input);
+            List<Wheel> o_WheelsList = CreateWheelsList(i_VehicleData);
+            EnergySource o_EnergySource = CreateEnergySource(i_VehicleData);
 
-            switch (input.m_VehicleType)
+            switch (i_VehicleData.m_VehicleType)
             {
                 case eVehicleType.Car:
                 case eVehicleType.ElectricCar:
-                    o_NewVehicle = new Car(input.m_ModelName,
-                                           input.m_LicenseNumber,
+                    o_NewVehicle = new Car(i_VehicleData.m_ModelName,
+                                           i_VehicleData.m_LicenseNumber,
                                            o_WheelsList,
                                            o_EnergySource,
-                                           input.m_Color,
-                                           input.m_Doors);
+                                           i_VehicleData.m_Color,
+                                           i_VehicleData.m_Doors);
                     break;
                 case eVehicleType.Motorcycle:
                 case eVehicleType.ElectricMotorcycle:
-                    o_NewVehicle = new Motorcycle(input.m_ModelName,
-                                                  input.m_LicenseNumber,
+                    o_NewVehicle = new Motorcycle(i_VehicleData.m_ModelName,
+                                                  i_VehicleData.m_LicenseNumber,
                                                   o_WheelsList,
                                                   o_EnergySource,
-                                                  input.m_LicenseType,
-                                                  input.m_EngineCapacity);
+                                                  i_VehicleData.m_LicenseType,
+                                                  i_VehicleData.m_EngineCapacity);
                     break;
                 case eVehicleType.Truck:
-                    o_NewVehicle = new Truck(input.m_ModelName,
-                                             input.m_LicenseNumber,
+                    o_NewVehicle = new Truck(i_VehicleData.m_ModelName,
+                                             i_VehicleData.m_LicenseNumber,
                                              o_WheelsList,
                                              o_EnergySource,
-                                             input.m_ContainDangerousSubstances,
-                                             input.m_CargoVolume);
+                                             i_VehicleData.m_ContainDangerousSubstances,
+                                             i_VehicleData.m_CargoVolume);
                     break;
                 default:
                     break;
@@ -60,12 +60,12 @@ namespace Ex03.GarageLogic
             return o_NewVehicle;
         }
 
-        private static List<Wheel> CreateWheelsList(VehicleInputData input)
+        private static List<Wheel> CreateWheelsList(VehicleInputData i_VehicleData)
         {
             List<Wheel> o_WheelsList = new List<Wheel>();
             int numOfWheels = 0;
 
-            switch (input.m_VehicleType)
+            switch (i_VehicleData.m_VehicleType)
             {
                 case eVehicleType.Car:
                 case eVehicleType.ElectricCar:
@@ -84,31 +84,31 @@ namespace Ex03.GarageLogic
 
             for (int i = 0; i < numOfWheels; i++)
             {
-                Wheel newWheel = new Wheel(input.m_WheelsManufacturer,
-                                           input.m_CurrentAirPressure,
-                                           input.m_MaxAirPressure);
+                Wheel newWheel = new Wheel(i_VehicleData.m_WheelsManufacturer,
+                                           i_VehicleData.m_CurrentAirPressure,
+                                           i_VehicleData.m_MaxAirPressure);
                 o_WheelsList.Add(newWheel);
             }
 
             return o_WheelsList;
         }
 
-        private static EnergySource CreateEnergySource(VehicleInputData input)
+        private static EnergySource CreateEnergySource(VehicleInputData i_VehicleData)
         {
             EnergySource o_energySource = null;
 
-            switch(input.m_VehicleType)
+            switch(i_VehicleData.m_VehicleType)
             {
                 case eVehicleType.Car:
                 case eVehicleType.Motorcycle:
                 case eVehicleType.Truck:
-                    o_energySource = new Fuel(input.m_CurrentFuelCapacity,
-                                              input.m_MaxFuelCapacity);
+                    o_energySource = new Fuel(i_VehicleData.m_CurrentFuelCapacity,
+                                              i_VehicleData.m_MaxFuelCapacity);
                     break;
                 case eVehicleType.ElectricCar:
                 case eVehicleType.ElectricMotorcycle:
-                    o_energySource = new Battery(input.m_RemainingBatteryTime,
-                                                 input.m_MaxBatteryTime);
+                    o_energySource = new Battery(i_VehicleData.m_RemainingBatteryTime,
+                                                 i_VehicleData.m_MaxBatteryTime);
                     break;
                 default:
                     break;
