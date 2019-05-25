@@ -74,10 +74,7 @@ namespace Ex03.ConsoleUI
                 validInput = false;
                 userChoice = 0;
             }
-            // exit program
         }
-
-       
 
 
         public static void PrintWelcomeMessage()
