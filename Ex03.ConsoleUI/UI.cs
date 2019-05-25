@@ -164,10 +164,14 @@ namespace Ex03.ConsoleUI
         {
             VehicleInputData o_VehicleData = new VehicleInputData();
 
+            GetVehicleLicenseNumberFromUser(out o_VehicleData.m_LicenseNumber);
             GetVehicleTypeFromUser(out o_VehicleData.m_VehicleType);
+            GetVehicleModelNameFromUser(out o_VehicleData.m_ModelName);
+            GetVehicleSpecificDataFromUserByType(out o_VehicleData.m_VehicleType, out o_VehicleData);
             GetWheelsDataFromUser(out o_VehicleData.m_WheelsManufacturer,
                                   out o_VehicleData.m_CurrentAirPressure,
                                   out o_VehicleData.m_MaxAirPressure);
+
 
             ////// GET... SPECIFIC DATA BY TYPE .....
             /////////////////////////////////////
@@ -239,6 +243,225 @@ namespace Ex03.ConsoleUI
             }
         }
 
+        public static void GetVehicleColorFromUser(out Car.eCarColor o_VehicleColor)
+        {
+            int userChoice = 0;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" -----------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Please choose your vehicle's color:" + Environment.NewLine);
+            userPrompt.Append("  1) Red" +                             Environment.NewLine);
+            userPrompt.Append("  2) Blue" +                            Environment.NewLine);
+            userPrompt.Append("  3) Black" +                           Environment.NewLine);
+            userPrompt.Append("  4) Grey" +                            Environment.NewLine);
+            userPrompt.Append(" -----------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            while (validInput == false)
+            {
+                try
+                {
+                    validInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a number.");
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Error: The number should be between " + ex.MinValue + " to " + ex.MaxValue);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            }
+
+            switch (userChoice)
+            {
+                case 1:
+                    o_VehicleColor = Car.eCarColor.Red;
+                    break;
+                case 2:
+                    o_VehicleColor = Car.eCarColor.Blue;
+                    break;
+                case 3:
+                    o_VehicleColor = Car.eCarColor.Black;
+                    break;
+                case 4:
+                    o_VehicleColor = Car.eCarColor.Grey;
+                    break;
+                default:
+                    o_VehicleColor = 0;
+                    break;
+            }
+        }
+
+        public static void GetVehicleNumberOfDoorsFromUser(out Car.eNumOfDoors o_NumOfDoors)
+        {
+            int userChoice = 0;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" ---------------------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Please choose your vehicle's number of doors:" + Environment.NewLine);
+            userPrompt.Append("  2" +                                            Environment.NewLine);
+            userPrompt.Append("  3" +                                            Environment.NewLine);
+            userPrompt.Append("  4" +                                            Environment.NewLine);
+            userPrompt.Append("  5" +                                            Environment.NewLine);
+            userPrompt.Append(" ---------------------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            while (validInput == false)
+            {
+                try
+                {
+                    validInput = GetValidIntFromUserInRange(out userChoice, 2, 5);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a number.");
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Error: The number of doors should be between " + ex.MinValue + " to " + ex.MaxValue);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            }
+
+            switch (userChoice)
+            {
+                case 2:
+                    o_NumOfDoors = Car.eNumOfDoors.Two;
+                    break;
+                case 3:
+                    o_NumOfDoors = Car.eNumOfDoors.Three;
+                    break;
+                case 4:
+                    o_NumOfDoors = Car.eNumOfDoors.Four;
+                    break;
+                case 5:
+                    o_NumOfDoors = Car.eNumOfDoors.Five;
+                    break;
+                default:
+                    o_NumOfDoors = 0;
+                    break;
+            }
+        }
+
+
+        private static void GetVehicleModelNameFromUser(out string o_ModelName)
+        {
+            string stringInput = string.Empty;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" ---------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter vehicle's model name:" + Environment.NewLine);
+            userPrompt.Append(" ---------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            do
+            {
+                try
+                {
+                    validInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Error: The model name's length should be " + ex.MinValue + " to " + ex.MaxValue + " chars");
+                }
+                catch (NullReferenceException)
+                {
+                    Console.WriteLine("Error: The model name can't be empty");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+            o_ModelName = stringInput;
+        }
+
+
+        private static void GetVehicleLicenseNumberFromUser(out string o_LicenseNumber)
+        {
+            string stringInput = string.Empty;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" -------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter vehicle's license number:" + Environment.NewLine);
+            userPrompt.Append(" -------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            do
+            {
+                try
+                {
+                    validInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
+                }
+                catch (ValueOutOfRangeException ex )
+                {
+                    Console.WriteLine("Error: The model's name length should be " + ex.MinValue + " to " + ex.MaxValue + " chars");
+                }
+                catch (NullReferenceException)
+                {
+                    Console.WriteLine("Error: The model name can't be empty");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+            o_LicenseNumber = stringInput;
+        }
+
+
+        private static void GetVehicleSpecificDataFromUserByType(eVehicleType i_VehicleType,
+                                                                 VehicleInputData o_VehicleData)
+        {
+            switch(i_VehicleType)
+            {
+                case eVehicleType.Car:
+                    GetVehicleColorFromUser(out o_VehicleData.m_Color);
+                    GetVehicleNumberOfDoorsFromUser(out o_VehicleData.m_Doors);
+                    GetVehicleFuelDataFromUser(o_VehicleData);
+                    break;
+                case eVehicleType.ElectricCar:
+                    GetVehicleColorFromUser(out o_VehicleData.m_Color);
+                    GetVehicleNumberOfDoorsFromUser(out o_VehicleData.m_Doors);
+                    GetVehicleBatteryDataFromUser(o_VehicleData);
+                    break;
+                case eVehicleType.Motorcycle:
+                    GetVehicleLicenseTypeFromUser(out o_VehicleData.m_LicenseType);
+                    GetVehicleEngineCapacityFromUser(out o_VehicleData.m_EngineCapacity);
+                    GetVehicleFuelDataFromUser(o_VehicleData);
+                    break;
+                case eVehicleType.ElectricMotorcycle:
+                    GetVehicleLicenseTypeFromUser(out o_VehicleData.m_LicenseType);
+                    GetVehicleEngineCapacityFromUser(out o_VehicleData.m_EngineCapacity);
+                    GetVehicleBatteryDataFromUser(o_VehicleData);
+                    break;
+                case eVehicleType.Truck:
+                    GetVehicleDangerousSubstancesDataFromUser(out o_VehicleData.m_ContainDangerousSubstances);
+                    GetVehicleCargoVolumeFromUser(out o_VehicleData.m_CargoVolume);
+                    GetVehicleFuelDataFromUser(o_VehicleData);
+                    break;
+                case default:
+                    break;
+            }
+        }
+
+
         private static void GetWheelsDataFromUser(out string o_Manufacturer,
                                                   out float o_CurrentAirPressure,
                                                   out float o_MaxAirPressure)
@@ -258,15 +481,15 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetUnemptyStringFromUser(out stringInput);
+                    validInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
                 }
-                catch (ValueOutOfRangeException)
+                catch (ValueOutOfRangeException ex)
                 {
-                    Console.WriteLine("Error: The name is too long");
+                    Console.WriteLine("Error: The manufacturer's name length should be " + ex.MinValue + " to " + ex.MaxValue + " chars");
                 }
                 catch (NullReferenceException)
                 {
-                    Console.WriteLine("The name can't be empty");
+                    Console.WriteLine("Error: The name can't be empty");
                 }
                 catch (Exception ex)
                 {
@@ -325,7 +548,7 @@ namespace Ex03.ConsoleUI
                 }
                 catch (ValueOutOfRangeException ex)
                 {
-                    Console.WriteLine("Error: The pressure should be positive number" + Environment.NewLine +
+                    Console.WriteLine("Error: The pressure should be positive number," + Environment.NewLine +
                                       "       and smaller then the maximum pressure (" + ex.MaxValue + ")");
                 }
                 catch (Exception ex)
@@ -336,6 +559,125 @@ namespace Ex03.ConsoleUI
             o_CurrentAirPressure = pressureInput;
         }
 
+        private static void GetVehicleFuelDataFromUser(out Fuel.eFuelType o_FuelType,
+                                                       out float o_CurrentFuelCapacity,
+                                                       out float o_MaxFuelCapacity)
+        {
+            float capacityInput = 0;
+            string stringInput = string.Empty;
+            bool validInput = false;
+            int userChoice = 0;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" ---------------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Please choose your vehicle's fuel type:" + Environment.NewLine);
+            userPrompt.Append("  1) Octan95" + Environment.NewLine);
+            userPrompt.Append("  2) Octan96" + Environment.NewLine);
+            userPrompt.Append("  3) Octan98" + Environment.NewLine);
+            userPrompt.Append("  4) Soler" +   Environment.NewLine);
+            userPrompt.Append(" ---------------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            while (validInput == false)
+            {
+                try
+                {
+                    validInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a number.");
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Error: The choice number should be between " + ex.MinValue + " to " + ex.MaxValue);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            }
+
+            switch (userChoice)
+            {
+                case 5:
+                    o_FuelType = Fuel.eFuelType.Octan95;
+                    break;
+                case 2:
+                    o_FuelType = Fuel.eFuelType.Octan96;
+                    break;
+                case 3:
+                    o_FuelType = Fuel.eFuelType.Octan98;
+                    break;
+                case 4:
+                    o_FuelType = Fuel.eFuelType.Soler;
+                    break;
+                default:
+                    o_FuelType = 0;
+                    break;
+            }
+            
+            userPrompt.Clear();
+            userPrompt.Append(" ----------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter vehicle's max fuel capacity:" + Environment.NewLine);
+            userPrompt.Append(" ----------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            validInput = false;
+            do
+            {
+                try
+                {
+                    GetValidFloatFromUserInRange(out capacityInput, 0, float.MaxValue);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a floating point number");
+                }
+                catch (ValueOutOfRangeException)
+                {
+                    Console.WriteLine("Error: Please enter a positive number");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+            o_MaxFuelCapacity = capacityInput;
+
+            userPrompt.Clear();
+            userPrompt.Append(" --------------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter current vehicle's fuel capacity:" + Environment.NewLine);
+            userPrompt.Append(" --------------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            capacityInput = 0;
+            validInput = false;
+            do
+            {
+                try
+                {
+                    GetValidFloatFromUserInRange(out capacityInput, 0, o_MaxFuelCapacity);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a floating point number");
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Error: The capacity should be a positive number," + Environment.NewLine +
+                                      "       and smaller then the maximum capacity (" + ex.MaxValue + ")");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+            o_MaxFuelCapacity = capacityInput;
+        }
 
         public static bool GetValidIntFromUserInRange(out int o_UserInput, int i_MinValue, int i_MaxValue)
         {
@@ -367,15 +709,23 @@ namespace Ex03.ConsoleUI
             return true;
         }
 
-        public static bool GetUnemptyStringFromUser(out string o_UserInput)
-        {
-            o_UserInput = Console.ReadLine();
+       
 
-            if(string.IsNullOrEmpty(o_UserInput))
+        public static bool GetStringInLengthRangeFromUser(out string o_UserInput, int i_MinLength, int i_MaxLength)
+        {
+            string userInput;
+            userInput = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(userInput))
             {
                 throw new NullReferenceException();
             }
+            else if(userInput.Length < i_MaxLength || userInput.Length > i_MaxLength)
+            {
+                throw new ValueOutOfRangeException(new Exception(), i_MinLength, i_MaxLength);
+            }
 
+            o_UserInput = userInput;
             return true;
         }
     }
