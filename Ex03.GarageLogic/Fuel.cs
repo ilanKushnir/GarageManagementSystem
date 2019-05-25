@@ -35,7 +35,7 @@ namespace Ex03.GarageLogic
             get { return m_CurrentFuelCapacity; }
         }
 
-        public Fuel(float i_CurrentFuelCapacity, float i_MaxFuelCapacity)
+        public Fuel(float i_CurrentFuelCapacity, float i_MaxFuelCapacity, eFuelType i_FuelType)
         {
             m_CurrentFuelCapacity = i_CurrentFuelCapacity;
             m_MaxFuelCapacity = i_MaxFuelCapacity;
