@@ -316,7 +316,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
+                    validInput = GetNameStringFromUser(out stringInput);
                 }
                 catch (ValueOutOfRangeException ex)
                 {
@@ -325,6 +325,10 @@ namespace Ex03.ConsoleUI
                 catch (NullReferenceException)
                 {
                     Console.WriteLine("Error: The name can't be empty");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: The name should contain only letters and spaces");
                 }
                 catch (Exception ex)
                 {
@@ -1145,6 +1149,31 @@ namespace Ex03.ConsoleUI
             else if(userInput.Length < i_MinLength || userInput.Length > i_MaxLength)
             {
                 throw new ValueOutOfRangeException(new Exception(), i_MinLength, i_MaxLength);
+            }
+
+            o_UserInput = userInput;
+            return true;
+        }
+
+        public static bool GetNameStringFromUser(out string o_UserInput)
+        {
+            string userInput;
+            userInput = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(userInput))
+            {
+                throw new NullReferenceException();
+            }
+            else if (userInput.Length > 200)
+            {
+                throw new ValueOutOfRangeException(new Exception(), 0, 200);
+            }
+            foreach (char c in userInput)
+            {
+                if((c == ' ' || (c > 'A' && c < 'Z') || (c > 'a' && c < 'z')) == false)
+                {
+                    throw new FormatException();
+                }
             }
 
             o_UserInput = userInput;
