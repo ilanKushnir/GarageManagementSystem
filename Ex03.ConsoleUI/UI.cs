@@ -153,6 +153,7 @@ namespace Ex03.ConsoleUI
         {
             VehicleInputData o_VehicleData = new VehicleInputData();
 
+            GetVehicleLicenseNumberFromUser(o_VehicleData.m_LicenseNumber);
             GetVehicleTypeFromUser(out o_VehicleData.m_VehicleType);
             GetVehicleModelNameFromUser(out o_VehicleData.m_ModelName);
             GetWheelsDataFromUser(out o_VehicleData.m_WheelsManufacturer,
@@ -245,15 +246,15 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetUnemptyStringFromUser(out stringInput);
+                    validInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (ValueOutOfRangeException ex)
                 {
-                    Console.WriteLine("Error: The model name is too long");
+                    Console.WriteLine("Error: The model name's length should be " + ex.MinValue + " to " + ex.MaxValue + " chars");
                 }
                 catch (NullReferenceException)
                 {
-                    Console.WriteLine("The model name can't be empty");
+                    Console.WriteLine("Error: The model name can't be empty");
                 }
                 catch (Exception ex)
                 {
@@ -280,15 +281,15 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetUnemptyStringFromUser(out stringInput);
+                    validInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (ValueOutOfRangeException ex )
                 {
-                    Console.WriteLine("Error: The model name is too long");
+                    Console.WriteLine("Error: The model's name length should be " + ex.MinValue + " to " + ex.MaxValue + " chars");
                 }
                 catch (NullReferenceException)
                 {
-                    Console.WriteLine("The model name can't be empty");
+                    Console.WriteLine("Error: The model name can't be empty");
                 }
                 catch (Exception ex)
                 {
@@ -318,15 +319,15 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetUnemptyStringFromUser(out stringInput);
+                    validInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
                 }
-                catch (ValueOutOfRangeException)
+                catch (ValueOutOfRangeException ex)
                 {
-                    Console.WriteLine("Error: The name is too long");
+                    Console.WriteLine("Error: The manufacturer's name length should be " + ex.MinValue + " to " + ex.MaxValue + " chars");
                 }
                 catch (NullReferenceException)
                 {
-                    Console.WriteLine("The name can't be empty");
+                    Console.WriteLine("Error: The name can't be empty");
                 }
                 catch (Exception ex)
                 {
@@ -385,7 +386,7 @@ namespace Ex03.ConsoleUI
                 }
                 catch (ValueOutOfRangeException ex)
                 {
-                    Console.WriteLine("Error: The pressure should be positive number" + Environment.NewLine +
+                    Console.WriteLine("Error: The pressure should be positive number," + Environment.NewLine +
                                       "       and smaller then the maximum pressure (" + ex.MaxValue + ")");
                 }
                 catch (Exception ex)
@@ -427,29 +428,24 @@ namespace Ex03.ConsoleUI
             return true;
         }
 
-        public static bool GetUnemptyStringFromUser(out string o_UserInput)
-        {
-            o_UserInput = Console.ReadLine();
+       
 
-            if(string.IsNullOrEmpty(o_UserInput))
-            {
-                throw new NullReferenceException();
-            }
-
-            return true;
-        }
-
-        public static void GetStringInLengthRangeFromUser(out string o_UserInput, int i_minLength, int i_maxLength)
+        public static bool GetStringInLengthRangeFromUser(out string o_UserInput, int i_MinLength, int i_MaxLength)
         {
             string userInput;
             userInput = Console.ReadLine();
 
-            if (string.IsNullOrEmpty(o_UserInput))
+            if (string.IsNullOrEmpty(userInput))
             {
                 throw new NullReferenceException();
             }
+            else if(userInput.Length < i_MaxLength || userInput.Length > i_MaxLength)
+            {
+                throw new ValueOutOfRangeException(new Exception(), i_MinLength, i_MaxLength);
+            }
 
             o_UserInput = userInput;
+            return true;
         }
     }
 }
