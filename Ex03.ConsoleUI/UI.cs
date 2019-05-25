@@ -50,10 +50,10 @@ namespace Ex03.ConsoleUI
                         ShowLicenseNumbersByStatus(i_Garage);
                         break;
                     case 3:
-                        ChangeVehicleStatus(i_Garage);
+                        ChangeVehicleStatus(i_Garage);          /////////////////////////////
                         break;
                     case 4:
-                        InflateVehicleToMax(i_Garage);
+                        InflateVehicleToMax(i_Garage);          //////////////////
                         break;
                     case 5:
                         FuelVehicle(i_Garage);
@@ -62,10 +62,13 @@ namespace Ex03.ConsoleUI
                         ChargeVehicle(i_Garage);
                         break;
                     case 7:
-                        ShowVehicleDataByLicenseNumber(i_Garage);
+                        ShowVehicleDataByLicenseNumber(i_Garage);       ////////////////////
+                        break;
+                    case 8:
+                        Environment.Exit(0);
                         break;
                     default:
-                        //userChoice = 0;
+                        userChoice = 0;
                         break;
                 }
                 validInput = false;
@@ -196,11 +199,6 @@ namespace Ex03.ConsoleUI
             string o_LicenseNumber;
             GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
             i_Garage.InflateVehicleWheelsToMax(o_LicenseNumber);
-        }
-        
-        public static void FuelOrChargeVehicle()
-        {
-            
         }
 
         public static void FuelVehicle(Garage i_Garage)
