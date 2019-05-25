@@ -23,7 +23,11 @@ namespace Ex03.GarageLogic
         public eLicenseType LicenseType
         {
             get { return m_LicenseType; }
-            set { m_LicenseType = value; }
+        }
+
+        public int EngineCapacity
+        {
+            get { return m_EngineCapacity; }
         }
 
         public Motorcycle(string i_ModelName,

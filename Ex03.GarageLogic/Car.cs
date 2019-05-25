@@ -40,6 +40,8 @@ namespace Ex03.GarageLogic
             Doors = i_Doors;
         }
 
+        
+
         public eCarColor Color
         {
             get { return m_Color; }

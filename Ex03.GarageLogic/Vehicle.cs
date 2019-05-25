@@ -42,5 +42,37 @@ namespace Ex03.GarageLogic
             get { return m_EnergySource; }
         }
 
+        public static eVehicleType GetVehicleType(Vehicle i_Vehicle)
+        {
+            eVehicleType o_VehicleType = 0;
+
+            if (i_Vehicle is Car && i_Vehicle.EnergySource is Fuel)
+            {
+                o_VehicleType = eVehicleType.Car;
+            }
+            else if (i_Vehicle is Car && i_Vehicle.EnergySource is Battery)
+            {
+                o_VehicleType = eVehicleType.ElectricCar;
+            }
+            else if (i_Vehicle is Motorcycle && i_Vehicle.EnergySource is Fuel)
+            {
+                o_VehicleType = eVehicleType.Motorcycle;
+            }
+            else if (i_Vehicle is Motorcycle && i_Vehicle.EnergySource is Battery)
+            {
+                o_VehicleType = eVehicleType.ElectricMotorcycle;
+            }
+            else if (i_Vehicle is Truck)
+            {
+                o_VehicleType = eVehicleType.Truck;
+            }
+            else
+            {
+                o_VehicleType = 0;
+            }
+
+            return o_VehicleType;
+        }
+
     }
 }

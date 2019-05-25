@@ -20,11 +20,27 @@ namespace Ex03.GarageLogic
         float m_CurrentFuelCapacity;
         float m_MaxFuelCapacity;
 
-        public Fuel(float i_CurrentFuelCapacity, float i_MaxFuelCapacity, eFuelType i_FuelType)
+        public eFuelType FuelType
+        {
+            get { return m_FuelType; }
+        }
+
+        public float MaxFuelCapacity
+        {
+            get { return m_MaxFuelCapacity; }
+        }
+
+        public float CurrentFuelCapacity
+        {
+            get { return m_CurrentFuelCapacity; }
+        }
+
+        public Fuel(float i_CurrentFuelCapacity, float i_MaxFuelCapacity)
         {
             m_CurrentFuelCapacity = i_CurrentFuelCapacity;
             m_MaxFuelCapacity = i_MaxFuelCapacity;
             m_FuelType = i_FuelType;
+            UpdateEnergyPercentage();
         }
 
         public void FuelUp(float i_FuelToAdd, eFuelType i_FuelType)              
@@ -37,11 +53,18 @@ namespace Ex03.GarageLogic
                 }
 
                 m_CurrentFuelCapacity += i_FuelToAdd;
+                UpdateEnergyPercentage();
             }
             else
             {
                 throw new WrongFuelException(new Exception(), i_FuelType.ToString(), m_FuelType.ToString());
             }
+        }
+
+        public void UpdateEnergyPercentage()
+        {
+            float percentageCaculation = m_CurrentFuelCapacity * 100.0f / m_MaxFuelCapacity;
+            m_EnergyPercentage = (float)Math.Round(percentageCaculation, 2);           
         }
     }
 }

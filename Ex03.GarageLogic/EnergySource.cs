@@ -8,6 +8,13 @@ namespace Ex03.GarageLogic
 {
     public class EnergySource
     {
-        float m_EnergyPercentage;
+        protected float m_EnergyPercentage;
+
+        public float EnergyPercentage
+        {
+            get { return m_EnergyPercentage; }
+        }
     }
+
+    
 }
