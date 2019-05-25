@@ -44,10 +44,10 @@ namespace Ex03.ConsoleUI
                 switch (userChoice)
                 {
                     case 1:
-                        AddNewVehicleToGarage(i_Garage);
-                        break;
+                        AddNewVehicleToGarage(i_Garage);    ////
+                        break; 
                     case 2:
-                        ShowLicenseNumbersByStatus(i_Garage);
+                        ShowLicenseNumbersByStatus(i_Garage);   ///////
                         break;
                     case 3:
                         ChangeVehicleStatus(i_Garage);          /////////////////////////////
@@ -203,34 +203,30 @@ namespace Ex03.ConsoleUI
             string o_LicenseNumber = null;
             Fuel.eFuelType o_FuelType;
             float o_FuelToAdd;
-            bool validInput = false;
 
-            while (validInput == false)
+            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
+            GetFuelTypeFromUser(out o_FuelType);
+            GetFuelToAddFromUser(out o_FuelToAdd);
+
+            try
             {
-                GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
-                GetFuelTypeFromUser(out o_FuelType);
-                GetFuelToAddFromUser(out o_FuelToAdd);
-
-                try
-                {
-                    validInput = i_Garage.FuelVehicle(o_LicenseNumber, o_FuelToAdd, o_FuelType);
-                }
-                catch (KeyNotFoundException)
-                {
-                    Console.WriteLine("License Number does not exist in the garage");
-                }
-                catch (ArgumentNullException) // electric vehicle
-                {
-                    Console.WriteLine("The vehicle has no fuel tank");
-                }
-                catch (ValueOutOfRangeException ex)
-                {
-                    Console.WriteLine("Cannot fuel vehilce over the maximum fuel capacity of" + ex.MaxValue);
-                }
-                catch (WrongFuelException ex)
-                {
-                    Console.WriteLine("Cannot fuel vehicle with {0} fuel type instead of {1}", ex.WrongFuel, ex.Fuel);
-                }
+                i_Garage.FuelVehicle(o_LicenseNumber, o_FuelToAdd, o_FuelType);
+            }
+            catch (KeyNotFoundException)
+            {
+                Console.WriteLine("License Number does not exist in the garage");
+            }
+            catch (ArgumentNullException) // electric vehicle
+            {
+                Console.WriteLine("The vehicle has no fuel tank");
+            }
+            catch (ValueOutOfRangeException ex)
+            {
+                Console.WriteLine("Cannot fuel vehilce over the maximum fuel capacity of" + ex.MaxValue);
+            }
+            catch (WrongFuelException ex)
+            {
+                Console.WriteLine("Cannot fuel vehicle with {0} fuel type instead of {1}", ex.WrongFuel, ex.Fuel);
             }
         }
 
@@ -240,29 +236,25 @@ namespace Ex03.ConsoleUI
             float o_BatteryTimeToAdd;
             bool validInput = false;
 
-            while(validInput == false)
+            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
+            GetBatteryTimeToAddFromUser(out o_BatteryTimeToAdd);
+
+            try
             {
-                GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
-                GetBatteryTimeToAddFromUser(out o_BatteryTimeToAdd);
-
-                try
-                {
-                    validInput = i_Garage.ChargeVehicle(o_LicenseNumber, o_BatteryTimeToAdd);
-                }
-                catch(KeyNotFoundException)
-                {
-                    Console.WriteLine("License Number does not exist in the garage");
-                }
-                catch (ArgumentNullException)
-                {
-                    Console.WriteLine("The vehicle has no Battery");
-                }
-                catch (ValueOutOfRangeException ex)
-                {
-                    Console.WriteLine("Cannot charge battery over " + ex.MaxValue);
-                }
+                validInput = i_Garage.ChargeVehicle(o_LicenseNumber, o_BatteryTimeToAdd);
             }
-
+            catch(KeyNotFoundException)
+            {
+                Console.WriteLine("License Number does not exist in the garage");
+            }
+            catch (ArgumentNullException)
+            {
+                Console.WriteLine("The vehicle has no Battery");
+            }
+            catch (ValueOutOfRangeException ex)
+            {
+                Console.WriteLine("Cannot charge battery over " + ex.MaxValue);
+            }
         }
 
         public static void ShowVehicleDataByLicenseNumber(Garage i_Garage)
@@ -471,7 +463,7 @@ namespace Ex03.ConsoleUI
                 {
                     validInput = GetValidPhoneNumberFromUser(out phoneInput);
                 }
-                catch (ValueOutOfRangeException ex)
+                catch (ValueOutOfRangeException)
                 {
                     Console.WriteLine("Error: The phone number's length should be 10 digits");
                 }
@@ -1206,7 +1198,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Error: Please enter a floating point number");
                 }
-                catch (ValueOutOfRangeException ex)
+                catch (ValueOutOfRangeException)
                 {
                     Console.WriteLine("Error: Please enter a positive number");
                 }
