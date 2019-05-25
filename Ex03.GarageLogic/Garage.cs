@@ -37,6 +37,10 @@ namespace Ex03.GarageLogic
             VehicleCard o_FoundCard = null;
 
             o_FoundCard = m_Cards.Find(card => card.Vehicle.LicenseNumber.Equals(i_LicenseNumber));
+            if (o_FoundCard == null)
+            {
+                throw new KeyNotFoundException();       
+            }
 
             return o_FoundCard;
         }
@@ -64,7 +68,7 @@ namespace Ex03.GarageLogic
             cardToChange =  m_Cards.Find(vehicleToChange => vehicleToChange.Vehicle.LicenseNumber.Equals(i_LicenseNumber));
             if(cardToChange == null)
             {
-                throw new KeyNotFoundException(i_LicenseNumber, new Exception());           ///// license number??
+                throw new KeyNotFoundException();           ///// license number? empty ctor?
             }
             cardToChange.Status = i_NewsStatus;
         }
@@ -77,13 +81,13 @@ namespace Ex03.GarageLogic
             vehicleToInflate = m_Cards.Find(toInflate => toInflate.Vehicle.LicenseNumber.Equals(i_LicenseNumber)).Vehicle;
             if (vehicleToInflate == null)
             {
-                throw new KeyNotFoundException(i_LicenseNumber, new Exception());           ///// license number??
+                throw new KeyNotFoundException();           ///// license number??
             }
             wheels = vehicleToInflate.Wheels;
 
             foreach(Wheel wheel in wheels)
             {
-                wheel.Inflate(wheel.MaxAirPressure - wheel.CurrentAirPressure);
+                wheel.InflateToMaxPressure();
             }
         }
 

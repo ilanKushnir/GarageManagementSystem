@@ -30,11 +30,12 @@ namespace Ex03.GarageLogic
                           string i_LicenseNumber,
                           List<Wheel> i_Wheels,
                           EnergySource i_EnergySource,
-                          eLicenseType m_LicenseType,
-                          int m_EngineCapacity) 
+                          eLicenseType i_LicenseType,
+                          int i_EngineCapacity) 
                           : base(i_ModelName, i_LicenseNumber, i_Wheels, i_EnergySource)
         {
-
+            m_LicenseType = i_LicenseType;
+            m_EngineCapacity = i_EngineCapacity;
         }
     }
 }
