@@ -12,10 +12,21 @@ namespace Ex03.GarageLogic
         float m_RemainingBatteryTime;
         float m_MaxBatteryTime;
 
+        public float RemainingBatteryTime
+        {
+            get { return m_RemainingBatteryTime; }
+        }
+
+        public float MaxBatteryTime
+        {
+            get { return m_MaxBatteryTime; }
+        }
+
         public Battery(float i_RemainingBatteryTime, float i_MaxBatteryTime)
         {
             m_RemainingBatteryTime = i_RemainingBatteryTime;
             m_MaxBatteryTime = i_MaxBatteryTime;
+            UpdateEnergyPercentage();
         }
 
         public void ChargeBattery(float i_TimeToCharge)
@@ -26,6 +37,13 @@ namespace Ex03.GarageLogic
             }
 
             m_RemainingBatteryTime += i_TimeToCharge;
+            UpdateEnergyPercentage();
+        }
+
+        public void UpdateEnergyPercentage()
+        {
+            float percentageCaculation = m_RemainingBatteryTime * 100.0f / m_MaxBatteryTime;
+            m_EnergyPercentage = (float)Math.Round(percentageCaculation, 2);
         }
     }
 }

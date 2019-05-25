@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
     {
         public enum eCarColor
         {
-            Red,
+            Red = 1,
             Blue,
             Black,
             Grey
@@ -39,6 +39,8 @@ namespace Ex03.GarageLogic
             Color = i_Color;
             Doors = i_Doors;
         }
+
+        
 
         public eCarColor Color
         {

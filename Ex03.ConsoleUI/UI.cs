@@ -84,7 +84,7 @@ namespace Ex03.ConsoleUI
 
         public static void PrintMenu()
         {
-            StringBuilder menu = new StringBuilder();
+            StringBuilder menu = new StringBuilder(Environment.NewLine);
             menu.Append(" Please choose which action to make by inserting a chioce number below: " + Environment.NewLine);
             menu.Append(" __________________________________" + Environment.NewLine);
             menu.Append("  1) Add a new vehicle to garage" +    Environment.NewLine);
@@ -116,7 +116,7 @@ namespace Ex03.ConsoleUI
             VehicleInputData o_VehicleData = new VehicleInputData();
             o_VehicleData.m_Color = Car.eCarColor.Red;
             o_VehicleData.m_CurrentAirPressure = 30;
-            o_VehicleData.m_CurrentFuelCapacity = 40;
+            o_VehicleData.m_CurrentFuelCapacity = 45.78f;
             o_VehicleData.m_Doors = Car.eNumOfDoors.Three;
             o_VehicleData.m_FuelType = Fuel.eFuelType.Octan95;
             o_VehicleData.m_LicenseNumber = "1234567";
@@ -134,7 +134,7 @@ namespace Ex03.ConsoleUI
             }
             catch (VehicleAllreadyInGarageException ex)
             {
-                Console.WriteLine("Vehicle with license number " + ex.LicenseNumber + " is allready taken care in the garage. Status changed to InService");
+                Console.WriteLine("Vehicle with license number " + ex.LicenseNumber + " is allready taken care in the garage." + Environment.NewLine + "Status changed to InService");
             }
         }
 
@@ -264,14 +264,95 @@ namespace Ex03.ConsoleUI
 
         public static void ShowVehicleDataByLicenseNumber(Garage i_Garage)
         {
-            string o_LicenseNumber = null;
+            string licenseNumber = string.Empty;
             Vehicle vehicleToShow;
-            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
+            VehicleCard cardToShow;
+            GetVehicleLicenseNumberFromUser(out licenseNumber);
+            StringBuilder outputString = new StringBuilder();
+            eVehicleType vehicleType = 0;
 
-            vehicleToShow = i_Garage.FindVehicleByLicense(o_LicenseNumber);
-            //////////////////// print vehicle
+            try
+            {
+                cardToShow = i_Garage.FindCardByLicense(licenseNumber);
+                vehicleToShow = cardToShow.Vehicle;
+                vehicleType = Vehicle.GetVehicleType(vehicleToShow);
+
+                outputString.Append("************ License Number: " + licenseNumber + "************" + Environment.NewLine);
+                outputString.Append(" + Model name: " + vehicleToShow.ModelName + Environment.NewLine);
+                outputString.Append(" + Owner name: " + cardToShow.OwnerName + Environment.NewLine);
+                outputString.Append(" + Vehicle status: " + cardToShow.Status + Environment.NewLine);
+                outputString.Append(" + Wheels data: ");
+
+                for (int i = 0; i < vehicleToShow.Wheels.Count; i++)
+                {
+                    if (i != 0)
+                    {
+                        outputString.Append("                ");
+                    }
+                    outputString.Append((i + 1) + ") ");
+                    outputString.Append("Manufacturer: " + vehicleToShow.Wheels[i].Manufacturer + ", ");
+                    outputString.Append("Max air pressure: " + vehicleToShow.Wheels[i].MaxAirPressure + ", ");
+                    outputString.Append("Current air pressure: " + vehicleToShow.Wheels[i].CurrentAirPressure);
+                    outputString.Append(Environment.NewLine);
+                }
+
+                outputString.Append(" + Energy percentage: " + vehicleToShow.EnergySource.EnergyPercentage + "%" + Environment.NewLine);
+
+                switch(vehicleType)
+                {
+                    case eVehicleType.Car:
+                    case eVehicleType.Motorcycle:
+                    case eVehicleType.Truck:
+                        outputString.Append(" + Fuel type: " + ((Fuel)vehicleToShow.EnergySource).FuelType.ToString() + Environment.NewLine);
+                        outputString.Append(" + Max fuel capacity: " + ((Fuel)vehicleToShow.EnergySource).MaxFuelCapacity + Environment.NewLine);
+                        outputString.Append(" + Current fuel capacity: " + ((Fuel)vehicleToShow.EnergySource).CurrentFuelCapacity + Environment.NewLine);
+                        break;
+                    case eVehicleType.ElectricCar:
+                    case eVehicleType.ElectricMotorcycle:
+                        outputString.Append(" + Max battery time: " + ((Battery)vehicleToShow.EnergySource).MaxBatteryTime + Environment.NewLine);
+                        outputString.Append(" + Remaining battery time: " + ((Battery)vehicleToShow.EnergySource).RemainingBatteryTime + Environment.NewLine);
+                        break;
+                    default:
+                        break;
+                }
+
+                switch (vehicleType)
+                {
+                    case eVehicleType.Car:
+                    case eVehicleType.ElectricCar:
+                        outputString.Append(" + Vehicle color: " + ((Car)vehicleToShow).Color.ToString() + Environment.NewLine);
+                        outputString.Append(" + Number of doors: " + ((Car)vehicleToShow).Doors + Environment.NewLine);
+                        break;
+                    case eVehicleType.Motorcycle:
+                    case eVehicleType.ElectricMotorcycle:
+                        outputString.Append(" + License type: " + ((Motorcycle)vehicleToShow).LicenseType + Environment.NewLine);
+                        outputString.Append(" + Engine capacity: " + ((Motorcycle)vehicleToShow).EngineCapacity + Environment.NewLine);
+                        break;
+                    case eVehicleType.Truck:
+                        outputString.Append(" + Contains dangerous substances? ");
+                        if(((Truck)vehicleToShow).ContainDangerousSubstances == true)
+                        {
+                            outputString.Append("Yes" + Environment.NewLine);
+                        }
+                        else
+                        {
+                            outputString.Append("No" + Environment.NewLine);
+                        }
+                        outputString.Append(" + Cargo volume: " + ((Truck)vehicleToShow).CargoVolume + Environment.NewLine);
+                        break;
+                    default:
+                        break;
+                }
+                outputString.Append("*************************************************" + Environment.NewLine);
+            }
+            catch (KeyNotFoundException)
+            {
+                outputString.Append(string.Format("There is no vehicle with the license number: " + licenseNumber + " inthe garage"));
+            }
+
+            Console.WriteLine(outputString);
         }
-                
+
         private static VehicleInputData GetVehicleDataFromUser()
         {
             VehicleInputData o_VehicleData = new VehicleInputData();

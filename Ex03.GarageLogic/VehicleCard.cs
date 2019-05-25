@@ -28,6 +28,16 @@ namespace Ex03.GarageLogic
             m_Vehicle = i_Vehicle;
         }
 
+        public string OwnerName
+        {
+            get { return m_OwnerName; }
+        }
+
+        public string Phone
+        {
+            get { return m_Phone; }
+        }
+
         public Vehicle Vehicle
         {
             get { return m_Vehicle; }
