@@ -17,19 +17,29 @@ namespace Ex03.GarageLogic
 
         public void AddVehicleToGarage(string i_Owner, string i_Phone, VehicleInputData i_VehicleData)
         {
-            VehicleCard newCard, foundCard = null;
-            Vehicle newVehicle; 
+            VehicleCard newCard, foundCard;
+            Vehicle newVehicle;
 
-            foundCard = FindCardByLicense(i_VehicleData.m_LicenseNumber);
-            if (foundCard != null)
+            try
+            {
+                foundCard = FindCardByLicense(i_VehicleData.m_LicenseNumber);
+            }
+            catch(KeyNotFoundException)
+            {
+                foundCard = null;
+            }
+
+            if (foundCard == null)
+            {
+                newVehicle = VehicleCreator.CreateNewVehicle(i_VehicleData);
+                newCard = new VehicleCard(i_Owner, i_Phone, VehicleCard.eVehicleStatus.InService, newVehicle);
+                m_Cards.Add(newCard);
+            }
+            else
             {
                 foundCard.Status = VehicleCard.eVehicleStatus.InService;
                 throw new VehicleAllreadyInGarageException(new Exception(), foundCard.Vehicle.LicenseNumber);
             }
-
-            newVehicle = VehicleCreator.CreateNewVehicle(i_VehicleData);
-            newCard = new VehicleCard(i_Owner, i_Phone, VehicleCard.eVehicleStatus.InService, newVehicle);
-            m_Cards.Add(newCard);
         }
 
         public VehicleCard FindCardByLicense(string i_LicenseNumber) 
@@ -110,7 +120,7 @@ namespace Ex03.GarageLogic
             engineToFuel = vehicleToFuel.EnergySource as Fuel;
             if(engineToFuel == null)
             {
-                throw new Exception("Electric Engine");
+                throw new ArgumentException();
             }
 
             engineToFuel.FuelUp(i_FuelToAdd, i_FuelType); // bad values will throw exceptions
@@ -127,7 +137,7 @@ namespace Ex03.GarageLogic
             BatteryToCharge = vehicleToCharge.EnergySource as Battery;
             if(BatteryToCharge == null)
             {
-                throw new Exception("Fuel Engine");
+                throw new ArgumentException();
             }
 
             BatteryToCharge.ChargeBattery(i_BatteryTimeToAdd); // bad values will throw exceptions

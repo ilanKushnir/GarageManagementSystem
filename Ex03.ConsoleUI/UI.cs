@@ -47,7 +47,7 @@ namespace Ex03.ConsoleUI
                         AddNewVehicleToGarage(i_Garage);
                         break;
                     case 2:
-                        ShowLicenseNumbersByStatus();
+                        ShowLicenseNumbersByStatus(i_Garage);
                         break;
                     case 3:
                         ChangeVehicleStatus(i_Garage);
@@ -65,7 +65,7 @@ namespace Ex03.ConsoleUI
                         //userChoice = 0;
                         break;
                 }
-
+                validInput = false;
                 userChoice = 0;
             }
             // exit program
@@ -119,7 +119,7 @@ namespace Ex03.ConsoleUI
             o_VehicleData.m_CurrentFuelCapacity = 40;
             o_VehicleData.m_Doors = Car.eNumOfDoors.Three;
             o_VehicleData.m_FuelType = Fuel.eFuelType.Octan95;
-            o_VehicleData.m_LicenseNumber = "3248390";
+            o_VehicleData.m_LicenseNumber = "1234567";
             o_VehicleData.m_MaxAirPressure = 32;
             o_VehicleData.m_MaxFuelCapacity = 50;
             o_VehicleData.m_ModelName = "The Off-Mobil";
@@ -130,35 +130,55 @@ namespace Ex03.ConsoleUI
             try
             {
                 i_Garage.AddVehicleToGarage(ownerNameInput, ownerPhoneNumberInput, o_VehicleData);
+                Console.WriteLine("The car added successfuly to the garage" + Environment.NewLine);
             }
             catch (VehicleAllreadyInGarageException ex)
             {
                 Console.WriteLine("Vehicle with license number " + ex.LicenseNumber + " is allready taken care in the garage. Status changed to InService");
             }
-
-            Console.WriteLine("The car added successfuly to the garage" + Environment.NewLine);
         }
 
-        public static void ShowLicenseNumbersByStatus()
+        public static void ShowLicenseNumbersByStatus(Garage i_Garage)
         {
-            
+            VehicleCard.eVehicleStatus o_Status;
+            List<String> licenseNumbersList;
+            StringBuilder sb = new StringBuilder();
+
+            GetVehicleStatusFromUser(out o_Status);
+            licenseNumbersList = i_Garage.GetLicenseNumbersByStatus(o_Status);
+
+            if(licenseNumbersList.Count == 0)
+            {
+                sb.Append(string.Format("Vehicle with status {0} not found " + Environment.NewLine, o_Status.ToString()));
+            }
+            else
+            {
+                sb.Append(string.Format("Vehicles with status {0} in garage: " + Environment.NewLine, o_Status.ToString()));
+                foreach (string licensNumber in licenseNumbersList)
+                {
+                    sb.Append(licensNumber);
+                }
+            }
+
+            Console.WriteLine(sb);
         }
+
 
         public static void ChangeVehicleStatus(Garage i_Garage)
         {
-            string o_LicenseNumber;
+            string o_LicenseNumber = null;
             VehicleCard.eVehicleStatus o_NewStatus = 0;
 
             GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
-            //GetVehicleStatusFromUser(out o_NewStatus);              /// add method!
+            GetVehicleStatusFromUser(out o_NewStatus); 
 
             try
-            {
+            {                                                                           //////// while????
                 i_Garage.ChangeVehicleStatus(o_LicenseNumber, o_NewStatus);
             }
-            catch (KeyNotFoundException ex)
+            catch (KeyNotFoundException)
             {
-                Console.WriteLine("License number " + ex.Message + " does not exist on garage");
+                Console.WriteLine("License number does not exist on garage");
             }
         }
 
@@ -194,19 +214,19 @@ namespace Ex03.ConsoleUI
                 }
                 catch (KeyNotFoundException)
                 {
-                    Console.WriteLine("License Number does not exist on garage");
+                    Console.WriteLine("License Number does not exist in the garage");
+                }
+                catch (ArgumentNullException) // electric vehicle
+                {
+                    Console.WriteLine("The vehicle has no fuel tank");
                 }
                 catch (ValueOutOfRangeException ex)
                 {
-                    Console.WriteLine("Cannot fuel vehilce over the maximum fuek capacity of" + ex.MaxValue);
+                    Console.WriteLine("Cannot fuel vehilce over the maximum fuel capacity of" + ex.MaxValue);
                 }
                 catch (WrongFuelException ex)
                 {
                     Console.WriteLine("Cannot fuel vehicle with {0} fuel type instead of {1}", ex.WrongFuel, ex.Fuel);
-                }
-                catch (Exception ex) // electric vehicle
-                {
-                    Console.WriteLine("Cannot fuel " + ex.Message);
                 }
             }
         }
@@ -220,15 +240,23 @@ namespace Ex03.ConsoleUI
             GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
             GetBatteryTimeToAddFromUser(out o_BatteryTimeToAdd);
 
-            while(validInput ==false)
+            while(validInput == false)
             {
                 try
                 {
                     validInput = i_Garage.ChargeVehicle(o_LicenseNumber, o_BatteryTimeToAdd);
                 }
-                catch()
+                catch(KeyNotFoundException)
                 {
-
+                    Console.WriteLine("License Number does not exist in the garage");
+                }
+                catch (ArgumentException)
+                {
+                    Console.WriteLine("The vehicle has no Battery");
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Cannot charge battery over " + ex.MaxValue);
                 }
             }
 
@@ -538,7 +566,7 @@ namespace Ex03.ConsoleUI
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" ---------------------------------------------" + Environment.NewLine);
-            userPrompt.Append(" Please choose your vehicle's number of doors:" + Environment.NewLine);
+            userPrompt.Append(" Please choose vehicle status:"             + Environment.NewLine);
             userPrompt.Append("  1) In service"                                + Environment.NewLine);
             userPrompt.Append("  2) Fixed"                                     + Environment.NewLine);
             userPrompt.Append("  3) Paid"                                      + Environment.NewLine);
@@ -566,6 +594,7 @@ namespace Ex03.ConsoleUI
                 }
             }
 
+            userChoice -= 1;
             o_VehicleStatus = (VehicleCard.eVehicleStatus)userChoice;
         }
 
