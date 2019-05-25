@@ -100,26 +100,18 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(menu);
         }
 
-
-        ////////////////////////////////
-
-
         public static void AddNewVehicleToGarage(Garage i_Garage)
         {
-            VehicleInputData vehicleData = GetVehicleDataFromUser();
-
+            VehicleInputData o_VehicleData = GetVehicleDataFromUser();
+            ///////////////////////
             try
             {
-              //  i_Garage.AddVehicleToGarage(owner, phone, vehicleData);
+                i_Garage.AddVehicleToGarage("ilan", "050505050505", o_VehicleData);
             }
-            catch(VehicleAllreadyInGarageException ex)
+            catch (VehicleAllreadyInGarageException ex)
             {
                 Console.WriteLine("Vehicle with license number " + ex.LicenseNumber + " is allready taken care in garage. Status changed to InService");
             }
-
-            // הוספת רכב למוסך צריכה להיות סטטית כי המוסך הקלאס הנוכחי לא מחזיק אובייקט מוסך?
-            // ויצירת הרכב חייבת לקרות בתוך מתודת ההוספה במוסך
-            ////////////////////////////////////////////
 
             
         }
@@ -156,10 +148,7 @@ namespace Ex03.ConsoleUI
         {
 
         }
-
-
-        /////////////////////////////////////////////////////////////
-        
+                
         private static VehicleInputData GetVehicleDataFromUser()
         {
             VehicleInputData o_VehicleData = new VehicleInputData();
@@ -167,20 +156,53 @@ namespace Ex03.ConsoleUI
             GetVehicleLicenseNumberFromUser(out o_VehicleData.m_LicenseNumber);
             GetVehicleTypeFromUser(out o_VehicleData.m_VehicleType);
             GetVehicleModelNameFromUser(out o_VehicleData.m_ModelName);
-            GetVehicleSpecificDataFromUserByType(out o_VehicleData.m_VehicleType, out o_VehicleData);
+            GetVehicleSpecificDataFromUserByType(o_VehicleData.m_VehicleType, o_VehicleData);
             GetWheelsDataFromUser(out o_VehicleData.m_WheelsManufacturer,
                                   out o_VehicleData.m_CurrentAirPressure,
                                   out o_VehicleData.m_MaxAirPressure);
-
-
-            ////// GET... SPECIFIC DATA BY TYPE .....
-            /////////////////////////////////////
-            
-
-
-
-
             return o_VehicleData;
+        }
+
+        private static void GetVehicleSpecificDataFromUserByType(eVehicleType i_VehicleType,
+                                                                 VehicleInputData o_VehicleData)
+        {
+            switch (i_VehicleType)
+            {
+                case eVehicleType.Car:
+                case eVehicleType.ElectricCar:
+                    GetVehicleColorFromUser(out o_VehicleData.m_Color);
+                    GetVehicleNumberOfDoorsFromUser(out o_VehicleData.m_Doors);
+                    break;
+                case eVehicleType.Motorcycle:
+                case eVehicleType.ElectricMotorcycle:
+                    GetVehicleLicenseTypeFromUser(out o_VehicleData.m_LicenseType);
+                    GetVehicleEngineCapacityFromUser(out o_VehicleData.m_EngineCapacity);
+                    break;
+                case eVehicleType.Truck:
+                    GetVehicleDangerousSubstancesDataFromUser(out o_VehicleData.m_ContainDangerousSubstances);
+                    GetVehicleCargoVolumeFromUser(out o_VehicleData.m_CargoVolume);
+                    break;
+                default:
+                    break;
+            }
+
+            switch (i_VehicleType)
+            {
+                case eVehicleType.Car:
+                case eVehicleType.Motorcycle:
+                case eVehicleType.Truck:
+                    GetVehicleFuelDataFromUser(out o_VehicleData.m_FuelType,
+                                               out o_VehicleData.m_CurrentFuelCapacity,
+                                               out o_VehicleData.m_MaxFuelCapacity);
+                    break;
+                case eVehicleType.ElectricCar:
+                case eVehicleType.ElectricMotorcycle:
+                    GetVehicleBatteryDataFromUser(out o_VehicleData.m_RemainingBatteryTime,
+                                                  out o_VehicleData.m_MaxBatteryTime);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private static void GetVehicleTypeFromUser(out eVehicleType o_VehicleType)
@@ -220,27 +242,46 @@ namespace Ex03.ConsoleUI
                 }
             }
 
-            switch(userChoice)
+            o_VehicleType = (eVehicleType)userChoice;
+        }
+
+        private static void GetVehicleLicenseTypeFromUser(out Motorcycle.eLicenseType o_LicenseType)
+        {
+            int userChoice = 0;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" ------------------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Please choose your vehicle's license type:" + Environment.NewLine);
+            userPrompt.Append("  1) A" + Environment.NewLine);
+            userPrompt.Append("  2) A1" + Environment.NewLine);
+            userPrompt.Append("  3) A2" + Environment.NewLine);
+            userPrompt.Append("  4) B" + Environment.NewLine);
+            userPrompt.Append(" ------------------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            while (validInput == false)
             {
-                case 1:
-                    o_VehicleType = eVehicleType.Car;
-                    break;
-                case 2:
-                    o_VehicleType = eVehicleType.ElectricCar;
-                    break;
-                case 3:
-                    o_VehicleType = eVehicleType.Motorcycle;
-                    break;
-                case 4:
-                    o_VehicleType = eVehicleType.ElectricMotorcycle;
-                    break;
-                case 5:
-                    o_VehicleType = eVehicleType.Truck;
-                    break;
-                default:
-                    o_VehicleType = 0;
-                    break;
+                try
+                {
+                    validInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a number.");
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Error: The choice number should be between " + ex.MinValue + " to " + ex.MaxValue);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
             }
+
+            o_LicenseType = (Motorcycle.eLicenseType)userChoice;
         }
 
         public static void GetVehicleColorFromUser(out Car.eCarColor o_VehicleColor)
@@ -279,24 +320,7 @@ namespace Ex03.ConsoleUI
                 }
             }
 
-            switch (userChoice)
-            {
-                case 1:
-                    o_VehicleColor = Car.eCarColor.Red;
-                    break;
-                case 2:
-                    o_VehicleColor = Car.eCarColor.Blue;
-                    break;
-                case 3:
-                    o_VehicleColor = Car.eCarColor.Black;
-                    break;
-                case 4:
-                    o_VehicleColor = Car.eCarColor.Grey;
-                    break;
-                default:
-                    o_VehicleColor = 0;
-                    break;
-            }
+            o_VehicleColor = (Car.eCarColor)userChoice;
         }
 
         public static void GetVehicleNumberOfDoorsFromUser(out Car.eNumOfDoors o_NumOfDoors)
@@ -335,26 +359,45 @@ namespace Ex03.ConsoleUI
                 }
             }
 
-            switch (userChoice)
-            {
-                case 2:
-                    o_NumOfDoors = Car.eNumOfDoors.Two;
-                    break;
-                case 3:
-                    o_NumOfDoors = Car.eNumOfDoors.Three;
-                    break;
-                case 4:
-                    o_NumOfDoors = Car.eNumOfDoors.Four;
-                    break;
-                case 5:
-                    o_NumOfDoors = Car.eNumOfDoors.Five;
-                    break;
-                default:
-                    o_NumOfDoors = 0;
-                    break;
-            }
+            o_NumOfDoors = (Car.eNumOfDoors)userChoice;
         }
 
+        public static void GetVehicleDangerousSubstancesDataFromUser(out bool o_ContainsDangerousSubstances)
+        {
+            int userChoice = 0;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" -----------------------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Does your vehicle contain dangerous substances:" + Environment.NewLine);
+            userPrompt.Append("  1) Yes" + Environment.NewLine);
+            userPrompt.Append("  2) No" +  Environment.NewLine);
+            userPrompt.Append(" -----------------------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            while (validInput == false)
+            {
+                try
+                {
+                    validInput = GetValidIntFromUserInRange(out userChoice, 1, 2);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please choose 1 for yes and 2 for no.");
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Error: The choice should be " + ex.MinValue + " - " + ex.MaxValue);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            }
+
+            o_ContainsDangerousSubstances = (userChoice == 1);
+        }
 
         private static void GetVehicleModelNameFromUser(out string o_ModelName)
         {
@@ -390,7 +433,6 @@ namespace Ex03.ConsoleUI
             o_ModelName = stringInput;
         }
 
-
         private static void GetVehicleLicenseNumberFromUser(out string o_LicenseNumber)
         {
             string stringInput = string.Empty;
@@ -424,43 +466,6 @@ namespace Ex03.ConsoleUI
             } while (validInput == false);
             o_LicenseNumber = stringInput;
         }
-
-
-        private static void GetVehicleSpecificDataFromUserByType(eVehicleType i_VehicleType,
-                                                                 VehicleInputData o_VehicleData)
-        {
-            switch(i_VehicleType)
-            {
-                case eVehicleType.Car:
-                    GetVehicleColorFromUser(out o_VehicleData.m_Color);
-                    GetVehicleNumberOfDoorsFromUser(out o_VehicleData.m_Doors);
-                    GetVehicleFuelDataFromUser(o_VehicleData);
-                    break;
-                case eVehicleType.ElectricCar:
-                    GetVehicleColorFromUser(out o_VehicleData.m_Color);
-                    GetVehicleNumberOfDoorsFromUser(out o_VehicleData.m_Doors);
-                    GetVehicleBatteryDataFromUser(o_VehicleData);
-                    break;
-                case eVehicleType.Motorcycle:
-                    GetVehicleLicenseTypeFromUser(out o_VehicleData.m_LicenseType);
-                    GetVehicleEngineCapacityFromUser(out o_VehicleData.m_EngineCapacity);
-                    GetVehicleFuelDataFromUser(o_VehicleData);
-                    break;
-                case eVehicleType.ElectricMotorcycle:
-                    GetVehicleLicenseTypeFromUser(out o_VehicleData.m_LicenseType);
-                    GetVehicleEngineCapacityFromUser(out o_VehicleData.m_EngineCapacity);
-                    GetVehicleBatteryDataFromUser(o_VehicleData);
-                    break;
-                case eVehicleType.Truck:
-                    GetVehicleDangerousSubstancesDataFromUser(out o_VehicleData.m_ContainDangerousSubstances);
-                    GetVehicleCargoVolumeFromUser(out o_VehicleData.m_CargoVolume);
-                    GetVehicleFuelDataFromUser(o_VehicleData);
-                    break;
-                case default:
-                    break;
-            }
-        }
-
 
         private static void GetWheelsDataFromUser(out string o_Manufacturer,
                                                   out float o_CurrentAirPressure,
@@ -599,24 +604,7 @@ namespace Ex03.ConsoleUI
                 }
             }
 
-            switch (userChoice)
-            {
-                case 5:
-                    o_FuelType = Fuel.eFuelType.Octan95;
-                    break;
-                case 2:
-                    o_FuelType = Fuel.eFuelType.Octan96;
-                    break;
-                case 3:
-                    o_FuelType = Fuel.eFuelType.Octan98;
-                    break;
-                case 4:
-                    o_FuelType = Fuel.eFuelType.Soler;
-                    break;
-                default:
-                    o_FuelType = 0;
-                    break;
-            }
+            o_FuelType = (Fuel.eFuelType)userChoice;
             
             userPrompt.Clear();
             userPrompt.Append(" ----------------------------------" + Environment.NewLine);
@@ -677,6 +665,145 @@ namespace Ex03.ConsoleUI
                 }
             } while (validInput == false);
             o_CurrentFuelCapacity = capacityInput;
+        }
+
+        private static void GetVehicleBatteryDataFromUser(out float o_RemainingBatteryTime,
+                                                          out float o_MaxBatteryTime)
+        {
+            float timeInput = 0;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" -----------------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter vehicle's max battery time (hours):" + Environment.NewLine);
+            userPrompt.Append(" -----------------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            validInput = false;
+            do
+            {
+                try
+                {
+                    GetValidFloatFromUserInRange(out timeInput, 0, float.MaxValue);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a floating point number");
+                }
+                catch (ValueOutOfRangeException)
+                {
+                    Console.WriteLine("Error: Please enter a positive number");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+            o_MaxBatteryTime = timeInput;
+
+            userPrompt.Clear();
+            userPrompt.Append(" -----------------------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter remaining vehicle's battery time (hours):" + Environment.NewLine);
+            userPrompt.Append(" -----------------------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            timeInput = 0;
+            validInput = false;
+            do
+            {
+                try
+                {
+                    GetValidFloatFromUserInRange(out timeInput, 0, o_MaxBatteryTime);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a floating point number");
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Error: The time should be a positive number," + Environment.NewLine +
+                                      "       and smaller then the maximum time (" + ex.MaxValue + ")");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+            o_RemainingBatteryTime = timeInput;
+        }
+
+        private static void GetVehicleEngineCapacityFromUser(out int o_EngineCapacity)
+        {
+            int capacityInput = 0;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" --------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter vehicle's engine capacity:" + Environment.NewLine);
+            userPrompt.Append(" --------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            validInput = false;
+            do
+            {
+                try
+                {
+                    GetValidIntFromUserInRange(out capacityInput, 0, Int32.MaxValue);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a natural number");
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Error: Please enter a positive number, not bigger than " + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+
+            o_EngineCapacity = capacityInput;
+        }
+
+        private static void GetVehicleCargoVolumeFromUser(out float o_CargoVolume)
+        {
+            float volumeInput = 0;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" -----------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter vehicle's cargo volume:" + Environment.NewLine);
+            userPrompt.Append(" -----------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            validInput = false;
+            do
+            {
+                try
+                {
+                    GetValidFloatFromUserInRange(out volumeInput, 0, float.MaxValue);
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error: Please enter a floating point number");
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Error: Please enter a positive number");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+
+            o_CargoVolume = volumeInput;
         }
 
         public static bool GetValidIntFromUserInRange(out int o_UserInput, int i_MinValue, int i_MaxValue)
