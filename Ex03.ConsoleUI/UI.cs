@@ -153,6 +153,7 @@ namespace Ex03.ConsoleUI
             VehicleInputData o_VehicleData = new VehicleInputData();
 
             GetVehicleTypeFromUser(out o_VehicleData.m_VehicleType);
+            GetVehicleModelNameFromUser(out o_VehicleData.m_ModelName);
             GetWheelsDataFromUser(out o_VehicleData.m_WheelsManufacturer,
                                   out o_VehicleData.m_CurrentAirPressure,
                                   out o_VehicleData.m_MaxAirPressure);
@@ -226,6 +227,76 @@ namespace Ex03.ConsoleUI
                     break;
             }
         }
+
+        private static void GetVehicleModelNameFromUser(out string o_ModelName)
+        {
+            string stringInput = string.Empty;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" ---------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter vehicle's model name:" + Environment.NewLine);
+            userPrompt.Append(" ---------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            do
+            {
+                try
+                {
+                    validInput = GetUnemptyStringFromUser(out stringInput);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Error: The model name is too long");
+                }
+                catch (NullReferenceException)
+                {
+                    Console.WriteLine("The model name can't be empty");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+            o_ModelName = stringInput;
+        }
+
+
+        private static void GetVehicleLicenseNumberFromUser(out string o_LicenseNumber)
+        {
+            string stringInput = string.Empty;
+            bool validInput = false;
+            StringBuilder userPrompt = new StringBuilder();
+
+            userPrompt.Append(" -------------------------------" + Environment.NewLine);
+            userPrompt.Append(" Enter vehicle's license number:" + Environment.NewLine);
+            userPrompt.Append(" -------------------------------" + Environment.NewLine);
+
+            Console.Write(userPrompt + Environment.NewLine);
+
+            do
+            {
+                try
+                {
+                    validInput = GetUnemptyStringFromUser(out stringInput);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Error: The model name is too long");
+                }
+                catch (NullReferenceException)
+                {
+                    Console.WriteLine("The model name can't be empty");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
+                }
+            } while (validInput == false);
+            o_LicenseNumber = stringInput;
+        }
+
 
         private static void GetWheelsDataFromUser(out string o_Manufacturer,
                                                   out float o_CurrentAirPressure,
@@ -365,6 +436,19 @@ namespace Ex03.ConsoleUI
             }
 
             return true;
+        }
+
+        public static void GetStringInLengthRangeFromUser(out string o_UserInput, int i_minLength, int i_maxLength)
+        {
+            string userInput;
+            userInput = Console.ReadLine();
+
+            if (string.IsNullOrEmpty(o_UserInput))
+            {
+                throw new NullReferenceException();
+            }
+
+            o_UserInput = userInput;
         }
     }
 }
