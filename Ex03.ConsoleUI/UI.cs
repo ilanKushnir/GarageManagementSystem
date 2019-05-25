@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Ex03.GarageLogic;
+using Ex03.Exceptions;
 
 namespace Ex03.ConsoleUI
 {
@@ -30,9 +31,9 @@ namespace Ex03.ConsoleUI
                     {
                         Console.WriteLine("Error: Please enter a number.");
                     }
-                    catch (ArgumentOutOfRangeException)
+                    catch (ValueOutOfRangeException ex)
                     {
-                        Console.WriteLine("Error: The number should be between 1 to 7.");
+                        Console.WriteLine("Error: The number should be between " + ex.MinValue + " to " + ex.MaxValue);
                     }
                     catch (Exception ex)
                     {
@@ -194,9 +195,9 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Error: Please enter a number.");
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (ValueOutOfRangeException ex)
                 {
-                    Console.WriteLine("Error: The number should be between 1 to 5.");
+                    Console.WriteLine("Error: The number should be between " + ex.MinValue +" to " + ex.MaxValue);
                 }
                 catch (Exception ex)
                 {
@@ -248,7 +249,7 @@ namespace Ex03.ConsoleUI
                 {
                     validInput = GetUnemptyStringFromUser(out stringInput);
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (ValueOutOfRangeException)
                 {
                     Console.WriteLine("Error: The name is too long");
                 }
@@ -281,7 +282,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Error: Please enter a floating point number");
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (ValueOutOfRangeException)
                 {
                     Console.WriteLine("Error: Please enter a positive number");
                 }
@@ -311,10 +312,10 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Error: Please enter a floating point number");
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (ValueOutOfRangeException ex)
                 {
                     Console.WriteLine("Error: The pressure should be positive number" + Environment.NewLine +
-                                      "       and smaller then the maximum pressure (" + o_MaxAirPressure + ")");
+                                      "       and smaller then the maximum pressure (" + ex.MaxValue + ")");
                 }
                 catch (Exception ex)
                 {
@@ -327,14 +328,14 @@ namespace Ex03.ConsoleUI
 
         public static bool GetValidIntFromUserInRange(out int o_UserInput, int i_MinValue, int i_MaxValue)
         {
-            if (!int.TryParse(Console.ReadLine(), out o_UserInput))
+            if (int.TryParse(Console.ReadLine(), out o_UserInput) == false)
             {
                 throw new FormatException();
             }
 
             if (o_UserInput < i_MinValue || o_UserInput > i_MaxValue)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ValueOutOfRangeException(new Exception(), i_MinValue, i_MaxValue);
             }
 
             return true;
@@ -342,14 +343,14 @@ namespace Ex03.ConsoleUI
 
         public static bool GetValidFloatFromUserInRange(out float o_UserInput, float i_MinValue, float i_MaxValue)
         {
-            if (!float.TryParse(Console.ReadLine(), out o_UserInput))
+            if (float.TryParse(Console.ReadLine(), out o_UserInput) == false)
             {
                 throw new FormatException();
             }
 
             if (o_UserInput < i_MinValue || o_UserInput > i_MaxValue)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ValueOutOfRangeException(new Exception(), i_MinValue, i_MaxValue);
             }
 
             return true;

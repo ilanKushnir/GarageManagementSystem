@@ -35,6 +35,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="VehicleAllreadyInGarageException.cs" />
     <Compile Include="WrongFuelException.cs" />
     <Compile Include="WrongInputException.cs" />
