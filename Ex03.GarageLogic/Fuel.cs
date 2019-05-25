@@ -30,14 +30,12 @@ namespace Ex03.GarageLogic
         {
             if (i_FuelType.Equals(m_FuelType))
             {
-                try
+                if(m_CurrentFuelCapacity + i_FuelToAdd > m_MaxFuelCapacity)
                 {
-                    m_CurrentFuelCapacity = (m_CurrentFuelCapacity + i_FuelToAdd > m_MaxFuelCapacity ? m_MaxFuelCapacity : m_CurrentFuelCapacity + i_FuelToAdd);
+                    throw new ValueOutOfRangeException(new Exception(), 0, m_MaxFuelCapacity);
                 }
-                catch
-                {
 
-                }
+                m_CurrentFuelCapacity += i_FuelToAdd;
             }
             else
             {

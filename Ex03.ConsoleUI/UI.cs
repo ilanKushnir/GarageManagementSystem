@@ -53,7 +53,7 @@ namespace Ex03.ConsoleUI
                         ChangeVehicleStatus(i_Garage);
                         break;
                     case 4:
-                        InflateVehicleToMax();
+                        InflateVehicleToMax(i_Garage);
                         break;
                     case 5:
 
@@ -118,7 +118,7 @@ namespace Ex03.ConsoleUI
 
         public static void ShowLicenseNumbersByStatus()
         {
-
+            
         }
 
         public static void ChangeVehicleStatus(Garage i_Garage)
@@ -147,21 +147,78 @@ namespace Ex03.ConsoleUI
         }
         
         public static void FuelOrChargeVehicle()
-        { }
-
-        private void FuelVehicle()
         {
 
         }
 
-        private void ChargeVehicle()
+        public static void FuelVehicle(Garage i_Garage)
         {
+            string o_LicenseNumber = null;
+            Fuel.eFuelType o_FuelType;
+            float o_FuelToAdd;
+            bool validInput = false;
+
+
+            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
+            GetFuelTypeFromUser(out o_FuelType);
+            GetFuelToAddFromUser(out o_FuelToAdd);
+
+            while (validInput == false)
+            {
+                try
+                {
+                    validInput = i_Garage.FuelVehicle(o_LicenseNumber, o_FuelToAdd, o_FuelType);
+                }
+                catch (KeyNotFoundException)
+                {
+                    Console.WriteLine("License Number does not exist on garage");
+                }
+                catch (ValueOutOfRangeException ex)
+                {
+                    Console.WriteLine("Cannot fuel vehilce over the maximum fuek capacity of" + ex.MaxValue);
+                }
+                catch (WrongFuelException ex)
+                {
+                    Console.WriteLine("Cannot fuel vehicle with {0} fuel type instead of {1}", ex.WrongFuel, ex.Fuel);
+                }
+                catch (Exception ex) // electric vehicle
+                {
+                    Console.WriteLine("Cannot fuel " + ex.Message);
+                }
+            }
+        }
+
+        public static void ChargeVehicle(Garage i_Garage)
+        {
+            string o_LicenseNumber = null;
+            float o_BatteryTimeToAdd;
+            bool validInput = false;
+
+            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
+            GetBatteryTimeToAddFromUser(out o_BatteryTimeToAdd);
+
+            while(validInput ==false)
+            {
+                try
+                {
+                    validInput = i_Garage.ChargeVehicle(o_LicenseNumber, o_BatteryTimeToAdd);
+                }
+                catch()
+                {
+
+                }
+            }
 
         }
 
         public static void ShowVehicleDataByLicenseNumber(Garage i_Garage)
         {
+            string o_LicenseNumber = null;
+            Vehicle vehicleToShow;
+            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
 
+            vehicleToShow = i_Garage.FindVehicleByLicense(o_LicenseNumber);
+            //////////////////// print vehicle
         }
                 
         private static VehicleInputData GetVehicleDataFromUser()

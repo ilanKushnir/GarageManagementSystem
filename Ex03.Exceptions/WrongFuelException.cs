@@ -10,6 +10,16 @@ namespace Ex03.Exceptions
         private string m_WrongFuel;
         private string m_Fuel;
 
+        public string WrongFuel
+        {
+            get { return m_WrongFuel; }
+        }
+
+        public string Fuel
+        {
+            get { return m_Fuel; }
+        }
+
         public WrongFuelException(
                                     Exception i_InnerException, 
                                     string i_WrongFuel, 

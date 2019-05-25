@@ -20,7 +20,12 @@ namespace Ex03.GarageLogic
 
         public void ChargeBattery(float i_TimeToCharge)
         {
+            if (m_RemainingBatteryTime + i_TimeToCharge > m_MaxBatteryTime)
+            {
+                throw new ValueOutOfRangeException(new Exception(), 0, m_MaxBatteryTime);
+            }
 
+            m_RemainingBatteryTime += i_TimeToCharge;
         }
     }
 }

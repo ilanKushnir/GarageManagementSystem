@@ -37,5 +37,10 @@ namespace Ex03.GarageLogic
             set { m_Wheels = value; }
         }
 
+        public EnergySource EnergySource
+        {
+            get { return m_EnergySource; }
+        }
+
     }
 }

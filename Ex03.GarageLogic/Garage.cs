@@ -45,6 +45,15 @@ namespace Ex03.GarageLogic
             return o_FoundCard;
         }
 
+        public Vehicle FindVehicleByLicense(string i_LicenseNumber)
+        {
+            VehicleCard o_FoundVehicleCard;
+
+            o_FoundVehicleCard = FindCardByLicense(i_LicenseNumber);
+            // exception will be thrown in a case of bad license number
+            return o_FoundVehicleCard.Vehicle;
+        }
+
         public List<string> GetLicenseNumbersByStatus(VehicleCard.eVehicleStatus i_Status)
         {
             List<string> o_licenstNumbers = new List<string>();
@@ -89,6 +98,40 @@ namespace Ex03.GarageLogic
             {
                 wheel.InflateToMaxPressure();
             }
+        }
+
+        public bool FuelVehicle(string i_LicenseNumber, float i_FuelToAdd, Fuel.eFuelType i_FuelType)
+        {
+            Vehicle vehicleToFuel = null;
+            Fuel engineToFuel = null;
+
+            vehicleToFuel = FindVehicleByLicense(i_LicenseNumber);
+
+            engineToFuel = vehicleToFuel.EnergySource as Fuel;
+            if(engineToFuel == null)
+            {
+                throw new Exception("Electric Engine");
+            }
+
+            engineToFuel.FuelUp(i_FuelToAdd, i_FuelType); // bad values will throw exceptions
+            return true;
+        }
+
+        public bool ChargeVehicle(string i_LicenseNumber, float i_BatteryTimeToAdd)
+        {
+            Vehicle vehicleToCharge = null;
+            Battery BatteryToCharge = null;
+
+            vehicleToCharge = FindVehicleByLicense(i_LicenseNumber);
+
+            BatteryToCharge = vehicleToCharge.EnergySource as Battery;
+            if(BatteryToCharge == null)
+            {
+                throw new Exception("Fuel Engine");
+            }
+
+            BatteryToCharge.ChargeBattery(i_BatteryTimeToAdd); // bad values will throw exceptions
+            return true;
         }
 
 
