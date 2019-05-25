@@ -123,12 +123,27 @@ namespace Ex03.ConsoleUI
 
         public static void ChangeVehicleStatus(Garage i_Garage)
         {
-           ////////////////////////////////////////////////////////
+            string o_LicenseNumber;
+            VehicleCard.eVehicleStatus o_NewStatus = 0;
+
+            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
+            //GetVehicleStatusFromUser(out o_NewStatus);              /// add method!
+
+            try
+            {
+                i_Garage.ChangeVehicleStatus(o_LicenseNumber, o_NewStatus);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                Console.WriteLine("License number " + ex.Message + " does not exist on garage");
+            }
         }
 
-        public static void InflateVehicleToMax()
+        public static void InflateVehicleToMax(Garage i_Garage)
         {
-
+            string o_LicenseNumber;
+            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
+            i_Garage.InflateVehicleWheelsToMax(o_LicenseNumber);
         }
         
         public static void FuelOrChargeVehicle()
@@ -449,15 +464,15 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
+                    validInput = GetStringInLengthRangeFromUser(out stringInput, 7, 8);
                 }
                 catch (ValueOutOfRangeException ex )
                 {
-                    Console.WriteLine("Error: The model's name length should be " + ex.MinValue + " to " + ex.MaxValue + " chars");
+                    Console.WriteLine("Error: The vehicle license number length should be " + ex.MinValue + " to " + ex.MaxValue + " chars");
                 }
                 catch (NullReferenceException)
                 {
-                    Console.WriteLine("Error: The model name can't be empty");
+                    Console.WriteLine("Error: The license number can't be empty");
                 }
                 catch (Exception ex)
                 {
