@@ -285,25 +285,11 @@ namespace Ex03.ConsoleUI
                 vehicleToShow = cardToShow.Vehicle;
                 vehicleType = Vehicle.GetVehicleType(vehicleToShow);
 
-                outputString.Append("************ License Number: " + licenseNumber + "************" + Environment.NewLine);
+                outputString.Append(Environment.NewLine);
+                outputString.Append("************************ License Number: " + licenseNumber + " ************************" + Environment.NewLine);
                 outputString.Append(" + Model name: " + vehicleToShow.ModelName + Environment.NewLine);
                 outputString.Append(" + Owner name: " + cardToShow.OwnerName + Environment.NewLine);
                 outputString.Append(" + Vehicle status: " + cardToShow.Status + Environment.NewLine);
-                outputString.Append(" + Wheels data: ");
-
-                for (int i = 0; i < vehicleToShow.Wheels.Count; i++)
-                {
-                    if (i != 0)
-                    {
-                        outputString.Append("                ");
-                    }
-                    outputString.Append((i + 1) + ") ");
-                    outputString.Append("Manufacturer: " + vehicleToShow.Wheels[i].Manufacturer + ", ");
-                    outputString.Append("Max air pressure: " + vehicleToShow.Wheels[i].MaxAirPressure + ", ");
-                    outputString.Append("Current air pressure: " + vehicleToShow.Wheels[i].CurrentAirPressure);
-                    outputString.Append(Environment.NewLine);
-                }
-
                 outputString.Append(" + Energy percentage: " + vehicleToShow.EnergySource.EnergyPercentage + "%" + Environment.NewLine);
 
                 switch(vehicleType)
@@ -351,7 +337,23 @@ namespace Ex03.ConsoleUI
                     default:
                         break;
                 }
-                outputString.Append("*************************************************" + Environment.NewLine);
+
+                outputString.Append(" + Wheels data: ");
+
+                for (int i = 0; i < vehicleToShow.Wheels.Count; i++)
+                {
+                    if (i != 0)
+                    {
+                        outputString.Append("                ");
+                    }
+                    outputString.Append((i + 1) + ") ");
+                    outputString.Append("Manufacturer: " + vehicleToShow.Wheels[i].Manufacturer + ", ");
+                    outputString.Append("Max air pressure: " + vehicleToShow.Wheels[i].MaxAirPressure + ", ");
+                    outputString.Append("Current air pressure: " + vehicleToShow.Wheels[i].CurrentAirPressure);
+                    outputString.Append(Environment.NewLine);
+                }
+
+                outputString.Append("**************************************************************************" + Environment.NewLine);
             }
             catch (KeyNotFoundException)
             {
