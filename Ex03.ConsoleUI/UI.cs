@@ -17,7 +17,7 @@ namespace Ex03.ConsoleUI
 
             PrintWelcomeMessage();
 
-            while (userChoice != 7)
+            while (userChoice != 8)
             {
                 PrintMenu();
 
@@ -25,7 +25,7 @@ namespace Ex03.ConsoleUI
                 {
                     try
                     {
-                        validInput = GetValidIntFromUserInRange(out userChoice, 1, 7);
+                        validInput = GetValidIntFromUserInRange(out userChoice, 1, 8);
                     }
                     catch (FormatException)
                     {
@@ -56,9 +56,12 @@ namespace Ex03.ConsoleUI
                         InflateVehicleToMax(i_Garage);
                         break;
                     case 5:
-
+                        FuelVehicle(i_Garage);
                         break;
                     case 6:
+                        ChargeVehicle(i_Garage);
+                        break;
+                    case 7:
                         ShowVehicleDataByLicenseNumber(i_Garage);
                         break;
                     default:
@@ -91,9 +94,10 @@ namespace Ex03.ConsoleUI
             menu.Append("  2) Show license numbers by status" + Environment.NewLine);
             menu.Append("  3) Change car status" +              Environment.NewLine);
             menu.Append("  4) Inflate car wheels to maximum" +  Environment.NewLine);
-            menu.Append("  5) Fuel/Charge vehicle" +            Environment.NewLine);
-            menu.Append("  6) Show vehicle full data" +         Environment.NewLine);
-            menu.Append("  7) Exit" +                           Environment.NewLine);
+            menu.Append("  5) Fuel vehicle" +                   Environment.NewLine);
+            menu.Append("  6) Charge vehicle" +                 Environment.NewLine);
+            menu.Append("  7) Show vehicle full data" +         Environment.NewLine);
+            menu.Append("  8) Exit" +                           Environment.NewLine);
             menu.Append(" ----------------------------------" + Environment.NewLine + Environment.NewLine);
             menu.Append(" Please choose and press Enter: " +    Environment.NewLine);
 
@@ -105,11 +109,12 @@ namespace Ex03.ConsoleUI
             string ownerNameInput = string.Empty;
             string ownerPhoneNumberInput = string.Empty;
             //VehicleInputData o_VehicleData;
-
-            //GetOwnerNameFromUser(out ownerNameInput);
-            //GetOwnerPhoneNumberFromUser(out ownerPhoneNumberInput);
-            //o_VehicleData = GetVehicleDataFromUser();
-
+            /*
+            GetOwnerNameFromUser(out ownerNameInput);
+            GetOwnerPhoneNumberFromUser(out ownerPhoneNumberInput);
+            o_VehicleData = GetVehicleDataFromUser();
+            */
+    
             ////// Example Car //////
             ownerNameInput = "Ilan Kushnir";
             ownerPhoneNumberInput = "0505877898";
@@ -119,12 +124,16 @@ namespace Ex03.ConsoleUI
             o_VehicleData.m_CurrentFuelCapacity = 45.78f;
             o_VehicleData.m_Doors = Car.eNumOfDoors.Three;
             o_VehicleData.m_FuelType = Fuel.eFuelType.Octan95;
+
             o_VehicleData.m_LicenseNumber = "1234567";
             o_VehicleData.m_MaxAirPressure = 32;
-            o_VehicleData.m_MaxFuelCapacity = 50;
+            //o_VehicleData.m_MaxFuelCapacity = 50;
             o_VehicleData.m_ModelName = "The Off-Mobil";
-            o_VehicleData.m_VehicleType = eVehicleType.Car;
+            o_VehicleData.m_VehicleType = eVehicleType.ElectricCar;
             o_VehicleData.m_WheelsManufacturer = "Michelin abu hasuna";
+
+            o_VehicleData.m_RemainingBatteryTime = 10;
+            o_VehicleData.m_MaxBatteryTime = 20;
             /////////////////////////
 
             try
@@ -156,7 +165,7 @@ namespace Ex03.ConsoleUI
                 sb.Append(string.Format("Vehicles with status {0} in garage: " + Environment.NewLine, o_Status.ToString()));
                 foreach (string licensNumber in licenseNumbersList)
                 {
-                    sb.Append(licensNumber);
+                    sb.Append(licensNumber + Environment.NewLine);
                 }
             }
 
@@ -191,7 +200,7 @@ namespace Ex03.ConsoleUI
         
         public static void FuelOrChargeVehicle()
         {
-
+            
         }
 
         public static void FuelVehicle(Garage i_Garage)
@@ -201,13 +210,12 @@ namespace Ex03.ConsoleUI
             float o_FuelToAdd;
             bool validInput = false;
 
-
-            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
-            GetFuelTypeFromUser(out o_FuelType);
-            GetFuelToAddFromUser(out o_FuelToAdd);
-
             while (validInput == false)
             {
+                GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
+                GetFuelTypeFromUser(out o_FuelType);
+                GetFuelToAddFromUser(out o_FuelToAdd);
+
                 try
                 {
                     validInput = i_Garage.FuelVehicle(o_LicenseNumber, o_FuelToAdd, o_FuelType);
@@ -237,11 +245,11 @@ namespace Ex03.ConsoleUI
             float o_BatteryTimeToAdd;
             bool validInput = false;
 
-            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
-            GetBatteryTimeToAddFromUser(out o_BatteryTimeToAdd);
-
             while(validInput == false)
             {
+                GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
+                GetBatteryTimeToAddFromUser(out o_BatteryTimeToAdd);
+
                 try
                 {
                     validInput = i_Garage.ChargeVehicle(o_LicenseNumber, o_BatteryTimeToAdd);
@@ -250,7 +258,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("License Number does not exist in the garage");
                 }
-                catch (ArgumentException)
+                catch (ArgumentNullException)
                 {
                     Console.WriteLine("The vehicle has no Battery");
                 }
@@ -679,7 +687,6 @@ namespace Ex03.ConsoleUI
                 }
             }
 
-            userChoice -= 1;
             o_VehicleStatus = (VehicleCard.eVehicleStatus)userChoice;
         }
 
@@ -1280,7 +1287,7 @@ namespace Ex03.ConsoleUI
             }
             foreach (char c in userInput)
             {
-                if((c == ' ' || (c > 'A' && c < 'Z') || (c > 'a' && c < 'z')) == false)
+                if((c == ' ' || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) == false)
                 {
                     throw new FormatException();
                 }

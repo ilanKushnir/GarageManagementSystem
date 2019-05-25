@@ -9,7 +9,7 @@ namespace Ex03.GarageLogic
 
     public enum eVehicleType
     {
-        Car,
+        Car = 1,
         ElectricCar,
         Motorcycle,
         ElectricMotorcycle,
@@ -103,7 +103,8 @@ namespace Ex03.GarageLogic
                 case eVehicleType.Motorcycle:
                 case eVehicleType.Truck:
                     o_energySource = new Fuel(i_VehicleData.m_CurrentFuelCapacity,
-                                              i_VehicleData.m_MaxFuelCapacity);
+                                              i_VehicleData.m_MaxFuelCapacity,
+                                              i_VehicleData.m_FuelType);
                     break;
                 case eVehicleType.ElectricCar:
                 case eVehicleType.ElectricMotorcycle:

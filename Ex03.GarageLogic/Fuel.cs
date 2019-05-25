@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
     {
         public enum eFuelType
         {
-            Octan95,
+            Octan95 = 1,
             Octan96,
             Octan98,
             Soler
@@ -39,6 +39,7 @@ namespace Ex03.GarageLogic
         {
             m_CurrentFuelCapacity = i_CurrentFuelCapacity;
             m_MaxFuelCapacity = i_MaxFuelCapacity;
+            m_FuelType = i_FuelType;
             UpdateEnergyPercentage();
         }
 
