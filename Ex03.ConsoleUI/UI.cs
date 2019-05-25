@@ -9,7 +9,7 @@ namespace Ex03.ConsoleUI
 {
     public class UI
     {
-        public static void Run(Garage i_garage)
+        public static void Run(Garage i_Garage)
         {
             //string userInput = string.Empty;
             int    userChoice = 0;
@@ -44,13 +44,13 @@ namespace Ex03.ConsoleUI
                 switch (userChoice)
                 {
                     case 1:
-                        AddNewVehicleToGarage();
+                        AddNewVehicleToGarage(i_Garage);
                         break;
                     case 2:
                         ShowLicenseNumbersByStatus();
                         break;
                     case 3:
-                        ChangeVehicleStatus();
+                        ChangeVehicleStatus(i_Garage);
                         break;
                     case 4:
                         InflateVehicleToMax();
@@ -59,9 +59,10 @@ namespace Ex03.ConsoleUI
 
                         break;
                     case 6:
+                        ShowVehicleDataByLicenseNumber(i_Garage);
                         break;
                     default:
-                        userChoice = 0;
+                        //userChoice = 0;
                         break;
                 }
 
@@ -103,9 +104,19 @@ namespace Ex03.ConsoleUI
         ////////////////////////////////
 
 
-        public static void AddNewVehicleToGarage()
+        public static void AddNewVehicleToGarage(Garage i_Garage)
         {
             VehicleInputData vehicleData = GetVehicleDataFromUser();
+
+            try
+            {
+              //  i_Garage.AddVehicleToGarage(owner, phone, vehicleData);
+            }
+            catch(VehicleAllreadyInGarageException ex)
+            {
+                Console.WriteLine("Vehicle with license number " + ex.LicenseNumber + " is allready taken care in garage. Status changed to InService");
+            }
+
             // הוספת רכב למוסך צריכה להיות סטטית כי המוסך הקלאס הנוכחי לא מחזיק אובייקט מוסך?
             // ויצירת הרכב חייבת לקרות בתוך מתודת ההוספה במוסך
             ////////////////////////////////////////////
@@ -118,9 +129,9 @@ namespace Ex03.ConsoleUI
 
         }
 
-        public static void ChangeVehicleStatus()
+        public static void ChangeVehicleStatus(Garage i_Garage)
         {
-
+           ////////////////////////////////////////////////////////
         }
 
         public static void InflateVehicleToMax()
@@ -141,7 +152,7 @@ namespace Ex03.ConsoleUI
 
         }
 
-        private void ShowVehicleDataByLicenseNumber()
+        public static void ShowVehicleDataByLicenseNumber(Garage i_Garage)
         {
 
         }

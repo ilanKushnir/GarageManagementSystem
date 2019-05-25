@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
 
         public void AddVehicleToGarage(string i_Owner, string i_Phone, VehicleInputData i_VehicleData)
         {
-            VehicleCard newCard, foundCard;
+            VehicleCard newCard, foundCard = null;
             Vehicle newVehicle; 
 
             foundCard = FindCardByLicense(i_VehicleData.m_LicenseNumber);
@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic
 
         public VehicleCard FindCardByLicense(string i_LicenseNumber) 
         {
-            VehicleCard o_FoundCard;
+            VehicleCard o_FoundCard = null;
 
             o_FoundCard = m_Cards.Find(card => card.Vehicle.LicenseNumber.Equals(i_LicenseNumber));
 
@@ -59,18 +59,26 @@ namespace Ex03.GarageLogic
 
         public void ChangeVehicleStatus(string i_LicenseNumber, VehicleCard.eVehicleStatus i_NewsStatus) 
         {
-            VehicleCard cardToChange;
+            VehicleCard cardToChange = null;
 
             cardToChange =  m_Cards.Find(vehicleToChange => vehicleToChange.Vehicle.LicenseNumber.Equals(i_LicenseNumber));
-            cardToChange.Status = i_NewsStatus;         /// exception
+            if(cardToChange == null)
+            {
+                throw new KeyNotFoundException(i_LicenseNumber, new Exception());           ///// license number??
+            }
+            cardToChange.Status = i_NewsStatus;
         }
 
         public void InflateVehicleWheelsToMax(string i_LicenseNumber)
         {
-            Vehicle vehicleToInflate;
+            Vehicle vehicleToInflate = null;
             List<Wheel> wheels;
 
             vehicleToInflate = m_Cards.Find(toInflate => toInflate.Vehicle.LicenseNumber.Equals(i_LicenseNumber)).Vehicle;
+            if (vehicleToInflate == null)
+            {
+                throw new KeyNotFoundException(i_LicenseNumber, new Exception());           ///// license number??
+            }
             wheels = vehicleToInflate.Wheels;
 
             foreach(Wheel wheel in wheels)
