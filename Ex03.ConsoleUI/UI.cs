@@ -665,7 +665,7 @@ namespace Ex03.ConsoleUI
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
             } while (validInput == false);
-            o_MaxFuelCapacity = capacityInput;
+            o_CurrentFuelCapacity = capacityInput;
         }
 
         public static bool GetValidIntFromUserInRange(out int o_UserInput, int i_MinValue, int i_MaxValue)
