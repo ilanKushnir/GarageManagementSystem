@@ -120,7 +120,7 @@ namespace Ex03.GarageLogic
             engineToFuel = vehicleToFuel.EnergySource as Fuel;
             if(engineToFuel == null)
             {
-                throw new ArgumentException();
+                throw new ArgumentNullException();
             }
 
             engineToFuel.FuelUp(i_FuelToAdd, i_FuelType); // bad values will throw exceptions
@@ -137,7 +137,7 @@ namespace Ex03.GarageLogic
             BatteryToCharge = vehicleToCharge.EnergySource as Battery;
             if(BatteryToCharge == null)
             {
-                throw new ArgumentException();
+                throw new ArgumentNullException();
             }
 
             BatteryToCharge.ChargeBattery(i_BatteryTimeToAdd); // bad values will throw exceptions

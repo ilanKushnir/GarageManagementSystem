@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
     {
         public enum eFuelType
         {
-            Octan95,
+            Octan95 = 1,
             Octan96,
             Octan98,
             Soler
@@ -20,10 +20,11 @@ namespace Ex03.GarageLogic
         float m_CurrentFuelCapacity;
         float m_MaxFuelCapacity;
 
-        public Fuel(float i_CurrentFuelCapacity, float i_MaxFuelCapacity)
+        public Fuel(float i_CurrentFuelCapacity, float i_MaxFuelCapacity, eFuelType i_FuelType)
         {
             m_CurrentFuelCapacity = i_CurrentFuelCapacity;
             m_MaxFuelCapacity = i_MaxFuelCapacity;
+            m_FuelType = i_FuelType;
         }
 
         public void FuelUp(float i_FuelToAdd, eFuelType i_FuelType)              
