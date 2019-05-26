@@ -17,6 +17,11 @@ namespace Ex03.GarageLogic
         }
 
         public static readonly int sr_NumOfWheels = 2;
+        public static readonly int sr_MaxAirPressure = 33;
+        public static readonly int sr_MaxFuelCapacity = 8;
+        public static readonly float sr_MaxBatteryTime = 1.4f;
+        public static readonly Fuel.eFuelType sr_FuelType = Fuel.eFuelType.Octan95;
+
         eLicenseType m_LicenseType;
         int m_EngineCapacity;
 

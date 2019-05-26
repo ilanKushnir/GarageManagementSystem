@@ -87,7 +87,7 @@ namespace Ex03.GarageLogic
             cardToChange =  m_Cards.Find(vehicleToChange => vehicleToChange.Vehicle.LicenseNumber.Equals(i_LicenseNumber));
             if(cardToChange == null)
             {
-                throw new KeyNotFoundException();           ///// license number? empty ctor?
+                throw new KeyNotFoundException();           
             }
             cardToChange.Status = i_NewsStatus;
         }
@@ -97,11 +97,8 @@ namespace Ex03.GarageLogic
             Vehicle vehicleToInflate = null;
             List<Wheel> wheels;
 
-            vehicleToInflate = m_Cards.Find(toInflate => toInflate.Vehicle.LicenseNumber.Equals(i_LicenseNumber)).Vehicle;
-            if (vehicleToInflate == null)
-            {
-                throw new KeyNotFoundException();           ///// license number??
-            }
+            vehicleToInflate = FindVehicleByLicense(i_LicenseNumber);
+            // Exception will be trown in a case of bad license number
             wheels = vehicleToInflate.Wheels;
 
             foreach(Wheel wheel in wheels)

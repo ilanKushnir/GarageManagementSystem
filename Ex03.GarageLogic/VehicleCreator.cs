@@ -64,19 +64,23 @@ namespace Ex03.GarageLogic
         {
             List<Wheel> o_WheelsList = new List<Wheel>();
             int numOfWheels = 0;
+            float maxAirPressure = 0;
 
             switch (i_VehicleData.m_VehicleType)
             {
                 case eVehicleType.Car:
                 case eVehicleType.ElectricCar:
                     numOfWheels = Car.sr_NumOfWheels;
+                    maxAirPressure = Car.sr_MaxAirPressure;
                     break;
                 case eVehicleType.Motorcycle:
                 case eVehicleType.ElectricMotorcycle:
                     numOfWheels = Motorcycle.sr_NumOfWheels;
+                    maxAirPressure = Motorcycle.sr_MaxAirPressure;
                     break;
                 case eVehicleType.Truck:
-                    numOfWheels = Motorcycle.sr_NumOfWheels;
+                    numOfWheels = Truck.sr_NumOfWheels;
+                    maxAirPressure = Truck.sr_MaxAirPressure;
                     break;
                 default:
                     break;
@@ -86,7 +90,7 @@ namespace Ex03.GarageLogic
             {
                 Wheel newWheel = new Wheel(i_VehicleData.m_WheelsManufacturer,
                                            i_VehicleData.m_CurrentAirPressure,
-                                           i_VehicleData.m_MaxAirPressure);
+                                           maxAirPressure);
                 o_WheelsList.Add(newWheel);
             }
 
@@ -96,20 +100,47 @@ namespace Ex03.GarageLogic
         private static EnergySource CreateEnergySource(VehicleInputData i_VehicleData)
         {
             EnergySource o_energySource = null;
+            Fuel.eFuelType fuelType = 0;
+            float maxFuelCapacity = 0;
+            float maxBatteryTime = 0;
 
-            switch(i_VehicleData.m_VehicleType)
+            switch (i_VehicleData.m_VehicleType)
+            {
+                case eVehicleType.Car:
+                    fuelType = Car.sr_FuelType;
+                    maxFuelCapacity = Car.sr_MaxFuelCapacity;
+                    break;
+                case eVehicleType.Motorcycle:
+                    fuelType = Motorcycle.sr_FuelType;
+                    maxFuelCapacity = Motorcycle.sr_MaxFuelCapacity;
+                    break;
+                case eVehicleType.Truck:
+                    fuelType = Truck.sr_FuelType;
+                    maxFuelCapacity = Truck.sr_MaxFuelCapacity;
+                    break;
+                case eVehicleType.ElectricCar:
+                    maxBatteryTime = Car.sr_MaxBatteryTime;
+                    break;
+                case eVehicleType.ElectricMotorcycle:
+                    maxBatteryTime = Motorcycle.sr_MaxBatteryTime;
+                    break;
+                default:
+                    break;
+            }
+
+            switch (i_VehicleData.m_VehicleType)
             {
                 case eVehicleType.Car:
                 case eVehicleType.Motorcycle:
                 case eVehicleType.Truck:
                     o_energySource = new Fuel(i_VehicleData.m_CurrentFuelCapacity,
-                                              i_VehicleData.m_MaxFuelCapacity,
-                                              i_VehicleData.m_FuelType);
+                                              maxFuelCapacity,
+                                              fuelType);
                     break;
                 case eVehicleType.ElectricCar:
                 case eVehicleType.ElectricMotorcycle:
                     o_energySource = new Battery(i_VehicleData.m_RemainingBatteryTime,
-                                                 i_VehicleData.m_MaxBatteryTime);
+                                                 maxBatteryTime);
                     break;
                 default:
                     break;

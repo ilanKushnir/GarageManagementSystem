@@ -9,6 +9,10 @@ namespace Ex03.GarageLogic
     public class Truck : Vehicle
     {
         public static readonly int sr_NumOfWheels = 12;
+        public static readonly int sr_MaxAirPressure = 26;
+        public static readonly int sr_MaxFuelCapacity = 110;
+        public static readonly Fuel.eFuelType sr_FuelType = Fuel.eFuelType.Soler;
+
         bool m_ContainDangerousSubstances;
         float m_CargoVolume;
 
