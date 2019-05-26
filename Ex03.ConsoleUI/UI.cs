@@ -185,7 +185,7 @@ namespace Ex03.ConsoleUI
             GetVehicleStatusFromUser(out o_NewStatus); 
 
             try
-            {                                                                           //////// while????
+            {                                                                     
                 i_Garage.ChangeVehicleStatus(o_LicenseNumber, o_NewStatus);
             }
             catch (KeyNotFoundException)
