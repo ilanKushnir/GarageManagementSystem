@@ -13,7 +13,7 @@ namespace Ex03.ConsoleUI
         {
             //string userInput = string.Empty;
             int    userChoice = 0;
-            bool   validInput = false;
+            bool v_ValidInput = false;
 
             PrintWelcomeMessage();
 
@@ -21,11 +21,11 @@ namespace Ex03.ConsoleUI
             {
                 PrintMenu();
 
-                while (validInput == false)
+                while (v_ValidInput == false)
                 {
                     try
                     {
-                        validInput = GetValidIntFromUserInRange(out userChoice, 1, 8);
+                        v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 8);
                     }
                     catch (FormatException)
                     {
@@ -245,14 +245,14 @@ namespace Ex03.ConsoleUI
         {
             string o_LicenseNumber = null;
             float o_BatteryTimeToAdd;
-            bool validInput = false;
+            bool v_ValidInput = false;
 
             GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
             GetBatteryTimeToAddFromUser(out o_BatteryTimeToAdd);
 
             try
             {
-                validInput = i_Garage.ChargeVehicle(o_LicenseNumber, o_BatteryTimeToAdd);
+                v_ValidInput = i_Garage.ChargeVehicle(o_LicenseNumber, o_BatteryTimeToAdd);
                 Console.WriteLine("Vehicle charged successfuly");
             }
             catch (KeyNotFoundException)
@@ -424,7 +424,7 @@ namespace Ex03.ConsoleUI
         private static void GetOwnerNameFromUser(out string o_OwnerName)
         {
             string stringInput = string.Empty;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" ---------------------------" + Environment.NewLine);
@@ -437,7 +437,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetNameStringFromUser(out stringInput);
+                    v_ValidInput = GetNameStringFromUser(out stringInput);
                 }
                 catch (ValueOutOfRangeException ex)
                 {
@@ -455,7 +455,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
 
             o_OwnerName = stringInput;
         }
@@ -463,7 +463,7 @@ namespace Ex03.ConsoleUI
         private static void GetOwnerPhoneNumberFromUser(out string o_OwnerPhoneNumber)
         {
             string phoneInput = string.Empty;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" ---------------------------" + Environment.NewLine);
@@ -476,7 +476,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetValidPhoneNumberFromUser(out phoneInput);
+                    v_ValidInput = GetValidPhoneNumberFromUser(out phoneInput);
                 }
                 catch (ValueOutOfRangeException)
                 {
@@ -494,7 +494,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
 
             o_OwnerPhoneNumber = phoneInput;
         }
@@ -502,7 +502,7 @@ namespace Ex03.ConsoleUI
         private static void GetVehicleTypeFromUser(out VehicleCreator.eVehicleType o_VehicleType)
         {
             int userChoice = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" ---------------------------------" + Environment.NewLine);
@@ -516,11 +516,11 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            while (validInput == false)
+            while (v_ValidInput == false)
             {
                 try
                 {
-                    validInput = GetValidIntFromUserInRange(out userChoice, 1, 5);
+                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 5);
                 }
                 catch (FormatException)
                 {
@@ -544,7 +544,7 @@ namespace Ex03.ConsoleUI
         private static void GetVehicleLicenseTypeFromUser(out Motorcycle.eLicenseType o_LicenseType)
         {
             int userChoice = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" ------------------------------------------" + Environment.NewLine);
@@ -557,11 +557,11 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            while (validInput == false)
+            while (v_ValidInput == false)
             {
                 try
                 {
-                    validInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
+                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
                 }
                 catch (FormatException)
                 {
@@ -583,7 +583,7 @@ namespace Ex03.ConsoleUI
         public static void GetVehicleColorFromUser(out Car.eCarColor o_VehicleColor)
         {
             int userChoice = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" -----------------------------------" + Environment.NewLine);
@@ -596,11 +596,11 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            while (validInput == false)
+            while (v_ValidInput == false)
             {
                 try
                 {
-                    validInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
+                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
                 }
                 catch (FormatException)
                 {
@@ -622,7 +622,7 @@ namespace Ex03.ConsoleUI
         public static void GetVehicleNumberOfDoorsFromUser(out Car.eNumOfDoors o_NumOfDoors)
         {
             int userChoice = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" ---------------------------------------------" + Environment.NewLine);
@@ -635,11 +635,11 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            while (validInput == false)
+            while (v_ValidInput == false)
             {
                 try
                 {
-                    validInput = GetValidIntFromUserInRange(out userChoice, 2, 5);
+                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 2, 5);
                 }
                 catch (FormatException)
                 {
@@ -661,7 +661,7 @@ namespace Ex03.ConsoleUI
         public static void GetVehicleStatusFromUser(out VehicleCard.eVehicleStatus o_VehicleStatus)
         {
             int userChoice = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" ---------------------------------------------" + Environment.NewLine);
@@ -673,11 +673,11 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            while (validInput == false)
+            while (v_ValidInput == false)
             {
                 try
                 {
-                    validInput = GetValidIntFromUserInRange(out userChoice, 1, 3);
+                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 3);
                 }
                 catch (FormatException)
                 {
@@ -699,7 +699,7 @@ namespace Ex03.ConsoleUI
         public static void GetVehicleDangerousSubstancesDataFromUser(out bool o_ContainsDangerousSubstances)
         {
             int userChoice = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" -----------------------------------------------" + Environment.NewLine);
@@ -710,11 +710,11 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            while (validInput == false)
+            while (v_ValidInput == false)
             {
                 try
                 {
-                    validInput = GetValidIntFromUserInRange(out userChoice, 1, 2);
+                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 2);
                 }
                 catch (FormatException)
                 {
@@ -736,7 +736,7 @@ namespace Ex03.ConsoleUI
         private static void GetVehicleModelNameFromUser(out string o_ModelName)
         {
             string stringInput = string.Empty;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" ---------------------------" + Environment.NewLine);
@@ -749,7 +749,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
+                    v_ValidInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
                 }
                 catch (ValueOutOfRangeException ex)
                 {
@@ -763,14 +763,14 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
             o_ModelName = stringInput;
         }
 
         private static void GetVehicleLicenseNumberFromUser(out string o_LicenseNumber)
         {
             string stringInput = string.Empty;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" -------------------------------" + Environment.NewLine);
@@ -783,7 +783,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetStringInLengthRangeFromUser(out stringInput, 7, 8);
+                    v_ValidInput = GetStringInLengthRangeFromUser(out stringInput, 7, 8);
                 }
                 catch (ValueOutOfRangeException ex )
                 {
@@ -797,7 +797,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
             o_LicenseNumber = stringInput;
         }
 
@@ -808,7 +808,7 @@ namespace Ex03.ConsoleUI
             float pressureInput = 0;
             float maxAirPressure = 0;
             string stringInput = string.Empty;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             switch(i_VehicleType)
@@ -838,7 +838,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
+                    v_ValidInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
                 }
                 catch (ValueOutOfRangeException ex)
                 {
@@ -852,7 +852,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
             o_Manufacturer = stringInput;
 
             
@@ -865,12 +865,12 @@ namespace Ex03.ConsoleUI
             Console.Write(userPrompt + Environment.NewLine);
 
             pressureInput = 0;
-            validInput = false;
+            v_ValidInput = false;
             do
             {
                 try
                 {
-                    validInput = GetValidFloatFromUserInRange(out pressureInput, 0, maxAirPressure);
+                    v_ValidInput = GetValidFloatFromUserInRange(out pressureInput, 0, maxAirPressure);
                 }
                 catch (FormatException)
                 {
@@ -885,13 +885,13 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
             o_CurrentAirPressure = pressureInput;
         }
 
         public static void GetFuelTypeFromUser(out Fuel.eFuelType o_FuelType)
         {
-            bool validInput = false;
+            bool v_ValidInput = false;
             int userChoice = 0;
             StringBuilder userPrompt = new StringBuilder();
 
@@ -905,11 +905,11 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            while (validInput == false)
+            while (v_ValidInput == false)
             {
                 try
                 {
-                    validInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
+                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
                 }
                 catch (FormatException)
                 {
@@ -931,7 +931,7 @@ namespace Ex03.ConsoleUI
         private static void GetFuelToAddFromUser(out float o_FuelToAdd)
         {
             float capacityInput = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" ------------------------------------" + Environment.NewLine);
@@ -940,12 +940,12 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            validInput = false;
+            v_ValidInput = false;
             do
             {
                 try
                 {
-                    validInput = GetValidFloatFromUserInRange(out capacityInput, 0, float.MaxValue);
+                    v_ValidInput = GetValidFloatFromUserInRange(out capacityInput, 0, float.MaxValue);
                 }
                 catch (FormatException)
                 {
@@ -959,14 +959,14 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
             o_FuelToAdd = capacityInput;
         }
 
         private static void GetMaxFuelCapacityFromUser(out float o_MaxFuelCapacity)
         {
             float capacityInput = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" ----------------------------------" + Environment.NewLine);
@@ -975,12 +975,12 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            validInput = false;
+            v_ValidInput = false;
             do
             {
                 try
                 {
-                    validInput = GetValidFloatFromUserInRange(out capacityInput, 0, float.MaxValue);
+                    v_ValidInput = GetValidFloatFromUserInRange(out capacityInput, 0, float.MaxValue);
                 }
                 catch (FormatException)
                 {
@@ -994,7 +994,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
             o_MaxFuelCapacity = capacityInput;
         }
 
@@ -1002,7 +1002,7 @@ namespace Ex03.ConsoleUI
                                                            float o_MaxFuelCapacity)
         {
             float capacityInput = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" --------------------------------------" + Environment.NewLine);
@@ -1012,12 +1012,12 @@ namespace Ex03.ConsoleUI
             Console.Write(userPrompt + Environment.NewLine);
 
             capacityInput = 0;
-            validInput = false;
+            v_ValidInput = false;
             do
             {
                 try
                 {
-                    validInput = GetValidFloatFromUserInRange(out capacityInput, 0, o_MaxFuelCapacity);
+                    v_ValidInput = GetValidFloatFromUserInRange(out capacityInput, 0, o_MaxFuelCapacity);
                 }
                 catch (FormatException)
                 {
@@ -1032,7 +1032,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
             o_CurrentFuelCapacity = capacityInput;
         }
 
@@ -1041,7 +1041,7 @@ namespace Ex03.ConsoleUI
         public static void GetBatteryTimeToAddFromUser(out float o_TimeToAdd)
         {
             float timeInput = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" -----------------------------------------------------------" + Environment.NewLine);
@@ -1050,12 +1050,12 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            validInput = false;
+            v_ValidInput = false;
             do
             {
                 try
                 {
-                    validInput = GetValidFloatFromUserInRange(out timeInput, 0, float.MaxValue);
+                    v_ValidInput = GetValidFloatFromUserInRange(out timeInput, 0, float.MaxValue);
                 }
                 catch (FormatException)
                 {
@@ -1069,7 +1069,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
             o_TimeToAdd = timeInput;
         }
 
@@ -1077,7 +1077,7 @@ namespace Ex03.ConsoleUI
                                                           float o_MaxBatteryTime)
         {
             float timeInput = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
             
             userPrompt.Append(" -----------------------------------------------" + Environment.NewLine);
@@ -1090,7 +1090,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    validInput = GetValidFloatFromUserInRange(out timeInput, 0, o_MaxBatteryTime);
+                    v_ValidInput = GetValidFloatFromUserInRange(out timeInput, 0, o_MaxBatteryTime);
                 }
                 catch (FormatException)
                 {
@@ -1105,7 +1105,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
 
             o_RemainingBatteryTime = timeInput;
         }
@@ -1113,7 +1113,7 @@ namespace Ex03.ConsoleUI
         private static void GetVehicleEngineCapacityFromUser(out int o_EngineCapacity)
         {
             int capacityInput = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" --------------------------------" + Environment.NewLine);
@@ -1122,12 +1122,12 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            validInput = false;
+            v_ValidInput = false;
             do
             {
                 try
                 {
-                    validInput = GetValidIntFromUserInRange(out capacityInput, 0, Int32.MaxValue);
+                    v_ValidInput = GetValidIntFromUserInRange(out capacityInput, 0, Int32.MaxValue);
                 }
                 catch (FormatException)
                 {
@@ -1141,7 +1141,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
 
             o_EngineCapacity = capacityInput;
         }
@@ -1149,7 +1149,7 @@ namespace Ex03.ConsoleUI
         private static void GetVehicleCargoVolumeFromUser(out float o_CargoVolume)
         {
             float volumeInput = 0;
-            bool validInput = false;
+            bool v_ValidInput = false;
             StringBuilder userPrompt = new StringBuilder();
 
             userPrompt.Append(" -----------------------------" + Environment.NewLine);
@@ -1158,12 +1158,12 @@ namespace Ex03.ConsoleUI
 
             Console.Write(userPrompt + Environment.NewLine);
 
-            validInput = false;
+            v_ValidInput = false;
             do
             {
                 try
                 {
-                    validInput = GetValidFloatFromUserInRange(out volumeInput, 0, float.MaxValue);
+                    v_ValidInput = GetValidFloatFromUserInRange(out volumeInput, 0, float.MaxValue);
                 }
                 catch (FormatException)
                 {
@@ -1177,7 +1177,7 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
                 }
-            } while (validInput == false);
+            } while (v_ValidInput == false);
 
             o_CargoVolume = volumeInput;
         }
