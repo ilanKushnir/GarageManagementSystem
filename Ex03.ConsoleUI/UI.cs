@@ -25,7 +25,7 @@ namespace Ex03.ConsoleUI
                 {
                     try
                     {
-                        v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 8);
+                        v_ValidInput = getValidIntFromUserInRange(out userChoice, 1, 8);
                     }
                     catch (FormatException)
                     {
@@ -74,7 +74,7 @@ namespace Ex03.ConsoleUI
 
                 Console.WriteLine("Press any key to continue..." + Environment.NewLine);
                 Console.ReadKey();
-                validInput = false;
+                v_ValidInput = false;
                 userChoice = 0;
             }
         }
@@ -221,8 +221,8 @@ namespace Ex03.ConsoleUI
 
         private static void chargeVehicle(Garage i_Garage)
         {
-            string o_LicenseNumber = null;
-            float o_BatteryTimeToAdd;
+            string licenseNumber = null;
+            float batteryTimeToAdd;
             bool v_ValidInput = false;
 
             getVehicleLicenseNumberFromUser(out licenseNumber);
@@ -230,7 +230,7 @@ namespace Ex03.ConsoleUI
 
             try
             {
-                v_ValidInput = i_Garage.ChargeVehicle(o_LicenseNumber, o_BatteryTimeToAdd);
+                v_ValidInput = i_Garage.ChargeVehicle(licenseNumber, batteryTimeToAdd);
                 Console.WriteLine("Vehicle charged successfuly");
             }
             catch (KeyNotFoundException)
@@ -416,7 +416,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetNameStringFromUser(out stringInput);
+                    v_ValidInput = getNameStringFromUser(out stringInput);
                 }
                 catch (ValueOutOfRangeException ex)
                 {
@@ -455,7 +455,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidPhoneNumberFromUser(out phoneInput);
+                    v_ValidInput = getValidPhoneNumberFromUser(out phoneInput);
                 }
                 catch (ValueOutOfRangeException)
                 {
@@ -499,7 +499,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 5);
+                    v_ValidInput = getValidIntFromUserInRange(out userChoice, 1, 5);
                 }
                 catch (FormatException)
                 {
@@ -540,7 +540,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
+                    v_ValidInput = getValidIntFromUserInRange(out userChoice, 1, 4);
                 }
                 catch (FormatException)
                 {
@@ -579,7 +579,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
+                    v_ValidInput = getValidIntFromUserInRange(out userChoice, 1, 4);
                 }
                 catch (FormatException)
                 {
@@ -656,7 +656,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 3);
+                    v_ValidInput = getValidIntFromUserInRange(out userChoice, 1, 3);
                 }
                 catch (FormatException)
                 {
@@ -693,7 +693,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 2);
+                    v_ValidInput = getValidIntFromUserInRange(out userChoice, 1, 2);
                 }
                 catch (FormatException)
                 {
@@ -728,7 +728,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
+                    v_ValidInput = getStringInLengthRangeFromUser(out stringInput, 1, 100);
                 }
                 catch (ValueOutOfRangeException ex)
                 {
@@ -762,7 +762,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetStringInLengthRangeFromUser(out stringInput, 7, 8);
+                    v_ValidInput = getStringInLengthRangeFromUser(out stringInput, 7, 8);
                 }
                 catch (ValueOutOfRangeException ex )
                 {
@@ -817,7 +817,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetStringInLengthRangeFromUser(out stringInput, 1, 100);
+                    v_ValidInput = getStringInLengthRangeFromUser(out stringInput, 1, 100);
                 }
                 catch (ValueOutOfRangeException ex)
                 {
@@ -849,7 +849,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidFloatFromUserInRange(out pressureInput, 0, maxAirPressure);
+                    v_ValidInput = getValidFloatFromUserInRange(out pressureInput, 0, maxAirPressure);
                 }
                 catch (FormatException)
                 {
@@ -888,7 +888,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 1, 4);
+                    v_ValidInput = getValidIntFromUserInRange(out userChoice, 1, 4);
                 }
                 catch (FormatException)
                 {
@@ -924,7 +924,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidFloatFromUserInRange(out capacityInput, 0, float.MaxValue);
+                    v_ValidInput = getValidFloatFromUserInRange(out capacityInput, 0, float.MaxValue);
                 }
                 catch (FormatException)
                 {
@@ -959,7 +959,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidFloatFromUserInRange(out capacityInput, 0, float.MaxValue);
+                    v_ValidInput = getValidFloatFromUserInRange(out capacityInput, 0, float.MaxValue);
                 }
                 catch (FormatException)
                 {
@@ -996,7 +996,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidFloatFromUserInRange(out capacityInput, 0, o_MaxFuelCapacity);
+                    v_ValidInput = getValidFloatFromUserInRange(out capacityInput, 0, i_MaxFuelCapacity);
                 }
                 catch (FormatException)
                 {
@@ -1034,7 +1034,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidFloatFromUserInRange(out timeInput, 0, float.MaxValue);
+                    v_ValidInput = getValidFloatFromUserInRange(out timeInput, 0, float.MaxValue);
                 }
                 catch (FormatException)
                 {
@@ -1069,7 +1069,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidFloatFromUserInRange(out timeInput, 0, o_MaxBatteryTime);
+                    v_ValidInput = getValidFloatFromUserInRange(out timeInput, 0, i_MaxBatteryTime);
                 }
                 catch (FormatException)
                 {
@@ -1106,7 +1106,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidIntFromUserInRange(out capacityInput, 0, Int32.MaxValue);
+                    v_ValidInput = getValidIntFromUserInRange(out capacityInput, 0, Int32.MaxValue);
                 }
                 catch (FormatException)
                 {
@@ -1142,7 +1142,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidFloatFromUserInRange(out volumeInput, 0, float.MaxValue);
+                    v_ValidInput = getValidFloatFromUserInRange(out volumeInput, 0, float.MaxValue);
                 }
                 catch (FormatException)
                 {
