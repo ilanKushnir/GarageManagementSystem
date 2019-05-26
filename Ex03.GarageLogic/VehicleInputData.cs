@@ -10,7 +10,7 @@ namespace Ex03.GarageLogic
         // Vehiclee
         public string m_ModelName;
         public string m_LicenseNumber;
-        public eVehicleType m_VehicleType;
+        public VehicleCreator.eVehicleType m_VehicleType;
         //Wheels
         public string m_WheelsManufacturer;
         public float m_CurrentAirPressure;

@@ -131,7 +131,7 @@ namespace Ex03.ConsoleUI
             o_VehicleData.m_MaxAirPressure = 32;
             //o_VehicleData.m_MaxFuelCapacity = 50;
             o_VehicleData.m_ModelName = "The Off-Mobil";
-            o_VehicleData.m_VehicleType = eVehicleType.ElectricCar;
+            o_VehicleData.m_VehicleType = VehicleCreator.eVehicleType.ElectricCar;
             o_VehicleData.m_WheelsManufacturer = "Michelin abu hasuna";
 
             o_VehicleData.m_RemainingBatteryTime = 10;
@@ -276,7 +276,7 @@ namespace Ex03.ConsoleUI
             VehicleCard cardToShow;
             GetVehicleLicenseNumberFromUser(out licenseNumber);
             StringBuilder outputString = new StringBuilder();
-            eVehicleType vehicleType = 0;
+            VehicleCreator.eVehicleType vehicleType = 0;
 
             try
             {
@@ -293,15 +293,15 @@ namespace Ex03.ConsoleUI
 
                 switch(vehicleType)
                 {
-                    case eVehicleType.Car:
-                    case eVehicleType.Motorcycle:
-                    case eVehicleType.Truck:
+                    case VehicleCreator.eVehicleType.Car:
+                    case VehicleCreator.eVehicleType.Motorcycle:
+                    case VehicleCreator.eVehicleType.Truck:
                         outputString.Append(" + Fuel type: " + ((Fuel)vehicleToShow.EnergySource).FuelType.ToString() + Environment.NewLine);
                         outputString.Append(" + Max fuel capacity: " + ((Fuel)vehicleToShow.EnergySource).MaxFuelCapacity + Environment.NewLine);
                         outputString.Append(" + Current fuel capacity: " + ((Fuel)vehicleToShow.EnergySource).CurrentFuelCapacity + Environment.NewLine);
                         break;
-                    case eVehicleType.ElectricCar:
-                    case eVehicleType.ElectricMotorcycle:
+                    case VehicleCreator.eVehicleType.ElectricCar:
+                    case VehicleCreator.eVehicleType.ElectricMotorcycle:
                         outputString.Append(" + Max battery time: " + ((Battery)vehicleToShow.EnergySource).MaxBatteryTime + Environment.NewLine);
                         outputString.Append(" + Remaining battery time: " + ((Battery)vehicleToShow.EnergySource).RemainingBatteryTime + Environment.NewLine);
                         break;
@@ -311,17 +311,17 @@ namespace Ex03.ConsoleUI
 
                 switch (vehicleType)
                 {
-                    case eVehicleType.Car:
-                    case eVehicleType.ElectricCar:
+                    case VehicleCreator.eVehicleType.Car:
+                    case VehicleCreator.eVehicleType.ElectricCar:
                         outputString.Append(" + Vehicle color: " + ((Car)vehicleToShow).Color.ToString() + Environment.NewLine);
                         outputString.Append(" + Number of doors: " + ((Car)vehicleToShow).Doors + Environment.NewLine);
                         break;
-                    case eVehicleType.Motorcycle:
-                    case eVehicleType.ElectricMotorcycle:
+                    case VehicleCreator.eVehicleType.Motorcycle:
+                    case VehicleCreator.eVehicleType.ElectricMotorcycle:
                         outputString.Append(" + License type: " + ((Motorcycle)vehicleToShow).LicenseType + Environment.NewLine);
                         outputString.Append(" + Engine capacity: " + ((Motorcycle)vehicleToShow).EngineCapacity + Environment.NewLine);
                         break;
-                    case eVehicleType.Truck:
+                    case VehicleCreator.eVehicleType.Truck:
                         outputString.Append(" + Contains dangerous substances? ");
                         if(((Truck)vehicleToShow).ContainDangerousSubstances == true)
                         {
@@ -376,22 +376,22 @@ namespace Ex03.ConsoleUI
             return o_VehicleData;
         }
 
-        private static void GetVehicleSpecificDataFromUserByType(eVehicleType i_VehicleType,
+        private static void GetVehicleSpecificDataFromUserByType(VehicleCreator.eVehicleType i_VehicleType,
                                                                  VehicleInputData o_VehicleData)
         {
             switch (i_VehicleType)
             {
-                case eVehicleType.Car:
-                case eVehicleType.ElectricCar:
+                case VehicleCreator.eVehicleType.Car:
+                case VehicleCreator.eVehicleType.ElectricCar:
                     GetVehicleColorFromUser(out o_VehicleData.m_Color);
                     GetVehicleNumberOfDoorsFromUser(out o_VehicleData.m_Doors);
                     break;
-                case eVehicleType.Motorcycle:
-                case eVehicleType.ElectricMotorcycle:
+                case VehicleCreator.eVehicleType.Motorcycle:
+                case VehicleCreator.eVehicleType.ElectricMotorcycle:
                     GetVehicleLicenseTypeFromUser(out o_VehicleData.m_LicenseType);
                     GetVehicleEngineCapacityFromUser(out o_VehicleData.m_EngineCapacity);
                     break;
-                case eVehicleType.Truck:
+                case VehicleCreator.eVehicleType.Truck:
                     GetVehicleDangerousSubstancesDataFromUser(out o_VehicleData.m_ContainDangerousSubstances);
                     GetVehicleCargoVolumeFromUser(out o_VehicleData.m_CargoVolume);
                     break;
@@ -401,19 +401,19 @@ namespace Ex03.ConsoleUI
 
             switch (i_VehicleType)
             {
-                case eVehicleType.Car:
+                case VehicleCreator.eVehicleType.Car:
                     GetFuelCurrentCapacityFromUser(out o_VehicleData.m_CurrentFuelCapacity, Car.sr_MaxFuelCapacity);
                     break;
-                case eVehicleType.Motorcycle:
+                case VehicleCreator.eVehicleType.Motorcycle:
                     GetFuelCurrentCapacityFromUser(out o_VehicleData.m_CurrentFuelCapacity, Motorcycle.sr_MaxFuelCapacity);
                     break;
-                case eVehicleType.Truck:
+                case VehicleCreator.eVehicleType.Truck:
                     GetFuelCurrentCapacityFromUser(out o_VehicleData.m_CurrentFuelCapacity, Truck.sr_MaxFuelCapacity);
                     break;
-                case eVehicleType.ElectricCar:
+                case VehicleCreator.eVehicleType.ElectricCar:
                     GetVehicleBatteryDataFromUser(out o_VehicleData.m_RemainingBatteryTime, Car.sr_MaxBatteryTime);
                     break;
-                case eVehicleType.ElectricMotorcycle:
+                case VehicleCreator.eVehicleType.ElectricMotorcycle:
                     GetVehicleBatteryDataFromUser(out o_VehicleData.m_RemainingBatteryTime, Motorcycle.sr_MaxBatteryTime);
                     break;
                 default:
@@ -499,7 +499,7 @@ namespace Ex03.ConsoleUI
             o_OwnerPhoneNumber = phoneInput;
         }
 
-        private static void GetVehicleTypeFromUser(out eVehicleType o_VehicleType)
+        private static void GetVehicleTypeFromUser(out VehicleCreator.eVehicleType o_VehicleType)
         {
             int userChoice = 0;
             bool validInput = false;
@@ -536,7 +536,7 @@ namespace Ex03.ConsoleUI
                 }
             }
 
-            o_VehicleType = (eVehicleType)userChoice;
+            o_VehicleType = (VehicleCreator.eVehicleType)userChoice;
         }
 
         
@@ -801,7 +801,7 @@ namespace Ex03.ConsoleUI
             o_LicenseNumber = stringInput;
         }
 
-        private static void GetWheelsDataFromUser(eVehicleType i_VehicleType,
+        private static void GetWheelsDataFromUser(VehicleCreator.eVehicleType i_VehicleType,
                                                   out string o_Manufacturer,
                                                   out float o_CurrentAirPressure)
         {
@@ -813,15 +813,15 @@ namespace Ex03.ConsoleUI
 
             switch(i_VehicleType)
             {
-                case eVehicleType.Car:
-                case eVehicleType.ElectricCar:
+                case VehicleCreator.eVehicleType.Car:
+                case VehicleCreator.eVehicleType.ElectricCar:
                     maxAirPressure = Car.sr_MaxAirPressure;
                     break;
-                case eVehicleType.Motorcycle:
-                case eVehicleType.ElectricMotorcycle:
+                case VehicleCreator.eVehicleType.Motorcycle:
+                case VehicleCreator.eVehicleType.ElectricMotorcycle:
                     maxAirPressure = Motorcycle.sr_MaxAirPressure;
                     break;
-                case eVehicleType.Truck:
+                case VehicleCreator.eVehicleType.Truck:
                     maxAirPressure = Truck.sr_MaxAirPressure;
                     break;
                 default:

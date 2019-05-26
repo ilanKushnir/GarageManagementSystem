@@ -6,19 +6,17 @@ using Ex03.Exceptions;
 
 namespace Ex03.GarageLogic
 {
-
-    public enum eVehicleType
-    {
-        Car = 1,
-        ElectricCar,
-        Motorcycle,
-        ElectricMotorcycle,
-        Truck
-    }
-
-
     public static class VehicleCreator
     {
+        public enum eVehicleType
+        {
+            Car = 1,
+            ElectricCar,
+            Motorcycle,
+            ElectricMotorcycle,
+            Truck
+        }
+
         public static Vehicle CreateNewVehicle(VehicleInputData i_VehicleData)
         {
             Vehicle o_NewVehicle = null;
