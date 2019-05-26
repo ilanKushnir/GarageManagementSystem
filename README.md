@@ -34,7 +34,7 @@ After submission we've improved more the styling and the classes organization.
 no need for now :)
 
 <h2>Project status</h2>
-In progress
+Completed
 
 <h2>Credits</h2>
 

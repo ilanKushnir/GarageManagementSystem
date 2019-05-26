@@ -114,10 +114,10 @@ namespace Ex03.ConsoleUI
             
             getOwnerNameFromUser(out ownerNameInput);
             getOwnerPhoneNumberFromUser(out ownerPhoneNumberInput);
-            o_VehicleData = getVehicleDataFromUser();
             
             try
             {
+                o_VehicleData = getVehicleDataFromUser();
                 i_Garage.AddVehicleToGarage(ownerNameInput, ownerPhoneNumberInput, o_VehicleData);
                 Console.WriteLine("The car added successfuly to the garage" + Environment.NewLine);
             }
@@ -198,7 +198,7 @@ namespace Ex03.ConsoleUI
             try
             {
                 i_Garage.FuelVehicle(licenseNumber, fuelToAdd, fuelType);
-                Console.WriteLine("Vehicle fueled to successfuly");
+                Console.WriteLine("Vehicle fueled successfuly");
             }
             catch (KeyNotFoundException)
             {
@@ -210,7 +210,7 @@ namespace Ex03.ConsoleUI
             }
             catch (ValueOutOfRangeException ex)
             {
-                Console.WriteLine("Cannot fuel vehilce over the maximum fuel capacity of" + ex.MaxValue);
+                Console.WriteLine("Cannot fuel vehilce over the maximum fuel capacity of " + ex.MaxValue);
             }
             catch (WrongFuelException ex)
             {
