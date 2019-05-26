@@ -8,9 +8,9 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-        string m_Manufacturer;
-        float m_CurrentAirPressure;
-        float m_MaxAirPressure;
+        private string m_Manufacturer;
+        private float m_CurrentAirPressure;
+        private float m_MaxAirPressure;
 
         public Wheel(string i_Manufecturer, float i_CurrentAirPressure, float i_MaxAirPressure)
         {

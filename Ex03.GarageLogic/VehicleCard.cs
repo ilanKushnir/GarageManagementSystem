@@ -15,10 +15,10 @@ namespace Ex03.GarageLogic
             Paid
         }
 
-        string m_OwnerName;
-        string m_Phone;
-        eVehicleStatus m_Status;
-        Vehicle m_Vehicle;
+        private string m_OwnerName;
+        private string m_Phone;
+        private eVehicleStatus m_Status;
+        private Vehicle m_Vehicle;
 
         public VehicleCard(string i_OwnerName, string i_Phone, eVehicleStatus i_Status, Vehicle i_Vehicle)
         {

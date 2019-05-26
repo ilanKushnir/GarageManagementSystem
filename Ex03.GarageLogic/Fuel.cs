@@ -17,8 +17,8 @@ namespace Ex03.GarageLogic
         }
 
         eFuelType m_FuelType;
-        float m_CurrentFuelCapacity;
-        float m_MaxFuelCapacity;
+        private float m_CurrentFuelCapacity;
+        private float m_MaxFuelCapacity;
 
         public eFuelType FuelType
         {
