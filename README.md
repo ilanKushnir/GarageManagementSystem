@@ -40,6 +40,7 @@ In progress
 
 - Authors: <a href="mailto:ilan.kushnir@gmail.com" target="_blank">Ilan Kushnir</a>, <a href="mailto:ofir5300@gmail.com" target="_blank">Ofir Cohen</a>
 - Logo & Design: <a href="mailto:ilan.kushnir@gmail.com" target="_blank">Ilan Kushnir</a>
+- Vector Graphics: <a href="https://www.freepik.com/free-photos-vectors/business">macrovector - www.freepik.com</a>
 - Lecturer: <a href="https://www.facebook.com/guy.ronen" target="_blank">Guy Ronen</a>
 - <a href="https://www.mta.ac.il/" target="_blank">The Academic College of Tel Aviv - Yaffo</a>
 
