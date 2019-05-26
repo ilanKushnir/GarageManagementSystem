@@ -24,11 +24,10 @@ namespace Ex03.Exceptions
                                     Exception i_InnerException, 
                                     string i_WrongFuel, 
                                     string i_Fuel) 
-                                    : base(string.Format("Cannot Fuel vehicle using {0} instead of {1}", i_WrongFuel, i_Fuel) ,i_InnerException)
+                                    : base(string.Format("Cannot Fuel vehicle using {0} instead of {1}", i_WrongFuel, i_Fuel), i_InnerException)
         {
             m_WrongFuel = i_WrongFuel;
             m_Fuel = i_Fuel;
         }
-
     }
 }

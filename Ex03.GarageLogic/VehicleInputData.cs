@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic
         public string m_ModelName;
         public string m_LicenseNumber;
         public VehicleCreator.eVehicleType m_VehicleType;
-        //Wheels
+        ////Wheels
         public string m_WheelsManufacturer;
         public float m_CurrentAirPressure;
 
@@ -30,7 +30,7 @@ namespace Ex03.GarageLogic
         // EnergySource
         // Fuel
         public float m_CurrentFuelCapacity;
-        // Battery
+        //// Battery
         public float m_RemainingBatteryTime;
     }
 }

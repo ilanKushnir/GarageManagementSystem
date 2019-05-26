@@ -8,8 +8,8 @@ namespace Ex03.GarageLogic
 {
     public class Battery : EnergySource
     {
-        float m_RemainingBatteryTime;
-        float m_MaxBatteryTime;
+        private float m_RemainingBatteryTime;
+        private float m_MaxBatteryTime;
 
         public float RemainingBatteryTime
         {

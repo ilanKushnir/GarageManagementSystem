@@ -24,7 +24,7 @@ namespace Ex03.GarageLogic
             {
                 foundCard = FindCardByLicense(i_VehicleData.m_LicenseNumber);
             }
-            catch(KeyNotFoundException)
+            catch (KeyNotFoundException)
             {
                 foundCard = null;
             }
@@ -42,14 +42,14 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public VehicleCard FindCardByLicense(string i_LicenseNumber) 
+        public VehicleCard FindCardByLicense(string i_LicenseNumber)
         {
             VehicleCard o_FoundCard = null;
 
             o_FoundCard = m_Cards.Find(card => card.Vehicle.LicenseNumber.Equals(i_LicenseNumber));
             if (o_FoundCard == null)
             {
-                throw new KeyNotFoundException();       
+                throw new KeyNotFoundException();
             }
 
             return o_FoundCard;
@@ -66,27 +66,27 @@ namespace Ex03.GarageLogic
         {
             List<string> o_licenstNumbers = new List<string>();
 
-            foreach(VehicleCard card in m_Cards)
+            foreach (VehicleCard card in m_Cards)
             {
-                if(card.Status.Equals(i_Status))
+                if (card.Status.Equals(i_Status))
                 {
                     o_licenstNumbers.Add(card.Vehicle.LicenseNumber);
                 }
-
             }
 
             return o_licenstNumbers;
         }
 
-        public void ChangeVehicleStatus(string i_LicenseNumber, VehicleCard.eVehicleStatus i_NewsStatus) 
+        public void ChangeVehicleStatus(string i_LicenseNumber, VehicleCard.eVehicleStatus i_NewsStatus)
         {
             VehicleCard cardToChange = null;
 
-            cardToChange =  m_Cards.Find(vehicleToChange => vehicleToChange.Vehicle.LicenseNumber.Equals(i_LicenseNumber));
-            if(cardToChange == null)
+            cardToChange = m_Cards.Find(vehicleToChange => vehicleToChange.Vehicle.LicenseNumber.Equals(i_LicenseNumber));
+            if (cardToChange == null)
             {
-                throw new KeyNotFoundException();           
+                throw new KeyNotFoundException();
             }
+
             cardToChange.Status = i_NewsStatus;
         }
 
@@ -96,10 +96,10 @@ namespace Ex03.GarageLogic
             List<Wheel> wheels;
 
             vehicleToInflate = FindVehicleByLicense(i_LicenseNumber);
-            // Exception will be trown in a case of bad license number
+            //// Exception will be trown in a case of bad license number
             wheels = vehicleToInflate.Wheels;
 
-            foreach(Wheel wheel in wheels)
+            foreach (Wheel wheel in wheels)
             {
                 wheel.InflateToMaxPressure();
             }
@@ -113,7 +113,7 @@ namespace Ex03.GarageLogic
             vehicleToFuel = FindVehicleByLicense(i_LicenseNumber);
 
             engineToFuel = vehicleToFuel.EnergySource as Fuel;
-            if(engineToFuel == null)
+            if (engineToFuel == null)
             {
                 throw new ArgumentNullException();
             }
@@ -130,7 +130,7 @@ namespace Ex03.GarageLogic
             vehicleToCharge = FindVehicleByLicense(i_LicenseNumber);
 
             BatteryToCharge = vehicleToCharge.EnergySource as Battery;
-            if(BatteryToCharge == null)
+            if (BatteryToCharge == null)
             {
                 throw new ArgumentNullException();
             }
@@ -138,7 +138,5 @@ namespace Ex03.GarageLogic
             BatteryToCharge.ChargeBattery(i_BatteryTimeToAdd); // bad values will throw exceptions
             return true;
         }
-
-
     }
 }

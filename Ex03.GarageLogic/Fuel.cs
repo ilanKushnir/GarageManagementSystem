@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
             Soler
         }
 
-        eFuelType m_FuelType;
+        private eFuelType m_FuelType;
         private float m_CurrentFuelCapacity;
         private float m_MaxFuelCapacity;
 

@@ -22,7 +22,7 @@ namespace Ex03.GarageLogic
             Three = 3,
             Four = 4,
             Five = 5
-        };
+        }
 
         public static readonly int sr_NumOfWheels = 4;
         public static readonly int sr_MaxAirPressure = 31;

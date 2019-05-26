@@ -22,8 +22,8 @@ namespace Ex03.GarageLogic
         public static readonly float sr_MaxBatteryTime = 1.4f;
         public static readonly Fuel.eFuelType sr_FuelType = Fuel.eFuelType.Octan95;
 
-        eLicenseType m_LicenseType;
-        int m_EngineCapacity;
+        private eLicenseType m_LicenseType;
+        private int m_EngineCapacity;
 
         public eLicenseType LicenseType
         {

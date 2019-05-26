@@ -13,8 +13,8 @@ namespace Ex03.GarageLogic
         public static readonly int sr_MaxFuelCapacity = 110;
         public static readonly Fuel.eFuelType sr_FuelType = Fuel.eFuelType.Soler;
 
-        bool m_ContainDangerousSubstances;
-        float m_CargoVolume;
+        private bool m_ContainDangerousSubstances;
+        private float m_CargoVolume;
 
         public Truck(string i_ModelName,
                  string i_LicenseNumber,
@@ -39,8 +39,5 @@ namespace Ex03.GarageLogic
             get { return m_CargoVolume; }
             set { m_CargoVolume = value; }
         }
-
     }
 }
-
-    

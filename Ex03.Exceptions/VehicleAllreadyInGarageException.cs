@@ -16,8 +16,7 @@ namespace Ex03.Exceptions
 
         public VehicleAllreadyInGarageException(Exception i_InnerException,
                                                 string i_LicenseNumber)
-                                                : base(string.Format("Vehicle with number license {0} allready exists in garage. Status changed to InService", i_LicenseNumber), 
-                                                       i_InnerException)
+                                                : base(string.Format("Vehicle with number license {0} allready exists in garage. Status changed to InService", i_LicenseNumber), i_InnerException)
         {
             m_LicenseNumber = i_LicenseNumber;
         }

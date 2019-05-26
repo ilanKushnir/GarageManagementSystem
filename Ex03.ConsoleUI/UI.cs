@@ -11,8 +11,8 @@ namespace Ex03.ConsoleUI
     {
         public static void Run(Garage i_Garage)
         {
-            //string userInput = string.Empty;
-            int    userChoice = 0;
+            ////string userInput = string.Empty;
+            int userChoice = 0;
             bool v_ValidInput = false;
 
             printWelcomeMessage();
@@ -82,7 +82,7 @@ namespace Ex03.ConsoleUI
         private static void printWelcomeMessage()
         {
             StringBuilder welcome = new StringBuilder();
-            // ASCII art
+            //// ASCII art
             welcome.Append(Environment.NewLine + " Welcome to:                    /\\\\      _____                    \r\n                 ,-----,       /  \\\\____/__|__\\_                  \r\n              ,--'---:---`--, /  |  _     |     `|                \r\n             ==(o)-----(o)==J    `(o)-------(o)=                  \r\n``````````````````````````````````````````````````````````````````\r\n  _____                         __  ___                           \r\n / ___/__  _______  ___  ___   /  |/  /__  ___  ___  ___  ___ ____\r\n/ (_ / _ `/ __/ _ `/ _ `/ -_) / /|_/ / _ `/ _ \\/ _ `/ _ `/ -_) __/\r\n\\___/\\_,_/_/  \\_,_/\\_, /\\__/ /_/  /_/\\_,_/_//_/\\_,_/\\_, /\\__/_/   \r\n                  /___/                            /___/          \r\n                          By Ilan & Ofir                          \r\n");
             Console.WriteLine(welcome);
         }
@@ -92,16 +92,16 @@ namespace Ex03.ConsoleUI
             StringBuilder menu = new StringBuilder(Environment.NewLine);
             menu.Append(" Please choose which action to make by inserting a chioce number below: " + Environment.NewLine);
             menu.Append(" __________________________________" + Environment.NewLine);
-            menu.Append("  1) Add a new vehicle to garage" +    Environment.NewLine);
+            menu.Append("  1) Add a new vehicle to garage" + Environment.NewLine);
             menu.Append("  2) Show license numbers by status" + Environment.NewLine);
-            menu.Append("  3) Change car status" +              Environment.NewLine);
-            menu.Append("  4) Inflate car wheels to maximum" +  Environment.NewLine);
-            menu.Append("  5) Fuel vehicle" +                   Environment.NewLine);
-            menu.Append("  6) Charge vehicle" +                 Environment.NewLine);
-            menu.Append("  7) Show vehicle full data" +         Environment.NewLine);
-            menu.Append("  8) Exit" +                           Environment.NewLine);
+            menu.Append("  3) Change car status" + Environment.NewLine);
+            menu.Append("  4) Inflate car wheels to maximum" + Environment.NewLine);
+            menu.Append("  5) Fuel vehicle" + Environment.NewLine);
+            menu.Append("  6) Charge vehicle" + Environment.NewLine);
+            menu.Append("  7) Show vehicle full data" + Environment.NewLine);
+            menu.Append("  8) Exit" + Environment.NewLine);
             menu.Append(" ----------------------------------" + Environment.NewLine + Environment.NewLine);
-            menu.Append(" Please choose and press Enter: " +    Environment.NewLine);
+            menu.Append(" Please choose and press Enter: " + Environment.NewLine);
 
             Console.WriteLine(menu);
         }
@@ -151,7 +151,6 @@ namespace Ex03.ConsoleUI
 
             Console.WriteLine(sb);
         }
-
 
         private static void changeVehicleStatus(Garage i_Garage)
         {
@@ -205,8 +204,8 @@ namespace Ex03.ConsoleUI
             {
                 Console.WriteLine("License Number does not exist in the garage");
             }
-            catch (ArgumentNullException) // electric vehicle
-            {
+            catch (ArgumentNullException)
+            {   // electric vehicle
                 Console.WriteLine("The vehicle has no fuel tank");
             }
             catch (ValueOutOfRangeException ex)
@@ -310,6 +309,7 @@ namespace Ex03.ConsoleUI
                         {
                             outputString.Append("No" + Environment.NewLine);
                         }
+
                         outputString.Append(" + Cargo volume: " + ((Truck)vehicleToShow).CargoVolume + Environment.NewLine);
                         break;
                     default:
@@ -324,6 +324,7 @@ namespace Ex03.ConsoleUI
                     {
                         outputString.Append("                ");
                     }
+
                     outputString.Append((i + 1) + ") ");
                     outputString.Append("Manufacturer: " + vehicleToShow.Wheels[i].Manufacturer + ", ");
                     outputString.Append("Max air pressure: " + vehicleToShow.Wheels[i].MaxAirPressure + ", ");
@@ -507,7 +508,7 @@ namespace Ex03.ConsoleUI
                 }
                 catch (ValueOutOfRangeException ex)
                 {
-                    Console.WriteLine("Error: The number should be between " + ex.MinValue +" to " + ex.MaxValue);
+                    Console.WriteLine("Error: The number should be between " + ex.MinValue + " to " + ex.MaxValue);
                 }
                 catch (Exception ex)
                 {
@@ -516,9 +517,7 @@ namespace Ex03.ConsoleUI
             }
 
             o_VehicleType = (VehicleCreator.eVehicleType)userChoice;
-        }
-
-        
+        }        
 
         private static void getVehicleLicenseTypeFromUser(out Motorcycle.eLicenseType o_LicenseType)
         {
@@ -567,10 +566,10 @@ namespace Ex03.ConsoleUI
 
             userPrompt.Append(" -----------------------------------" + Environment.NewLine);
             userPrompt.Append(" Please choose your vehicle's color:" + Environment.NewLine);
-            userPrompt.Append("  1) Red" +                             Environment.NewLine);
-            userPrompt.Append("  2) Blue" +                            Environment.NewLine);
-            userPrompt.Append("  3) Black" +                           Environment.NewLine);
-            userPrompt.Append("  4) Grey" +                            Environment.NewLine);
+            userPrompt.Append("  1) Red" + Environment.NewLine);
+            userPrompt.Append("  2) Blue" + Environment.NewLine);
+            userPrompt.Append("  3) Black" + Environment.NewLine);
+            userPrompt.Append("  4) Grey" + Environment.NewLine);
             userPrompt.Append(" -----------------------------------" + Environment.NewLine);
 
             Console.Write(userPrompt + Environment.NewLine);
@@ -606,10 +605,10 @@ namespace Ex03.ConsoleUI
 
             userPrompt.Append(" ---------------------------------------------" + Environment.NewLine);
             userPrompt.Append(" Please choose your vehicle's number of doors:" + Environment.NewLine);
-            userPrompt.Append("  2" +                                            Environment.NewLine);
-            userPrompt.Append("  3" +                                            Environment.NewLine);
-            userPrompt.Append("  4" +                                            Environment.NewLine);
-            userPrompt.Append("  5" +                                            Environment.NewLine);
+            userPrompt.Append("  2" + Environment.NewLine);
+            userPrompt.Append("  3" + Environment.NewLine);
+            userPrompt.Append("  4" + Environment.NewLine);
+            userPrompt.Append("  5" + Environment.NewLine);
             userPrompt.Append(" ---------------------------------------------" + Environment.NewLine);
 
             Console.Write(userPrompt + Environment.NewLine);
@@ -684,7 +683,7 @@ namespace Ex03.ConsoleUI
             userPrompt.Append(" -----------------------------------------------" + Environment.NewLine);
             userPrompt.Append(" Does your vehicle contain dangerous substances:" + Environment.NewLine);
             userPrompt.Append("  1) Yes" + Environment.NewLine);
-            userPrompt.Append("  2) No" +  Environment.NewLine);
+            userPrompt.Append("  2) No" + Environment.NewLine);
             userPrompt.Append(" -----------------------------------------------" + Environment.NewLine);
 
             Console.Write(userPrompt + Environment.NewLine);
@@ -709,7 +708,7 @@ namespace Ex03.ConsoleUI
                 }
             }
 
-            o_ContainsDangerousSubstances = (userChoice == 1);
+            o_ContainsDangerousSubstances = userChoice == 1;
         }
 
         private static void getVehicleModelNameFromUser(out string o_ModelName)
@@ -833,8 +832,6 @@ namespace Ex03.ConsoleUI
                 }
             } while (v_ValidInput == false);
             o_Manufacturer = stringInput;
-
-            
 
             userPrompt.Clear();
             userPrompt.Append(" -----------------------------" + Environment.NewLine);
@@ -1015,8 +1012,6 @@ namespace Ex03.ConsoleUI
             o_CurrentFuelCapacity = capacityInput;
         }
 
-
-
         private static void getBatteryTimeToAddFromUser(out float o_TimeToAdd)
         {
             float timeInput = 0;
@@ -1106,7 +1101,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = getValidIntFromUserInRange(out capacityInput, 0, Int32.MaxValue);
+                    v_ValidInput = getValidIntFromUserInRange(out capacityInput, 0, System.Int32.MaxValue);
                 }
                 catch (FormatException)
                 {
@@ -1190,6 +1185,7 @@ namespace Ex03.ConsoleUI
 
             return true;
         }
+
         private static bool getStringInLengthRangeFromUser(out string o_UserInput, int i_MinLength, int i_MaxLength)
         {
             string userInput;
@@ -1221,6 +1217,7 @@ namespace Ex03.ConsoleUI
             {
                 throw new ValueOutOfRangeException(new Exception(), 0, 200);
             }
+
             foreach (char c in userInput)
             {
                 if((c == ' ' || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) == false)
@@ -1250,7 +1247,9 @@ namespace Ex03.ConsoleUI
             foreach (char c in userInput)
             {
                 if (c < '0' || c > '9')
+                {
                     throw new FormatException();
+                }
             }
 
             o_PhoneNumber = userInput;

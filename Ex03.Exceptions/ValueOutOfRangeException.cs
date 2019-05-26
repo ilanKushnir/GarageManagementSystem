@@ -24,8 +24,7 @@ namespace Ex03.Exceptions
                                         float i_MinValue, 
                                         float i_MaxValue) 
                                         : base(
-                                              string.Format("Value is out of range, range should be between {0} - {1}",i_MinValue,i_MaxValue),
-                                              i_InnerException)
+                                              string.Format("Value is out of range, range should be between {0} - {1}", i_MinValue, i_MaxValue), i_InnerException)
         {
             m_MaxValue = i_MaxValue;
             m_MinValue = i_MinValue;

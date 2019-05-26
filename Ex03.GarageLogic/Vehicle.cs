@@ -73,6 +73,5 @@ namespace Ex03.GarageLogic
 
             return o_VehicleType;
         }
-
     }
 }
