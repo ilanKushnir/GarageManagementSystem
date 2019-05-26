@@ -14,7 +14,6 @@ namespace Ex03.GarageLogic
         //Wheels
         public string m_WheelsManufacturer;
         public float m_CurrentAirPressure;
-        public float m_MaxAirPressure;
 
         // Car
         public Car.eCarColor m_Color;
@@ -30,11 +29,8 @@ namespace Ex03.GarageLogic
 
         // EnergySource
         // Fuel
-        public Fuel.eFuelType m_FuelType;
         public float m_CurrentFuelCapacity;
-        public float m_MaxFuelCapacity;
         // Battery
         public float m_RemainingBatteryTime;
-        public float m_MaxBatteryTime;
     }
 }
