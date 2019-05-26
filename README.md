@@ -8,6 +8,10 @@
 This is a garage management system, coded using C# for our CS degree.
 <br/>In this program you can manage a garage, add new customers and manage it.
 
+<h2>Project Architecture</h2>
+
+<div align="center"><img src="design/garage-management-diagram.png"></img></div>
+
 <h2>Goal and requirements</h2>
 
 The idea was to practice classes, inheritance and polymorphism.

@@ -1,0 +1,586 @@
+<Project>
+  <Name>Garage management</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Untitled</Name>
+    <Language>CSharp</Language>
+    <Entities />
+    <Relationships />
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Ex03.ConsoleUI.exe</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Program</Name>
+        <Access>Public</Access>
+        <Location left="224" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public Program()</Member>
+        <Member type="Method">public static Void Main()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UI</Name>
+        <Access>Public</Access>
+        <Location left="12" top="12" />
+        <Size width="162" height="706" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UI()</Member>
+        <Member type="Method">public static Void Run(Garage i_Garage)</Member>
+        <Member type="Method">private static Void printWelcomeMessage()</Member>
+        <Member type="Method">private static Void PrintMenu()</Member>
+        <Member type="Method">private static Void addNewVehicleToGarage(Garage i_Garage)</Member>
+        <Member type="Method">private static Void showLicenseNumbersByStatus(Garage i_Garage)</Member>
+        <Member type="Method">private static Void changeVehicleStatus(Garage i_Garage)</Member>
+        <Member type="Method">private static Void inflateVehicleToMax(Garage i_Garage)</Member>
+        <Member type="Method">private static Void fuelVehicle(Garage i_Garage)</Member>
+        <Member type="Method">private static Void chargeVehicle(Garage i_Garage)</Member>
+        <Member type="Method">private static Void showVehicleDataByLicenseNumber(Garage i_Garage)</Member>
+        <Member type="Method">private static VehicleInputData getVehicleDataFromUser()</Member>
+        <Member type="Method">private static Void getVehicleSpecificDataFromUserByType(eVehicleType i_VehicleType, VehicleInputData o_VehicleData)</Member>
+        <Member type="Method">private static Void getOwnerNameFromUser(out String o_OwnerName)</Member>
+        <Member type="Method">private static Void getOwnerPhoneNumberFromUser(out String o_OwnerPhoneNumber)</Member>
+        <Member type="Method">private static Void getVehicleTypeFromUser(out eVehicleType o_VehicleType)</Member>
+        <Member type="Method">private static Void getVehicleLicenseTypeFromUser(out eLicenseType o_LicenseType)</Member>
+        <Member type="Method">private static Void getVehicleColorFromUser(out eCarColor o_VehicleColor)</Member>
+        <Member type="Method">private static Void getVehicleNumberOfDoorsFromUser(out eNumOfDoors o_NumOfDoors)</Member>
+        <Member type="Method">private static Void getVehicleStatusFromUser(out eVehicleStatus o_VehicleStatus)</Member>
+        <Member type="Method">private static Void getVehicleDangerousSubstancesDataFromUser(out Boolean o_ContainsDangerousSubstances)</Member>
+        <Member type="Method">private static Void getVehicleModelNameFromUser(out String o_ModelName)</Member>
+        <Member type="Method">private static Void getVehicleLicenseNumberFromUser(out String o_LicenseNumber)</Member>
+        <Member type="Method">private static Void getWheelsDataFromUser(eVehicleType i_VehicleType, out String o_Manufacturer, out Single o_CurrentAirPressure)</Member>
+        <Member type="Method">private static Void getFuelTypeFromUser(out eFuelType o_FuelType)</Member>
+        <Member type="Method">private static Void getFuelToAddFromUser(out Single o_FuelToAdd)</Member>
+        <Member type="Method">private static Void getMaxFuelCapacityFromUser(out Single o_MaxFuelCapacity)</Member>
+        <Member type="Method">private static Void getFuelCurrentCapacityFromUser(out Single o_CurrentFuelCapacity, Single i_MaxFuelCapacity)</Member>
+        <Member type="Method">private static Void getBatteryTimeToAddFromUser(out Single o_TimeToAdd)</Member>
+        <Member type="Method">private static Void getVehicleBatteryDataFromUser(out Single o_RemainingBatteryTime, Single i_MaxBatteryTime)</Member>
+        <Member type="Method">private static Void getVehicleEngineCapacityFromUser(out Int32 o_EngineCapacity)</Member>
+        <Member type="Method">private static Void getVehicleCargoVolumeFromUser(out Single o_CargoVolume)</Member>
+        <Member type="Method">private static Boolean getValidIntFromUserInRange(out Int32 o_UserInput, Int32 i_MinValue, Int32 i_MaxValue)</Member>
+        <Member type="Method">private static Boolean getValidFloatFromUserInRange(out Single o_UserInput, Single i_MinValue, Single i_MaxValue)</Member>
+        <Member type="Method">private static Boolean getStringInLengthRangeFromUser(out String o_UserInput, Int32 i_MinLength, Int32 i_MaxLength)</Member>
+        <Member type="Method">private static Boolean getNameStringFromUser(out String o_UserInput)</Member>
+        <Member type="Method">private static Boolean getValidPhoneNumberFromUser(out String o_PhoneNumber)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Ex03.Exceptions.dll</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>ValueOutOfRangeException</Name>
+        <Access>Public</Access>
+        <Location left="436" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Single m_MaxValue</Member>
+        <Member type="Field">private Single m_MinValue</Member>
+        <Member type="Property">public Single MaxValue { get; }</Member>
+        <Member type="Property">public Single MinValue { get; }</Member>
+        <Member type="Constructor">public ValueOutOfRangeException(Exception i_InnerException, Single i_MinValue, Single i_MaxValue)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>VehicleAllreadyInGarageException</Name>
+        <Access>Public</Access>
+        <Location left="224" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private String m_LicenseNumber</Member>
+        <Member type="Property">public String LicenseNumber { get; }</Member>
+        <Member type="Constructor">public VehicleAllreadyInGarageException(Exception i_InnerException, String i_LicenseNumber)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>WrongFuelException</Name>
+        <Access>Public</Access>
+        <Location left="12" top="12" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private String m_WrongFuel</Member>
+        <Member type="Field">private String m_Fuel</Member>
+        <Member type="Property">public String WrongFuel { get; }</Member>
+        <Member type="Property">public String Fuel { get; }</Member>
+        <Member type="Constructor">public WrongFuelException(Exception i_InnerException, String i_WrongFuel, String i_Fuel)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships />
+  </ProjectItem>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Ex03.GarageLogic.dll</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Battery</Name>
+        <Access>Public</Access>
+        <Location left="480" top="92" />
+        <Size width="162" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Single m_RemainingBatteryTime</Member>
+        <Member type="Field">private Single m_MaxBatteryTime</Member>
+        <Member type="Property">public Single RemainingBatteryTime { get; }</Member>
+        <Member type="Property">public Single MaxBatteryTime { get; }</Member>
+        <Member type="Constructor">public Battery(Single i_RemainingBatteryTime, Single i_MaxBatteryTime)</Member>
+        <Member type="Method">public Void ChargeBattery(Single i_TimeToCharge)</Member>
+        <Member type="Method">public Void UpdateEnergyPercentage()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Car</Name>
+        <Access>Public</Access>
+        <Location left="911" top="378" />
+        <Size width="162" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private eCarColor m_Color</Member>
+        <Member type="Field">private eNumOfDoors m_Doors</Member>
+        <Member type="Field">public Int32 sr_NumOfWheels</Member>
+        <Member type="Field">public Int32 sr_MaxAirPressure</Member>
+        <Member type="Field">public Int32 sr_MaxFuelCapacity</Member>
+        <Member type="Field">public Single sr_MaxBatteryTime</Member>
+        <Member type="Field">public eFuelType sr_FuelType</Member>
+        <Member type="Property">public eCarColor Color { get; set; }</Member>
+        <Member type="Property">public eNumOfDoors Doors { get; set; }</Member>
+        <Member type="Constructor">public Car(String i_ModelName, String i_LicenseNumber, List&lt;Wheel&gt; i_Wheels, EnergySource i_EnergySource, eCarColor i_Color, eNumOfDoors i_Doors)</Member>
+        <Member type="Constructor">static Car()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>EnergySource</Name>
+        <Access>Public</Access>
+        <Location left="710" top="92" />
+        <Size width="162" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected Single m_EnergyPercentage</Member>
+        <Member type="Property">public Single EnergyPercentage { get; }</Member>
+        <Member type="Constructor">public EnergySource()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Fuel</Name>
+        <Access>Public</Access>
+        <Location left="480" top="317" />
+        <Size width="162" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private eFuelType m_FuelType</Member>
+        <Member type="Field">private Single m_CurrentFuelCapacity</Member>
+        <Member type="Field">private Single m_MaxFuelCapacity</Member>
+        <Member type="Property">public eFuelType FuelType { get; }</Member>
+        <Member type="Property">public Single MaxFuelCapacity { get; }</Member>
+        <Member type="Property">public Single CurrentFuelCapacity { get; }</Member>
+        <Member type="Constructor">public Fuel(Single i_CurrentFuelCapacity, Single i_MaxFuelCapacity, eFuelType i_FuelType)</Member>
+        <Member type="Method">public Void FuelUp(Single i_FuelToAdd, eFuelType i_FuelType)</Member>
+        <Member type="Method">public Void UpdateEnergyPercentage()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Garage</Name>
+        <Access>Public</Access>
+        <Location left="1525" top="52" />
+        <Size width="162" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private List&lt;VehicleCard&gt; m_Cards</Member>
+        <Member type="Constructor">public Garage()</Member>
+        <Member type="Method">public Void AddVehicleToGarage(String i_Owner, String i_Phone, VehicleInputData i_VehicleData)</Member>
+        <Member type="Method">public VehicleCard FindCardByLicense(String i_LicenseNumber)</Member>
+        <Member type="Method">public Vehicle FindVehicleByLicense(String i_LicenseNumber)</Member>
+        <Member type="Method">public List&lt;String&gt; GetLicenseNumbersByStatus(eVehicleStatus i_Status)</Member>
+        <Member type="Method">public Void ChangeVehicleStatus(String i_LicenseNumber, eVehicleStatus i_NewsStatus)</Member>
+        <Member type="Method">public Void InflateVehicleWheelsToMax(String i_LicenseNumber)</Member>
+        <Member type="Method">public Boolean FuelVehicle(String i_LicenseNumber, Single i_FuelToAdd, eFuelType i_FuelType)</Member>
+        <Member type="Method">public Boolean ChargeVehicle(String i_LicenseNumber, Single i_BatteryTimeToAdd)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Motorcycle</Name>
+        <Access>Public</Access>
+        <Location left="710" top="378" />
+        <Size width="162" height="264" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private eLicenseType m_LicenseType</Member>
+        <Member type="Field">private Int32 m_EngineCapacity</Member>
+        <Member type="Field">public Int32 sr_NumOfWheels</Member>
+        <Member type="Field">public Int32 sr_MaxAirPressure</Member>
+        <Member type="Field">public Int32 sr_MaxFuelCapacity</Member>
+        <Member type="Field">public Single sr_MaxBatteryTime</Member>
+        <Member type="Field">public eFuelType sr_FuelType</Member>
+        <Member type="Property">public eLicenseType LicenseType { get; }</Member>
+        <Member type="Property">public Int32 EngineCapacity { get; }</Member>
+        <Member type="Constructor">public Motorcycle(String i_ModelName, String i_LicenseNumber, List&lt;Wheel&gt; i_Wheels, EnergySource i_EnergySource, eLicenseType i_LicenseType, Int32 i_EngineCapacity)</Member>
+        <Member type="Constructor">static Motorcycle()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Truck</Name>
+        <Access>Public</Access>
+        <Location left="1115" top="378" />
+        <Size width="162" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Boolean m_ContainDangerousSubstances</Member>
+        <Member type="Field">private Single m_CargoVolume</Member>
+        <Member type="Field">public Int32 sr_NumOfWheels</Member>
+        <Member type="Field">public Int32 sr_MaxAirPressure</Member>
+        <Member type="Field">public Int32 sr_MaxFuelCapacity</Member>
+        <Member type="Field">public eFuelType sr_FuelType</Member>
+        <Member type="Property">public Boolean ContainDangerousSubstances { get; set; }</Member>
+        <Member type="Property">public Single CargoVolume { get; set; }</Member>
+        <Member type="Constructor">public Truck(String i_ModelName, String i_LicenseNumber, List&lt;Wheel&gt; i_Wheels, EnergySource i_EnergySource, Boolean i_ContainDangerousSubstances, Single i_CargoVolume)</Member>
+        <Member type="Constructor">static Truck()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Vehicle</Name>
+        <Access>Public</Access>
+        <Location left="1073" top="52" />
+        <Size width="162" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">protected String m_ModelName</Member>
+        <Member type="Field">protected String m_LicenseNumber</Member>
+        <Member type="Field">protected List&lt;Wheel&gt; m_Wheels</Member>
+        <Member type="Field">protected EnergySource m_EnergySource</Member>
+        <Member type="Property">public String ModelName { get; }</Member>
+        <Member type="Property">public String LicenseNumber { get; }</Member>
+        <Member type="Property">public List&lt;Wheel&gt; Wheels { get; set; }</Member>
+        <Member type="Property">public EnergySource EnergySource { get; }</Member>
+        <Member type="Constructor">public Vehicle(String i_ModelName, String i_LicenseNumber, List&lt;Wheel&gt; i_Wheels, EnergySource i_EnergySource)</Member>
+        <Member type="Method">public static eVehicleType GetVehicleType(Vehicle i_Vehicle)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>VehicleCard</Name>
+        <Access>Public</Access>
+        <Location left="1326" top="52" />
+        <Size width="162" height="230" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private String m_OwnerName</Member>
+        <Member type="Field">private String m_Phone</Member>
+        <Member type="Field">private eVehicleStatus m_Status</Member>
+        <Member type="Field">private Vehicle m_Vehicle</Member>
+        <Member type="Property">public String OwnerName { get; }</Member>
+        <Member type="Property">public String Phone { get; }</Member>
+        <Member type="Property">public Vehicle Vehicle { get; }</Member>
+        <Member type="Property">public eVehicleStatus Status { get; set; }</Member>
+        <Member type="Constructor">public VehicleCard(String i_OwnerName, String i_Phone, eVehicleStatus i_Status, Vehicle i_Vehicle)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>VehicleCreator</Name>
+        <Access>Public</Access>
+        <Location left="257" top="454" />
+        <Size width="162" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public static Vehicle CreateNewVehicle(VehicleInputData i_VehicleData)</Member>
+        <Member type="Method">private static List&lt;Wheel&gt; createWheelsList(VehicleInputData i_VehicleData)</Member>
+        <Member type="Method">private static EnergySource createEnergySource(VehicleInputData i_VehicleData)</Member>
+        <Modifier>Static</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>VehicleInputData</Name>
+        <Access>Public</Access>
+        <Location left="257" top="92" />
+        <Size width="162" height="315" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">public String m_ModelName</Member>
+        <Member type="Field">public String m_LicenseNumber</Member>
+        <Member type="Field">public eVehicleType m_VehicleType</Member>
+        <Member type="Field">public String m_WheelsManufacturer</Member>
+        <Member type="Field">public Single m_CurrentAirPressure</Member>
+        <Member type="Field">public eCarColor m_Color</Member>
+        <Member type="Field">public eNumOfDoors m_Doors</Member>
+        <Member type="Field">public eLicenseType m_LicenseType</Member>
+        <Member type="Field">public Int32 m_EngineCapacity</Member>
+        <Member type="Field">public Boolean m_ContainDangerousSubstances</Member>
+        <Member type="Field">public Single m_CargoVolume</Member>
+        <Member type="Field">public Single m_CurrentFuelCapacity</Member>
+        <Member type="Field">public Single m_RemainingBatteryTime</Member>
+        <Member type="Constructor">public VehicleInputData()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Wheel</Name>
+        <Access>Public</Access>
+        <Location left="1527" top="331" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private String m_Manufacturer</Member>
+        <Member type="Field">private Single m_CurrentAirPressure</Member>
+        <Member type="Field">private Single m_MaxAirPressure</Member>
+        <Member type="Property">public String Manufacturer { get; }</Member>
+        <Member type="Property">public Single CurrentAirPressure { get; }</Member>
+        <Member type="Property">public Single MaxAirPressure { get; }</Member>
+        <Member type="Constructor">public Wheel(String i_Manufecturer, Single i_CurrentAirPressure, Single i_MaxAirPressure)</Member>
+        <Member type="Method">public Void InflateToMaxPressure()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>eCarColor</Name>
+        <Access>Public</Access>
+        <Location left="1115" top="706" />
+        <Size width="162" height="129" />
+        <Collapsed>False</Collapsed>
+        <Value>Red = 1</Value>
+        <Value>Blue = 2</Value>
+        <Value>Black = 3</Value>
+        <Value>Grey = 4</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>eNumOfDoors</Name>
+        <Access>Public</Access>
+        <Location left="911" top="706" />
+        <Size width="162" height="129" />
+        <Collapsed>False</Collapsed>
+        <Value>Two = 2</Value>
+        <Value>Three = 3</Value>
+        <Value>Four = 4</Value>
+        <Value>Five = 5</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>eFuelType</Name>
+        <Access>Public</Access>
+        <Location left="480" top="649" />
+        <Size width="162" height="129" />
+        <Collapsed>False</Collapsed>
+        <Value>Octan95 = 1</Value>
+        <Value>Octan96 = 2</Value>
+        <Value>Octan98 = 3</Value>
+        <Value>Soler = 4</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>eLicenseType</Name>
+        <Access>Public</Access>
+        <Location left="710" top="706" />
+        <Size width="162" height="129" />
+        <Collapsed>False</Collapsed>
+        <Value>A = 1</Value>
+        <Value>A1 = 2</Value>
+        <Value>A2 = 3</Value>
+        <Value>B = 4</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>eVehicleStatus</Name>
+        <Access>Public</Access>
+        <Location left="1326" top="378" />
+        <Size width="162" height="112" />
+        <Collapsed>False</Collapsed>
+        <Value>InService = 1</Value>
+        <Value>Fixed = 2</Value>
+        <Value>Paid = 3</Value>
+      </Entity>
+      <Entity type="Enum">
+        <Name>eVehicleType</Name>
+        <Access>Public</Access>
+        <Location left="257" top="649" />
+        <Size width="162" height="146" />
+        <Collapsed>False</Collapsed>
+        <Value>Car = 1</Value>
+        <Value>ElectricCar = 2</Value>
+        <Value>Motorcycle = 3</Value>
+        <Value>ElectricMotorcycle = 4</Value>
+        <Value>Truck = 5</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>UI</Name>
+        <Access>Public</Access>
+        <Location left="48" top="174" />
+        <Size width="162" height="706" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public UI()</Member>
+        <Member type="Method">public static Void Run(Garage i_Garage)</Member>
+        <Member type="Method">private static Void printWelcomeMessage()</Member>
+        <Member type="Method">private static Void PrintMenu()</Member>
+        <Member type="Method">private static Void addNewVehicleToGarage(Garage i_Garage)</Member>
+        <Member type="Method">private static Void showLicenseNumbersByStatus(Garage i_Garage)</Member>
+        <Member type="Method">private static Void changeVehicleStatus(Garage i_Garage)</Member>
+        <Member type="Method">private static Void inflateVehicleToMax(Garage i_Garage)</Member>
+        <Member type="Method">private static Void fuelVehicle(Garage i_Garage)</Member>
+        <Member type="Method">private static Void chargeVehicle(Garage i_Garage)</Member>
+        <Member type="Method">private static Void showVehicleDataByLicenseNumber(Garage i_Garage)</Member>
+        <Member type="Method">private static VehicleInputData getVehicleDataFromUser()</Member>
+        <Member type="Method">private static Void getVehicleSpecificDataFromUserByType(eVehicleType i_VehicleType, VehicleInputData o_VehicleData)</Member>
+        <Member type="Method">private static Void getOwnerNameFromUser(out String o_OwnerName)</Member>
+        <Member type="Method">private static Void getOwnerPhoneNumberFromUser(out String o_OwnerPhoneNumber)</Member>
+        <Member type="Method">private static Void getVehicleTypeFromUser(out eVehicleType o_VehicleType)</Member>
+        <Member type="Method">private static Void getVehicleLicenseTypeFromUser(out eLicenseType o_LicenseType)</Member>
+        <Member type="Method">private static Void getVehicleColorFromUser(out eCarColor o_VehicleColor)</Member>
+        <Member type="Method">private static Void getVehicleNumberOfDoorsFromUser(out eNumOfDoors o_NumOfDoors)</Member>
+        <Member type="Method">private static Void getVehicleStatusFromUser(out eVehicleStatus o_VehicleStatus)</Member>
+        <Member type="Method">private static Void getVehicleDangerousSubstancesDataFromUser(out Boolean o_ContainsDangerousSubstances)</Member>
+        <Member type="Method">private static Void getVehicleModelNameFromUser(out String o_ModelName)</Member>
+        <Member type="Method">private static Void getVehicleLicenseNumberFromUser(out String o_LicenseNumber)</Member>
+        <Member type="Method">private static Void getWheelsDataFromUser(eVehicleType i_VehicleType, out String o_Manufacturer, out Single o_CurrentAirPressure)</Member>
+        <Member type="Method">private static Void getFuelTypeFromUser(out eFuelType o_FuelType)</Member>
+        <Member type="Method">private static Void getFuelToAddFromUser(out Single o_FuelToAdd)</Member>
+        <Member type="Method">private static Void getMaxFuelCapacityFromUser(out Single o_MaxFuelCapacity)</Member>
+        <Member type="Method">private static Void getFuelCurrentCapacityFromUser(out Single o_CurrentFuelCapacity, Single i_MaxFuelCapacity)</Member>
+        <Member type="Method">private static Void getBatteryTimeToAddFromUser(out Single o_TimeToAdd)</Member>
+        <Member type="Method">private static Void getVehicleBatteryDataFromUser(out Single o_RemainingBatteryTime, Single i_MaxBatteryTime)</Member>
+        <Member type="Method">private static Void getVehicleEngineCapacityFromUser(out Int32 o_EngineCapacity)</Member>
+        <Member type="Method">private static Void getVehicleCargoVolumeFromUser(out Single o_CargoVolume)</Member>
+        <Member type="Method">private static Boolean getValidIntFromUserInRange(out Int32 o_UserInput, Int32 i_MinValue, Int32 i_MaxValue)</Member>
+        <Member type="Method">private static Boolean getValidFloatFromUserInRange(out Single o_UserInput, Single i_MinValue, Single i_MaxValue)</Member>
+        <Member type="Method">private static Boolean getStringInLengthRangeFromUser(out String o_UserInput, Int32 i_MinLength, Int32 i_MaxLength)</Member>
+        <Member type="Method">private static Boolean getNameStringFromUser(out String o_UserInput)</Member>
+        <Member type="Method">private static Boolean getValidPhoneNumberFromUser(out String o_PhoneNumber)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Program</Name>
+        <Access>Public</Access>
+        <Location left="48" top="43" />
+        <Size width="162" height="111" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public Program()</Member>
+        <Member type="Method">public static Void Main()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ValueOutOfRangeException</Name>
+        <Access>Public</Access>
+        <Location left="1525" top="573" />
+        <Size width="162" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private Single m_MaxValue</Member>
+        <Member type="Field">private Single m_MinValue</Member>
+        <Member type="Property">public Single MaxValue { get; }</Member>
+        <Member type="Property">public Single MinValue { get; }</Member>
+        <Member type="Constructor">public ValueOutOfRangeException(Exception i_InnerException, Single i_MinValue, Single i_MaxValue)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>WrongFuelException</Name>
+        <Access>Public</Access>
+        <Location left="1326" top="672" />
+        <Size width="162" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private String m_WrongFuel</Member>
+        <Member type="Field">private String m_Fuel</Member>
+        <Member type="Property">public String WrongFuel { get; }</Member>
+        <Member type="Property">public String Fuel { get; }</Member>
+        <Member type="Constructor">public WrongFuelException(Exception i_InnerException, String i_WrongFuel, String i_Fuel)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>VehicleAllreadyInGarageException</Name>
+        <Access>Public</Access>
+        <Location left="1326" top="517" />
+        <Size width="162" height="128" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private String m_LicenseNumber</Member>
+        <Member type="Property">public String LicenseNumber { get; }</Member>
+        <Member type="Constructor">public VehicleAllreadyInGarageException(Exception i_InnerException, String i_LicenseNumber)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Nesting" first="1" second="12">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Nesting" first="1" second="13">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Nesting" first="3" second="14">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Nesting" first="5" second="15">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Nesting" first="8" second="16">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Nesting" first="9" second="17">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="0" second="2">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="1" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="3" second="2">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="5" second="7">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+      </Relationship>
+      <Relationship type="Generalization" first="6" second="7">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+      </Relationship>
+      <Relationship type="Association" first="1" second="12">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>m_Color</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="1" second="13">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>m_Doors</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="5" second="15">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>m_LicenseType</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="7" second="2">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>m_EnergySource</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="8" second="16">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>m_Status</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="8" second="7">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartRole>m_Vehicle</StartRole>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
