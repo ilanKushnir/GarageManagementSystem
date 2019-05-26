@@ -58,9 +58,7 @@ namespace Ex03.GarageLogic
         public Vehicle FindVehicleByLicense(string i_LicenseNumber)
         {
             VehicleCard o_FoundVehicleCard;
-
             o_FoundVehicleCard = FindCardByLicense(i_LicenseNumber);
-            // exception will be thrown in a case of bad license number
             return o_FoundVehicleCard.Vehicle;
         }
 

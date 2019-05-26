@@ -20,8 +20,8 @@ namespace Ex03.GarageLogic
         public static Vehicle CreateNewVehicle(VehicleInputData i_VehicleData)
         {
             Vehicle o_NewVehicle = null;
-            List<Wheel> o_WheelsList = CreateWheelsList(i_VehicleData);
-            EnergySource o_EnergySource = CreateEnergySource(i_VehicleData);
+            List<Wheel> o_WheelsList = createWheelsList(i_VehicleData);
+            EnergySource o_EnergySource = createEnergySource(i_VehicleData);
 
             switch (i_VehicleData.m_VehicleType)
             {
@@ -58,7 +58,7 @@ namespace Ex03.GarageLogic
             return o_NewVehicle;
         }
 
-        private static List<Wheel> CreateWheelsList(VehicleInputData i_VehicleData)
+        private static List<Wheel> createWheelsList(VehicleInputData i_VehicleData)
         {
             List<Wheel> o_WheelsList = new List<Wheel>();
             int numOfWheels = 0;
@@ -95,7 +95,7 @@ namespace Ex03.GarageLogic
             return o_WheelsList;
         }
 
-        private static EnergySource CreateEnergySource(VehicleInputData i_VehicleData)
+        private static EnergySource createEnergySource(VehicleInputData i_VehicleData)
         {
             EnergySource o_energySource = null;
             Fuel.eFuelType fuelType = 0;

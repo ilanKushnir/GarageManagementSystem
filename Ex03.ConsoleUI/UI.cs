@@ -15,7 +15,7 @@ namespace Ex03.ConsoleUI
             int    userChoice = 0;
             bool v_ValidInput = false;
 
-            PrintWelcomeMessage();
+            printWelcomeMessage();
 
             while (userChoice != 8)
             {
@@ -44,25 +44,25 @@ namespace Ex03.ConsoleUI
                 switch (userChoice)
                 {
                     case 1:
-                        AddNewVehicleToGarage(i_Garage);    ////
+                        addNewVehicleToGarage(i_Garage);    ////
                         break; 
                     case 2:
-                        ShowLicenseNumbersByStatus(i_Garage);   ///////
+                        showLicenseNumbersByStatus(i_Garage);   ///////
                         break;
                     case 3:
-                        ChangeVehicleStatus(i_Garage);          /////////////////////////////
+                        changeVehicleStatus(i_Garage);          /////////////////////////////
                         break;
                     case 4:
-                        InflateVehicleToMax(i_Garage);          //////////////////
+                        inflateVehicleToMax(i_Garage);          //////////////////
                         break;
                     case 5:
-                        FuelVehicle(i_Garage);
+                        fuelVehicle(i_Garage);
                         break;
                     case 6:
-                        ChargeVehicle(i_Garage);
+                        chargeVehicle(i_Garage);
                         break;
                     case 7:
-                        ShowVehicleDataByLicenseNumber(i_Garage);       ////////////////////
+                        showVehicleDataByLicenseNumber(i_Garage);       ////////////////////
                         break;
                     case 8:
                         Environment.Exit(0);
@@ -79,7 +79,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void PrintWelcomeMessage()
+        private static void printWelcomeMessage()
         {
             StringBuilder welcome = new StringBuilder();
             // ASCII art
@@ -87,7 +87,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(welcome);
         }
 
-        public static void PrintMenu()
+        private static void PrintMenu()
         {
             StringBuilder menu = new StringBuilder(Environment.NewLine);
             menu.Append(" Please choose which action to make by inserting a chioce number below: " + Environment.NewLine);
@@ -106,38 +106,16 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(menu);
         }
 
-        public static void AddNewVehicleToGarage(Garage i_Garage)
+        private static void addNewVehicleToGarage(Garage i_Garage)
         {
             string ownerNameInput = string.Empty;
             string ownerPhoneNumberInput = string.Empty;
             VehicleInputData o_VehicleData;
             
-            GetOwnerNameFromUser(out ownerNameInput);
-            GetOwnerPhoneNumberFromUser(out ownerPhoneNumberInput);
-            o_VehicleData = GetVehicleDataFromUser();
+            getOwnerNameFromUser(out ownerNameInput);
+            getOwnerPhoneNumberFromUser(out ownerPhoneNumberInput);
+            o_VehicleData = getVehicleDataFromUser();
             
-            /*
-            ////// Example Car //////
-            ownerNameInput = "Ilan Kushnir";
-            ownerPhoneNumberInput = "0505877898";
-            VehicleInputData o_VehicleData = new VehicleInputData();
-            o_VehicleData.m_Color = Car.eCarColor.Red;
-            o_VehicleData.m_CurrentAirPressure = 30;
-            o_VehicleData.m_CurrentFuelCapacity = 45.78f;
-            o_VehicleData.m_Doors = Car.eNumOfDoors.Three;
-            o_VehicleData.m_FuelType = Fuel.eFuelType.Octan95;
-
-            o_VehicleData.m_LicenseNumber = "1234567";
-            o_VehicleData.m_MaxAirPressure = 32;
-            //o_VehicleData.m_MaxFuelCapacity = 50;
-            o_VehicleData.m_ModelName = "The Off-Mobil";
-            o_VehicleData.m_VehicleType = VehicleCreator.eVehicleType.ElectricCar;
-            o_VehicleData.m_WheelsManufacturer = "Michelin abu hasuna";
-
-            o_VehicleData.m_RemainingBatteryTime = 10;
-            o_VehicleData.m_MaxBatteryTime = 20;
-            /////////////////////////
-            */
             try
             {
                 i_Garage.AddVehicleToGarage(ownerNameInput, ownerPhoneNumberInput, o_VehicleData);
@@ -149,22 +127,22 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void ShowLicenseNumbersByStatus(Garage i_Garage)
+        private static void showLicenseNumbersByStatus(Garage i_Garage)
         {
-            VehicleCard.eVehicleStatus o_Status;
+            VehicleCard.eVehicleStatus vehicleStatus;
             List<String> licenseNumbersList;
             StringBuilder sb = new StringBuilder();
 
-            GetVehicleStatusFromUser(out o_Status);
-            licenseNumbersList = i_Garage.GetLicenseNumbersByStatus(o_Status);
+            getVehicleStatusFromUser(out vehicleStatus);
+            licenseNumbersList = i_Garage.GetLicenseNumbersByStatus(vehicleStatus);
 
             if(licenseNumbersList.Count == 0)
             {
-                sb.Append(string.Format("Vehicle with status {0} not found " + Environment.NewLine, o_Status.ToString()));
+                sb.Append(string.Format("Vehicle with status {0} not found " + Environment.NewLine, vehicleStatus.ToString()));
             }
             else
             {
-                sb.Append(string.Format("Vehicles with status {0} in garage: " + Environment.NewLine, o_Status.ToString()));
+                sb.Append(string.Format("Vehicles with status {0} in garage: " + Environment.NewLine, vehicleStatus.ToString()));
                 foreach (string licensNumber in licenseNumbersList)
                 {
                     sb.Append(licensNumber + Environment.NewLine);
@@ -175,17 +153,17 @@ namespace Ex03.ConsoleUI
         }
 
 
-        public static void ChangeVehicleStatus(Garage i_Garage)
+        private static void changeVehicleStatus(Garage i_Garage)
         {
-            string o_LicenseNumber = null;
-            VehicleCard.eVehicleStatus o_NewStatus = 0;
+            string licenseNumber = null;
+            VehicleCard.eVehicleStatus newVehicleStatus = 0;
 
-            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
-            GetVehicleStatusFromUser(out o_NewStatus); 
+            getVehicleLicenseNumberFromUser(out licenseNumber);
+            getVehicleStatusFromUser(out newVehicleStatus); 
 
             try
             {                                                                     
-                i_Garage.ChangeVehicleStatus(o_LicenseNumber, o_NewStatus);
+                i_Garage.ChangeVehicleStatus(licenseNumber, newVehicleStatus);
             }
             catch (KeyNotFoundException)
             {
@@ -193,13 +171,13 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void InflateVehicleToMax(Garage i_Garage)
+        private static void inflateVehicleToMax(Garage i_Garage)
         {
-            string o_LicenseNumber;
+            string licenseNumber;
             try
             {
-                GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
-                i_Garage.InflateVehicleWheelsToMax(o_LicenseNumber);
+                getVehicleLicenseNumberFromUser(out licenseNumber);
+                i_Garage.InflateVehicleWheelsToMax(licenseNumber);
                 Console.WriteLine("Vehicles wheels inflated to max successfuly");
             }
             catch(KeyNotFoundException)
@@ -208,19 +186,19 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void FuelVehicle(Garage i_Garage)
+        private static void fuelVehicle(Garage i_Garage)
         {
-            string o_LicenseNumber = null;
-            Fuel.eFuelType o_FuelType;
-            float o_FuelToAdd;
+            string licenseNumber = null;
+            Fuel.eFuelType fuelType;
+            float fuelToAdd;
 
-            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
-            GetFuelTypeFromUser(out o_FuelType);
-            GetFuelToAddFromUser(out o_FuelToAdd);
+            getVehicleLicenseNumberFromUser(out licenseNumber);
+            getFuelTypeFromUser(out fuelType);
+            getFuelToAddFromUser(out fuelToAdd);
 
             try
             {
-                i_Garage.FuelVehicle(o_LicenseNumber, o_FuelToAdd, o_FuelType);
+                i_Garage.FuelVehicle(licenseNumber, fuelToAdd, fuelType);
                 Console.WriteLine("Vehicle fueled to successfuly");
             }
             catch (KeyNotFoundException)
@@ -241,14 +219,14 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void ChargeVehicle(Garage i_Garage)
+        private static void chargeVehicle(Garage i_Garage)
         {
             string o_LicenseNumber = null;
             float o_BatteryTimeToAdd;
             bool v_ValidInput = false;
 
-            GetVehicleLicenseNumberFromUser(out o_LicenseNumber);
-            GetBatteryTimeToAddFromUser(out o_BatteryTimeToAdd);
+            getVehicleLicenseNumberFromUser(out licenseNumber);
+            getBatteryTimeToAddFromUser(out batteryTimeToAdd);
 
             try
             {
@@ -269,15 +247,16 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static void ShowVehicleDataByLicenseNumber(Garage i_Garage)
+        private static void showVehicleDataByLicenseNumber(Garage i_Garage)
         {
             string licenseNumber = string.Empty;
             Vehicle vehicleToShow;
             VehicleCard cardToShow;
-            GetVehicleLicenseNumberFromUser(out licenseNumber);
             StringBuilder outputString = new StringBuilder();
             VehicleCreator.eVehicleType vehicleType = 0;
 
+            getVehicleLicenseNumberFromUser(out licenseNumber);
+            
             try
             {
                 cardToShow = i_Garage.FindCardByLicense(licenseNumber);
@@ -362,38 +341,38 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(outputString);
         }
 
-        private static VehicleInputData GetVehicleDataFromUser()
+        private static VehicleInputData getVehicleDataFromUser()
         {
             VehicleInputData o_VehicleData = new VehicleInputData();
 
-            GetVehicleLicenseNumberFromUser(out o_VehicleData.m_LicenseNumber);
-            GetVehicleTypeFromUser(out o_VehicleData.m_VehicleType);
-            GetVehicleModelNameFromUser(out o_VehicleData.m_ModelName);
-            GetVehicleSpecificDataFromUserByType(o_VehicleData.m_VehicleType, o_VehicleData);
-            GetWheelsDataFromUser(o_VehicleData.m_VehicleType,
+            getVehicleLicenseNumberFromUser(out o_VehicleData.m_LicenseNumber);
+            getVehicleTypeFromUser(out o_VehicleData.m_VehicleType);
+            getVehicleModelNameFromUser(out o_VehicleData.m_ModelName);
+            getVehicleSpecificDataFromUserByType(o_VehicleData.m_VehicleType, o_VehicleData);
+            getWheelsDataFromUser(o_VehicleData.m_VehicleType,
                                   out o_VehicleData.m_WheelsManufacturer,
                                   out o_VehicleData.m_CurrentAirPressure);
             return o_VehicleData;
         }
 
-        private static void GetVehicleSpecificDataFromUserByType(VehicleCreator.eVehicleType i_VehicleType,
+        private static void getVehicleSpecificDataFromUserByType(VehicleCreator.eVehicleType i_VehicleType,
                                                                  VehicleInputData o_VehicleData)
         {
             switch (i_VehicleType)
             {
                 case VehicleCreator.eVehicleType.Car:
                 case VehicleCreator.eVehicleType.ElectricCar:
-                    GetVehicleColorFromUser(out o_VehicleData.m_Color);
-                    GetVehicleNumberOfDoorsFromUser(out o_VehicleData.m_Doors);
+                    getVehicleColorFromUser(out o_VehicleData.m_Color);
+                    getVehicleNumberOfDoorsFromUser(out o_VehicleData.m_Doors);
                     break;
                 case VehicleCreator.eVehicleType.Motorcycle:
                 case VehicleCreator.eVehicleType.ElectricMotorcycle:
-                    GetVehicleLicenseTypeFromUser(out o_VehicleData.m_LicenseType);
-                    GetVehicleEngineCapacityFromUser(out o_VehicleData.m_EngineCapacity);
+                    getVehicleLicenseTypeFromUser(out o_VehicleData.m_LicenseType);
+                    getVehicleEngineCapacityFromUser(out o_VehicleData.m_EngineCapacity);
                     break;
                 case VehicleCreator.eVehicleType.Truck:
-                    GetVehicleDangerousSubstancesDataFromUser(out o_VehicleData.m_ContainDangerousSubstances);
-                    GetVehicleCargoVolumeFromUser(out o_VehicleData.m_CargoVolume);
+                    getVehicleDangerousSubstancesDataFromUser(out o_VehicleData.m_ContainDangerousSubstances);
+                    getVehicleCargoVolumeFromUser(out o_VehicleData.m_CargoVolume);
                     break;
                 default:
                     break;
@@ -402,26 +381,26 @@ namespace Ex03.ConsoleUI
             switch (i_VehicleType)
             {
                 case VehicleCreator.eVehicleType.Car:
-                    GetFuelCurrentCapacityFromUser(out o_VehicleData.m_CurrentFuelCapacity, Car.sr_MaxFuelCapacity);
+                    getFuelCurrentCapacityFromUser(out o_VehicleData.m_CurrentFuelCapacity, Car.sr_MaxFuelCapacity);
                     break;
                 case VehicleCreator.eVehicleType.Motorcycle:
-                    GetFuelCurrentCapacityFromUser(out o_VehicleData.m_CurrentFuelCapacity, Motorcycle.sr_MaxFuelCapacity);
+                    getFuelCurrentCapacityFromUser(out o_VehicleData.m_CurrentFuelCapacity, Motorcycle.sr_MaxFuelCapacity);
                     break;
                 case VehicleCreator.eVehicleType.Truck:
-                    GetFuelCurrentCapacityFromUser(out o_VehicleData.m_CurrentFuelCapacity, Truck.sr_MaxFuelCapacity);
+                    getFuelCurrentCapacityFromUser(out o_VehicleData.m_CurrentFuelCapacity, Truck.sr_MaxFuelCapacity);
                     break;
                 case VehicleCreator.eVehicleType.ElectricCar:
-                    GetVehicleBatteryDataFromUser(out o_VehicleData.m_RemainingBatteryTime, Car.sr_MaxBatteryTime);
+                    getVehicleBatteryDataFromUser(out o_VehicleData.m_RemainingBatteryTime, Car.sr_MaxBatteryTime);
                     break;
                 case VehicleCreator.eVehicleType.ElectricMotorcycle:
-                    GetVehicleBatteryDataFromUser(out o_VehicleData.m_RemainingBatteryTime, Motorcycle.sr_MaxBatteryTime);
+                    getVehicleBatteryDataFromUser(out o_VehicleData.m_RemainingBatteryTime, Motorcycle.sr_MaxBatteryTime);
                     break;
                 default:
                     break;
             }
         }
 
-        private static void GetOwnerNameFromUser(out string o_OwnerName)
+        private static void getOwnerNameFromUser(out string o_OwnerName)
         {
             string stringInput = string.Empty;
             bool v_ValidInput = false;
@@ -460,7 +439,7 @@ namespace Ex03.ConsoleUI
             o_OwnerName = stringInput;
         }
 
-        private static void GetOwnerPhoneNumberFromUser(out string o_OwnerPhoneNumber)
+        private static void getOwnerPhoneNumberFromUser(out string o_OwnerPhoneNumber)
         {
             string phoneInput = string.Empty;
             bool v_ValidInput = false;
@@ -499,7 +478,7 @@ namespace Ex03.ConsoleUI
             o_OwnerPhoneNumber = phoneInput;
         }
 
-        private static void GetVehicleTypeFromUser(out VehicleCreator.eVehicleType o_VehicleType)
+        private static void getVehicleTypeFromUser(out VehicleCreator.eVehicleType o_VehicleType)
         {
             int userChoice = 0;
             bool v_ValidInput = false;
@@ -541,7 +520,7 @@ namespace Ex03.ConsoleUI
 
         
 
-        private static void GetVehicleLicenseTypeFromUser(out Motorcycle.eLicenseType o_LicenseType)
+        private static void getVehicleLicenseTypeFromUser(out Motorcycle.eLicenseType o_LicenseType)
         {
             int userChoice = 0;
             bool v_ValidInput = false;
@@ -580,7 +559,7 @@ namespace Ex03.ConsoleUI
             o_LicenseType = (Motorcycle.eLicenseType)userChoice;
         }
 
-        public static void GetVehicleColorFromUser(out Car.eCarColor o_VehicleColor)
+        private static void getVehicleColorFromUser(out Car.eCarColor o_VehicleColor)
         {
             int userChoice = 0;
             bool v_ValidInput = false;
@@ -619,7 +598,7 @@ namespace Ex03.ConsoleUI
             o_VehicleColor = (Car.eCarColor)userChoice;
         }
 
-        public static void GetVehicleNumberOfDoorsFromUser(out Car.eNumOfDoors o_NumOfDoors)
+        private static void getVehicleNumberOfDoorsFromUser(out Car.eNumOfDoors o_NumOfDoors)
         {
             int userChoice = 0;
             bool v_ValidInput = false;
@@ -639,7 +618,7 @@ namespace Ex03.ConsoleUI
             {
                 try
                 {
-                    v_ValidInput = GetValidIntFromUserInRange(out userChoice, 2, 5);
+                    v_ValidInput = getValidIntFromUserInRange(out userChoice, 2, 5);
                 }
                 catch (FormatException)
                 {
@@ -658,7 +637,7 @@ namespace Ex03.ConsoleUI
             o_NumOfDoors = (Car.eNumOfDoors)userChoice;
         }
 
-        public static void GetVehicleStatusFromUser(out VehicleCard.eVehicleStatus o_VehicleStatus)
+        private static void getVehicleStatusFromUser(out VehicleCard.eVehicleStatus o_VehicleStatus)
         {
             int userChoice = 0;
             bool v_ValidInput = false;
@@ -696,7 +675,7 @@ namespace Ex03.ConsoleUI
             o_VehicleStatus = (VehicleCard.eVehicleStatus)userChoice;
         }
 
-        public static void GetVehicleDangerousSubstancesDataFromUser(out bool o_ContainsDangerousSubstances)
+        private static void getVehicleDangerousSubstancesDataFromUser(out bool o_ContainsDangerousSubstances)
         {
             int userChoice = 0;
             bool v_ValidInput = false;
@@ -733,7 +712,7 @@ namespace Ex03.ConsoleUI
             o_ContainsDangerousSubstances = (userChoice == 1);
         }
 
-        private static void GetVehicleModelNameFromUser(out string o_ModelName)
+        private static void getVehicleModelNameFromUser(out string o_ModelName)
         {
             string stringInput = string.Empty;
             bool v_ValidInput = false;
@@ -767,7 +746,7 @@ namespace Ex03.ConsoleUI
             o_ModelName = stringInput;
         }
 
-        private static void GetVehicleLicenseNumberFromUser(out string o_LicenseNumber)
+        private static void getVehicleLicenseNumberFromUser(out string o_LicenseNumber)
         {
             string stringInput = string.Empty;
             bool v_ValidInput = false;
@@ -801,7 +780,7 @@ namespace Ex03.ConsoleUI
             o_LicenseNumber = stringInput;
         }
 
-        private static void GetWheelsDataFromUser(VehicleCreator.eVehicleType i_VehicleType,
+        private static void getWheelsDataFromUser(VehicleCreator.eVehicleType i_VehicleType,
                                                   out string o_Manufacturer,
                                                   out float o_CurrentAirPressure)
         {
@@ -889,7 +868,7 @@ namespace Ex03.ConsoleUI
             o_CurrentAirPressure = pressureInput;
         }
 
-        public static void GetFuelTypeFromUser(out Fuel.eFuelType o_FuelType)
+        private static void getFuelTypeFromUser(out Fuel.eFuelType o_FuelType)
         {
             bool v_ValidInput = false;
             int userChoice = 0;
@@ -928,7 +907,7 @@ namespace Ex03.ConsoleUI
             o_FuelType = (Fuel.eFuelType)userChoice;
         }
 
-        private static void GetFuelToAddFromUser(out float o_FuelToAdd)
+        private static void getFuelToAddFromUser(out float o_FuelToAdd)
         {
             float capacityInput = 0;
             bool v_ValidInput = false;
@@ -963,7 +942,7 @@ namespace Ex03.ConsoleUI
             o_FuelToAdd = capacityInput;
         }
 
-        private static void GetMaxFuelCapacityFromUser(out float o_MaxFuelCapacity)
+        private static void getMaxFuelCapacityFromUser(out float o_MaxFuelCapacity)
         {
             float capacityInput = 0;
             bool v_ValidInput = false;
@@ -998,8 +977,8 @@ namespace Ex03.ConsoleUI
             o_MaxFuelCapacity = capacityInput;
         }
 
-        private static void GetFuelCurrentCapacityFromUser(out float o_CurrentFuelCapacity,
-                                                           float o_MaxFuelCapacity)
+        private static void getFuelCurrentCapacityFromUser(out float o_CurrentFuelCapacity,
+                                                           float i_MaxFuelCapacity)
         {
             float capacityInput = 0;
             bool v_ValidInput = false;
@@ -1036,9 +1015,9 @@ namespace Ex03.ConsoleUI
             o_CurrentFuelCapacity = capacityInput;
         }
 
-        
 
-        public static void GetBatteryTimeToAddFromUser(out float o_TimeToAdd)
+
+        private static void getBatteryTimeToAddFromUser(out float o_TimeToAdd)
         {
             float timeInput = 0;
             bool v_ValidInput = false;
@@ -1073,8 +1052,8 @@ namespace Ex03.ConsoleUI
             o_TimeToAdd = timeInput;
         }
 
-        private static void GetVehicleBatteryDataFromUser(out float o_RemainingBatteryTime,
-                                                          float o_MaxBatteryTime)
+        private static void getVehicleBatteryDataFromUser(out float o_RemainingBatteryTime,
+                                                          float i_MaxBatteryTime)
         {
             float timeInput = 0;
             bool v_ValidInput = false;
@@ -1110,7 +1089,7 @@ namespace Ex03.ConsoleUI
             o_RemainingBatteryTime = timeInput;
         }
 
-        private static void GetVehicleEngineCapacityFromUser(out int o_EngineCapacity)
+        private static void getVehicleEngineCapacityFromUser(out int o_EngineCapacity)
         {
             int capacityInput = 0;
             bool v_ValidInput = false;
@@ -1146,7 +1125,7 @@ namespace Ex03.ConsoleUI
             o_EngineCapacity = capacityInput;
         }
 
-        private static void GetVehicleCargoVolumeFromUser(out float o_CargoVolume)
+        private static void getVehicleCargoVolumeFromUser(out float o_CargoVolume)
         {
             float volumeInput = 0;
             bool v_ValidInput = false;
@@ -1182,7 +1161,7 @@ namespace Ex03.ConsoleUI
             o_CargoVolume = volumeInput;
         }
 
-        public static bool GetValidIntFromUserInRange(out int o_UserInput, int i_MinValue, int i_MaxValue)
+        private static bool getValidIntFromUserInRange(out int o_UserInput, int i_MinValue, int i_MaxValue)
         {
             if (int.TryParse(Console.ReadLine(), out o_UserInput) == false)
             {
@@ -1197,7 +1176,7 @@ namespace Ex03.ConsoleUI
             return true;
         }
 
-        public static bool GetValidFloatFromUserInRange(out float o_UserInput, float i_MinValue, float i_MaxValue)
+        private static bool getValidFloatFromUserInRange(out float o_UserInput, float i_MinValue, float i_MaxValue)
         {
             if (float.TryParse(Console.ReadLine(), out o_UserInput) == false)
             {
@@ -1211,10 +1190,7 @@ namespace Ex03.ConsoleUI
 
             return true;
         }
-
-       
-
-        public static bool GetStringInLengthRangeFromUser(out string o_UserInput, int i_MinLength, int i_MaxLength)
+        private static bool getStringInLengthRangeFromUser(out string o_UserInput, int i_MinLength, int i_MaxLength)
         {
             string userInput;
             userInput = Console.ReadLine();
@@ -1232,7 +1208,7 @@ namespace Ex03.ConsoleUI
             return true;
         }
 
-        public static bool GetNameStringFromUser(out string o_UserInput)
+        private static bool getNameStringFromUser(out string o_UserInput)
         {
             string userInput;
             userInput = Console.ReadLine();
@@ -1257,7 +1233,7 @@ namespace Ex03.ConsoleUI
             return true;
         }
 
-        public static bool GetValidPhoneNumberFromUser(out string o_PhoneNumber)
+        private static bool getValidPhoneNumberFromUser(out string o_PhoneNumber)
         {
             string userInput;
             userInput = Console.ReadLine();
