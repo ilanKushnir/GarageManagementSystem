@@ -38,7 +38,7 @@ namespace Ex03.ConsoleUI
                     catch (Exception ex)
                     {
                         Console.WriteLine("Unknown error occured: " + Environment.NewLine + ex.Message + Environment.NewLine);
-                    }
+                    }   
                 }
 
                 switch (userChoice)
@@ -71,6 +71,9 @@ namespace Ex03.ConsoleUI
                         userChoice = 0;
                         break;
                 }
+
+                Console.WriteLine("Press any key to continue..." + Environment.NewLine);
+                Console.ReadKey();
                 validInput = false;
                 userChoice = 0;
             }
